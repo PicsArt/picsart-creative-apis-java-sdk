@@ -1,0 +1,50 @@
+/*
+ * MIT License
+ *
+ * Copyright (c) 2024 PicsArt, Inc.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
+package com.picsart.creativeapis.examples.imageapi;
+
+import com.picsart.creativeapis.PicsartEnterprise;
+import com.picsart.creativeapis.busobj.image.result.BalanceResult;
+import com.picsart.creativeapis.image.ImageApi;
+import reactor.core.publisher.Mono;
+
+import java.util.concurrent.CountDownLatch;
+
+public class BalanceExample {
+    public static void main(String[] args) throws InterruptedException {
+        ImageApi imageApi = PicsartEnterprise.createImageApi("YOUR_API_KEY");
+
+        // Create a CountDownLatch to keep the main thread alive (not for production code)
+        CountDownLatch latch = new CountDownLatch(1);
+
+        Mono<BalanceResult> resultMono = imageApi.balance();
+        resultMono
+                .doFinally(signalType -> latch.countDown()) // Release the main thread (not for production code)
+                .subscribe(result -> { // non-blocking subscribe
+                    System.out.println("Result credits: " + result.credits());
+                });
+        // Keep the main thread alive for the example to finish (not for production code)
+        latch.await();
+    }
+}
