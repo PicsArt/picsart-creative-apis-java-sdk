@@ -27,20 +27,22 @@ package com.picsart.creativeapis.busobj.exception;
 import com.picsart.creativeapis.busobj.result.Metadata;
 import io.netty.handler.codec.http.HttpResponseStatus;
 
-/**
- * Exception thrown when the server returns a 400 Bad Request response.
- */
+/** Exception thrown when the server returns a 400 Bad Request response. */
 public class BadRequestException extends FailureResponseException {
-    public BadRequestException(String message, Metadata metadata) {
-        super(message, HttpResponseStatus.BAD_REQUEST, metadata);
-    }
+  public BadRequestException(String message, Metadata metadata) {
+    super(message, HttpResponseStatus.BAD_REQUEST, metadata);
+  }
 
-    @Override
-    public String toString() {
-        return "BadRequestException{" +
-                "httpStatus=" + getHttpStatus() +
-                ", message='" + getMessage() + '\'' +
-                ", metadata=" + getMetadata() +
-                '}';
-    }
+  @Override
+  public String toString() {
+    return "BadRequestException{"
+        + "httpStatus="
+        + getHttpStatus()
+        + ", message='"
+        + getMessage()
+        + '\''
+        + ", metadata="
+        + getMetadata()
+        + '}';
+  }
 }

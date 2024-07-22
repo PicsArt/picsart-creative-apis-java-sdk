@@ -30,28 +30,34 @@ import lombok.Getter;
 import lombok.experimental.Accessors;
 import lombok.experimental.FieldDefaults;
 
-/**
- * This class represents an image with an effect.
- */
+/** This class represents an image with an effect. */
 @Getter
 @EqualsAndHashCode(callSuper = true)
 @Accessors(fluent = true)
 @FieldDefaults(makeFinal = true, level = lombok.AccessLevel.PRIVATE)
 public class ImageWithEffect extends Image {
-    String effectName;
-    public ImageWithEffect(@JsonProperty("id") String id,
-                           @JsonProperty("url") String url,
-                           @JsonProperty("effect_name") String effectName) {
-        super(id, url);
-        this.effectName = effectName;
-    }
+  String effectName;
 
-    @Override
-    public String toString() {
-        return "ImageWithEffect{" +
-                "effectName='" + effectName + '\'' +
-                ", id='" + id + '\'' +
-                ", url='" + url + '\'' +
-                '}';
-    }
+  public ImageWithEffect(
+      @JsonProperty("id") String id,
+      @JsonProperty("url") String url,
+      @JsonProperty("effect_name") String effectName) {
+    super(id, url);
+    this.effectName = effectName;
+  }
+
+  @Override
+  public String toString() {
+    return "ImageWithEffect{"
+        + "effectName='"
+        + effectName
+        + '\''
+        + ", id='"
+        + id
+        + '\''
+        + ", url='"
+        + url
+        + '\''
+        + '}';
+  }
 }

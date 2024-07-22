@@ -26,71 +26,58 @@ package com.picsart.creativeapis.busobj.image.parameters;
 
 import com.picsart.creativeapis.busobj.image.ImageFormat;
 import com.picsart.creativeapis.busobj.image.ImageSource;
+import java.util.List;
+import javax.annotation.Nullable;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-import javax.annotation.Nullable;
-import java.util.List;
-
 /**
- * This class represents the parameters for generating previews of effects on an image.
- * It includes properties for the image source, a list of effect names, the desired size of the previews, and the 
- * desired format of the previews.
- * The size and format can be null, which means that the api default values will be used for the corresponding 
- * parameters.
+ * This class represents the parameters for generating previews of effects on an image. It includes
+ * properties for the image source, a list of effect names, the desired size of the previews, and
+ * the desired format of the previews. The size and format can be null, which means that the api
+ * default values will be used for the corresponding parameters.
  */
 @Data
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class EffectsPreviewsParameters {
-    /**
-     * The source of the image for which the previews will be generated.
-     */
-    ImageSource image;
+  /** The source of the image for which the previews will be generated. */
+  ImageSource image;
 
-    /**
-     * The names of the effects for which previews will be generated.
-     * The list must contain at least one effect name and at most 10 effect names.
-     */
-    @Singular("addEffectName")
-    List<String> effectNames;
+  /**
+   * The names of the effects for which previews will be generated. The list must contain at least
+   * one effect name and at most 10 effect names.
+   */
+  @Singular("addEffectName")
+  List<String> effectNames;
 
-    /**
-     * The desired size of the previews. This is optional.
-     */
-    @Nullable
-    Integer previewSize;
+  /** The desired size of the previews. This is optional. */
+  @Nullable Integer previewSize;
 
-    /**
-     * The desired format of the previews. This is optional.
-     */
-    @Nullable
-    ImageFormat format;
+  /** The desired format of the previews. This is optional. */
+  @Nullable ImageFormat format;
 
-    private static EffectsPreviewsParametersBuilder builder() {
-        return new EffectsPreviewsParametersBuilder();
+  private static EffectsPreviewsParametersBuilder builder() {
+    return new EffectsPreviewsParametersBuilder();
+  }
+
+  /**
+   * Returns a new builder for EffectsPreviewsParameters with the specified image source.
+   *
+   * @param image The source of the image for which the previews will be generated.
+   * @return A new builder for EffectsPreviewsParameters.
+   */
+  public static EffectsPreviewsParametersBuilder builder(ImageSource image) {
+    return builder().image(image);
+  }
+
+  /** This class provides a builder for EffectsPreviewsParameters. */
+  public static class EffectsPreviewsParametersBuilder {
+    private ImageSource image;
+
+    private EffectsPreviewsParametersBuilder image(@NonNull ImageSource image) {
+      this.image = image;
+      return this;
     }
-
-    /**
-     * Returns a new builder for EffectsPreviewsParameters with the specified image source.
-     *
-     * @param image The source of the image for which the previews will be generated.
-     * @return A new builder for EffectsPreviewsParameters.
-     */
-    public static EffectsPreviewsParametersBuilder builder(ImageSource image) {
-        return builder().image(image);
-    }
-
-    /**
-     * This class provides a builder for EffectsPreviewsParameters.
-     */
-    public static class EffectsPreviewsParametersBuilder {
-        private ImageSource image;
-
-        private EffectsPreviewsParametersBuilder image(@NonNull ImageSource image) {
-            this.image = image;
-            return this;
-        }
-    }
-
+  }
 }

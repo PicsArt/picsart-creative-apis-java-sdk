@@ -25,5 +25,7 @@
 package com.picsart.creativeapis.busobj.image;
 
 public enum ImageFormat {
-    JPG, PNG, WEBP
+  JPG,
+  PNG,
+  WEBP
 }

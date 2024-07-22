@@ -24,45 +24,51 @@
 
 package com.picsart.creativeapis.busobj.image.request;
 
+import com.picsart.creativeapis.busobj.image.ImageFormat;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
+import java.io.File;
+import javax.annotation.Nullable;
 import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.experimental.FieldDefaults;
-import com.picsart.creativeapis.busobj.image.ImageFormat;
-
-import javax.annotation.Nullable;
-import java.io.File;
 
 @Getter
 @EqualsAndHashCode(callSuper = true)
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class UltraEnhanceRequest extends RequestWithImageAndFormat {
 
-    @Min(value = 2, message = "Upscale factor must be be in range [2, 16]")
-    @Max(value = 16, message = "Upscale factor must be be in range [2, 16]")
-    @Nullable
-    Integer upscaleFactor;
+  @Min(value = 2, message = "Upscale factor must be be in range [2, 16]")
+  @Max(value = 16, message = "Upscale factor must be be in range [2, 16]")
+  @Nullable
+  Integer upscaleFactor;
 
+  public UltraEnhanceRequest(
+      @Nullable String imageId,
+      @Nullable String imageUrl,
+      @Nullable File image,
+      @Nullable ImageFormat format,
+      @Nullable Integer upscaleFactor) {
+    super(imageId, imageUrl, image, format);
+    this.upscaleFactor = upscaleFactor;
+  }
 
-    public UltraEnhanceRequest(@Nullable String imageId,
-                               @Nullable String imageUrl,
-                               @Nullable File image,
-                               @Nullable ImageFormat format,
-                               @Nullable Integer upscaleFactor) {
-        super(imageId, imageUrl, image, format);
-        this.upscaleFactor = upscaleFactor;
-    }
-
-    @Override
-    public String toString() {
-        return "UltraEnhanceRequest{" +
-                "upscaleFactor=" + upscaleFactor +
-                ", format=" + format +
-                ", image=" + image +
-                ", imageUrl='" + imageUrl + '\'' +
-                ", imageId='" + imageId + '\'' +
-                '}';
-    }
+  @Override
+  public String toString() {
+    return "UltraEnhanceRequest{"
+        + "upscaleFactor="
+        + upscaleFactor
+        + ", format="
+        + format
+        + ", image="
+        + image
+        + ", imageUrl='"
+        + imageUrl
+        + '\''
+        + ", imageId='"
+        + imageId
+        + '\''
+        + '}';
+  }
 }

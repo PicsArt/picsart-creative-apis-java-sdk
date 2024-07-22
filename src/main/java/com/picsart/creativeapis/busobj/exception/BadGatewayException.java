@@ -27,20 +27,22 @@ package com.picsart.creativeapis.busobj.exception;
 import com.picsart.creativeapis.busobj.result.Metadata;
 import io.netty.handler.codec.http.HttpResponseStatus;
 
-/**
- * Exception thrown when the server returns a 502 Bad Gateway response.
- */
+/** Exception thrown when the server returns a 502 Bad Gateway response. */
 public class BadGatewayException extends FailureResponseException implements Recoverable {
-    public BadGatewayException(String message, Metadata metadata) {
-        super(message, HttpResponseStatus.BAD_GATEWAY, metadata);
-    }
+  public BadGatewayException(String message, Metadata metadata) {
+    super(message, HttpResponseStatus.BAD_GATEWAY, metadata);
+  }
 
-    @Override
-    public String toString() {
-        return "BadGatewayException{" +
-                "httpStatus=" + getHttpStatus() +
-                ", message='" + getMessage() + '\'' +
-                ", metadata=" + getMetadata() +
-                '}';
-    }
+  @Override
+  public String toString() {
+    return "BadGatewayException{"
+        + "httpStatus="
+        + getHttpStatus()
+        + ", message='"
+        + getMessage()
+        + '\''
+        + ", metadata="
+        + getMetadata()
+        + '}';
+  }
 }

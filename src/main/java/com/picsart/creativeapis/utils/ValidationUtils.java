@@ -28,60 +28,58 @@ import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
 import jakarta.validation.ValidatorFactory;
+import java.util.Set;
+import java.util.stream.Collectors;
 import lombok.experimental.UtilityClass;
 import reactor.core.publisher.Mono;
 
-import java.util.Set;
-import java.util.stream.Collectors;
-
 @UtilityClass
 public class ValidationUtils {
-    private final ValidatorFactory VALIDATOR_FACTORY = Validation.buildDefaultValidatorFactory();
-    private final Validator VALIDATOR = VALIDATOR_FACTORY.getValidator();
+  private final ValidatorFactory VALIDATOR_FACTORY = Validation.buildDefaultValidatorFactory();
+  private final Validator VALIDATOR = VALIDATOR_FACTORY.getValidator();
 
-    private Set<ConstraintViolation<Object>> validate(Object object) {
-        return VALIDATOR.validate(object);
+  private Set<ConstraintViolation<Object>> validate(Object object) {
+    return VALIDATOR.validate(object);
+  }
+
+  public void validOrThrow(Object object, String actionName) {
+    var validate = validate(object);
+    if (!validate.isEmpty()) {
+      throw new IllegalArgumentException(
+          actionName
+              + " failed with errors: "
+              + validate.stream()
+                  .map(ConstraintViolation::getMessage)
+                  .sorted()
+                  .collect(Collectors.joining(", ")));
     }
+  }
 
-    public void validOrThrow(Object object, String actionName) {
-        var validate = validate(object);
-        if (!validate.isEmpty()) {
-            throw new IllegalArgumentException(
-                    actionName + " failed with errors: " +
-                    validate.stream()
-                            .map(ConstraintViolation::getMessage)
-                            .sorted()
-                            .collect(Collectors.joining(", "))
-            );
+  public Mono<Void> validateRequestMono(Object object, String actionName) {
+    return Mono.fromRunnable(() -> validOrThrow(object, actionName));
+  }
+
+  public boolean onlyOneNotEmpty(Object... objects) {
+    return getNonEmptyObjectsCount(objects) == 1;
+  }
+
+  public boolean atMostOneNotEmpty(Object... objects) {
+    return getNonEmptyObjectsCount(objects) <= 1;
+  }
+
+  private int getNonEmptyObjectsCount(Object[] objects) {
+    var count = 0;
+    for (var object : objects) {
+      if (object != null) {
+        if (object instanceof String str) {
+          if (!str.isBlank()) {
+            count++;
+          }
+        } else {
+          count++;
         }
+      }
     }
-
-    public Mono<Void> validateRequestMono(Object object, String actionName) {
-        return Mono.fromRunnable(() -> validOrThrow(object, actionName));
-    }
-
-    public boolean onlyOneNotEmpty(Object... objects) {
-        return getNonEmptyObjectsCount(objects) == 1;
-    }
-
-
-    public boolean atMostOneNotEmpty(Object... objects) {
-        return getNonEmptyObjectsCount(objects) <= 1;
-    }
-
-    private int getNonEmptyObjectsCount(Object[] objects) {
-        var count = 0;
-        for (var object : objects) {
-            if (object != null) {
-                if (object instanceof String str) {
-                    if (!str.isBlank()) {
-                        count++;
-                    }
-                } else {
-                    count++;
-                }
-            }
-        }
-        return count;
-    }
+    return count;
+  }
 }

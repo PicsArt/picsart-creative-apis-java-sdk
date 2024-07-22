@@ -24,6 +24,4 @@
 
 package com.picsart.creativeapis.busobj.image.response;
 
-public record ErrorResponse(int code, String detail) {
-}
-
+public record ErrorResponse(int code, String detail) {}

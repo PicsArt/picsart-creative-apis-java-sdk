@@ -26,56 +26,59 @@ package com.picsart.creativeapis.busobj.image.mapper;
 
 import com.picsart.creativeapis.busobj.image.response.*;
 import com.picsart.creativeapis.busobj.image.result.*;
+import com.picsart.creativeapis.busobj.mapper.MetadataMapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
-import com.picsart.creativeapis.busobj.mapper.MetadataMapper;
 import reactor.netty.http.client.HttpClientResponse;
 
 /**
- * This interface provides methods for mapping image api responses to results.
- * It uses the MapStruct library to generate the implementation of these methods.
+ * This interface provides methods for mapping image api responses to results. It uses the MapStruct
+ * library to generate the implementation of these methods.
  */
 @Mapper(uses = {MetadataMapper.class})
 public interface ResponseMapper {
-    ResponseMapper INSTANCE = Mappers.getMapper(ResponseMapper.class);
+  ResponseMapper INSTANCE = Mappers.getMapper(ResponseMapper.class);
 
-    @Mapping(target = "metadata", source = "httpClientResponse")
-    RemoveBackgroundResult toResult(RemoveBackgroundResponse response, HttpClientResponse httpClientResponse);
+  @Mapping(target = "metadata", source = "httpClientResponse")
+  RemoveBackgroundResult toResult(
+      RemoveBackgroundResponse response, HttpClientResponse httpClientResponse);
 
-    @Mapping(target = "metadata", source = "httpClientResponse")
-    EffectResult toResult(EffectResponse response, HttpClientResponse httpClientResponse);
+  @Mapping(target = "metadata", source = "httpClientResponse")
+  EffectResult toResult(EffectResponse response, HttpClientResponse httpClientResponse);
 
-    @Mapping(target = "metadata", source = "httpClientResponse")
-    ListEffectsResult toResult(ListEffectsResponse response, HttpClientResponse httpClientResponse);
+  @Mapping(target = "metadata", source = "httpClientResponse")
+  ListEffectsResult toResult(ListEffectsResponse response, HttpClientResponse httpClientResponse);
 
-    @Mapping(target = "metadata", source = "httpClientResponse")
-    UltraUpscaleResult toResult(UltraUpscaleResponse response, HttpClientResponse httpClientResponse);
+  @Mapping(target = "metadata", source = "httpClientResponse")
+  UltraUpscaleResult toResult(UltraUpscaleResponse response, HttpClientResponse httpClientResponse);
 
-    @Mapping(target = "metadata", source = "httpClientResponse")
-    UpscaleResult toResult(UpscaleResponse response, HttpClientResponse httpClientResponse);
+  @Mapping(target = "metadata", source = "httpClientResponse")
+  UpscaleResult toResult(UpscaleResponse response, HttpClientResponse httpClientResponse);
 
-    @Mapping(target = "metadata", source = "httpClientResponse")
-    UltraEnhanceResult toResult(UltraEnhanceResponse response, HttpClientResponse httpClientResponse);
+  @Mapping(target = "metadata", source = "httpClientResponse")
+  UltraEnhanceResult toResult(UltraEnhanceResponse response, HttpClientResponse httpClientResponse);
 
-    @Mapping(target = "metadata", source = "httpClientResponse")
-    EnhanceFaceResult toResult(EnhanceFaceResponse response, HttpClientResponse httpClientResponse);
+  @Mapping(target = "metadata", source = "httpClientResponse")
+  EnhanceFaceResult toResult(EnhanceFaceResponse response, HttpClientResponse httpClientResponse);
 
-    @Mapping(target = "metadata", source = "httpClientResponse")
-    EffectsPreviewsResult toResult(EffectsPreviewsResponse response, HttpClientResponse httpClientResponse);
+  @Mapping(target = "metadata", source = "httpClientResponse")
+  EffectsPreviewsResult toResult(
+      EffectsPreviewsResponse response, HttpClientResponse httpClientResponse);
 
-    @Mapping(target = "metadata", source = "httpClientResponse")
-    AdjustResult toResult(AdjustResponse response, HttpClientResponse httpClientResponse);
+  @Mapping(target = "metadata", source = "httpClientResponse")
+  AdjustResult toResult(AdjustResponse response, HttpClientResponse httpClientResponse);
 
-    @Mapping(target = "metadata", source = "httpClientResponse")
-    BackgroundTextureResult toResult(BackgroundTextureResponse response, HttpClientResponse httpClientResponse);
+  @Mapping(target = "metadata", source = "httpClientResponse")
+  BackgroundTextureResult toResult(
+      BackgroundTextureResponse response, HttpClientResponse httpClientResponse);
 
-    @Mapping(target = "metadata", source = "httpClientResponse")
-    SurfaceMapResult toResult(SurfaceMapResponse response, HttpClientResponse httpClientResponse);
+  @Mapping(target = "metadata", source = "httpClientResponse")
+  SurfaceMapResult toResult(SurfaceMapResponse response, HttpClientResponse httpClientResponse);
 
-    @Mapping(target = "metadata", source = "httpClientResponse")
-    UploadResult toResult(UploadResponse response, HttpClientResponse httpClientResponse);
+  @Mapping(target = "metadata", source = "httpClientResponse")
+  UploadResult toResult(UploadResponse response, HttpClientResponse httpClientResponse);
 
-    @Mapping(target = "metadata", source = "httpClientResponse")
-    BalanceResult toResult(BalanceResponse response, HttpClientResponse httpClientResponse);
+  @Mapping(target = "metadata", source = "httpClientResponse")
+  BalanceResult toResult(BalanceResponse response, HttpClientResponse httpClientResponse);
 }

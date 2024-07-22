@@ -24,27 +24,31 @@
 
 package com.picsart.creativeapis.busobj.image.result;
 
-import lombok.EqualsAndHashCode;
 import com.picsart.creativeapis.busobj.image.Image;
 import com.picsart.creativeapis.busobj.result.Metadata;
+import lombok.EqualsAndHashCode;
 
 /**
- * This class represents the result of an upscale operation.
- * It includes properties for metadata, status, and the upscaled image.
+ * This class represents the result of an upscale operation. It includes properties for metadata,
+ * status, and the upscaled image.
  */
 @EqualsAndHashCode(callSuper = true)
 public class UpscaleResult extends ResultWithImageAndStatus {
 
-    public UpscaleResult(Metadata metadata, String status, Image image) {
-        super(metadata, status, image);
-    }
+  public UpscaleResult(Metadata metadata, String status, Image image) {
+    super(metadata, status, image);
+  }
 
-    @Override
-    public String toString() {
-        return "UpscaleResult{" +
-                "status='" + status + '\'' +
-                ", image=" + image +
-                ", metadata=" + metadata +
-                '}';
-    }
+  @Override
+  public String toString() {
+    return "UpscaleResult{"
+        + "status='"
+        + status
+        + '\''
+        + ", image="
+        + image
+        + ", metadata="
+        + metadata
+        + '}';
+  }
 }

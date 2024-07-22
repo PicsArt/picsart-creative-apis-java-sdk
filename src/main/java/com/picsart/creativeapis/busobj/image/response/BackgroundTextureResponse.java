@@ -30,7 +30,8 @@ import lombok.EqualsAndHashCode;
 
 @EqualsAndHashCode(callSuper = true)
 public class BackgroundTextureResponse extends ResponseWithImageAndStatus {
-    public BackgroundTextureResponse(@JsonProperty("status") String status, @JsonProperty("data") Image image) {
-        super(status, image);
-    }
+  public BackgroundTextureResponse(
+      @JsonProperty("status") String status, @JsonProperty("data") Image image) {
+    super(status, image);
+  }
 }

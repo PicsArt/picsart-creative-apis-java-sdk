@@ -24,45 +24,42 @@
 
 package com.picsart.creativeapis.busobj.image.config;
 
+import static com.picsart.creativeapis.utils.Constants.*;
+
+import java.time.Duration;
 import lombok.Builder;
 import lombok.Data;
 import lombok.experimental.Accessors;
 import lombok.experimental.FieldDefaults;
 
-import java.time.Duration;
-
-import static com.picsart.creativeapis.utils.Constants.*;
-
 /**
- * This class represents the configuration for the Image API client.
- * It includes properties for the upscale ultra polling repeat count, upscale ultra polling repeat delay, and upscale
- * ultra polling first delay.
+ * This class represents the configuration for the Image API client. It includes properties for the
+ * upscale ultra polling repeat count, upscale ultra polling repeat delay, and upscale ultra polling
+ * first delay.
  */
 @Builder
 @Data
 @Accessors(fluent = true)
 @FieldDefaults(makeFinal = true, level = lombok.AccessLevel.PRIVATE)
 public class ImageApiClientConfig {
-    /**
-     * The default configuration for the Image API client.
-     */
-    public static final ImageApiClientConfig DEFAULT = ImageApiClientConfig.builder().build();
+  /** The default configuration for the Image API client. */
+  public static final ImageApiClientConfig DEFAULT = ImageApiClientConfig.builder().build();
 
-    /**
-     * The number of times to repeat the upscale ultra polling. Defaults to UPSCALE_ULTRA_POLLING_REPEAT_COUNT.
-     */
-    @Builder.Default
-    int upscaleUltraPollingRepeatCount = UPSCALE_ULTRA_POLLING_REPEAT_COUNT;
+  /**
+   * The number of times to repeat the upscale ultra polling. Defaults to
+   * UPSCALE_ULTRA_POLLING_REPEAT_COUNT.
+   */
+  @Builder.Default int upscaleUltraPollingRepeatCount = UPSCALE_ULTRA_POLLING_REPEAT_COUNT;
 
-    /**
-     * The delay between each upscale ultra polling repeat. Defaults to UPSCALE_ULTRA_POLLING_REPEAT_DELAY.
-     */
-    @Builder.Default
-    Duration upscaleUltraPollingRepeatDelay = UPSCALE_ULTRA_POLLING_REPEAT_DELAY;
+  /**
+   * The delay between each upscale ultra polling repeat. Defaults to
+   * UPSCALE_ULTRA_POLLING_REPEAT_DELAY.
+   */
+  @Builder.Default Duration upscaleUltraPollingRepeatDelay = UPSCALE_ULTRA_POLLING_REPEAT_DELAY;
 
-    /**
-     * The initial delay before starting the upscale ultra polling. Defaults to UPSCALE_ULTRA_POLLING_FIRST_DELAY.
-     */
-    @Builder.Default
-    Duration upscaleUltraPollingFirstDelay = UPSCALE_ULTRA_POLLING_FIRST_DELAY;
+  /**
+   * The initial delay before starting the upscale ultra polling. Defaults to
+   * UPSCALE_ULTRA_POLLING_FIRST_DELAY.
+   */
+  @Builder.Default Duration upscaleUltraPollingFirstDelay = UPSCALE_ULTRA_POLLING_FIRST_DELAY;
 }

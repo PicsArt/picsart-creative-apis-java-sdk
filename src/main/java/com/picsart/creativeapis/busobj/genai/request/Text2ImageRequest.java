@@ -26,30 +26,29 @@ package com.picsart.creativeapis.busobj.genai.request;
 
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import javax.annotation.Nullable;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.experimental.FieldDefaults;
 
-import javax.annotation.Nullable;
-
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class Text2ImageRequest {
-    @NotBlank(message = "Prompt cannot be blank")
-    String prompt;
+  @NotBlank(message = "Prompt cannot be blank")
+  String prompt;
 
-    @NotBlank(message = "Negative prompt cannot be blank")
-    String negativePrompt;
+  @NotBlank(message = "Negative prompt cannot be blank")
+  String negativePrompt;
 
-    @Nullable
-    @Min(value = 1, message = "Width must be greater than 0")
-    Integer width;
+  @Nullable
+  @Min(value = 1, message = "Width must be greater than 0")
+  Integer width;
 
-    @Nullable
-    @Min(value = 1, message = "Height must be greater than 0")
-    Integer height;
+  @Nullable
+  @Min(value = 1, message = "Height must be greater than 0")
+  Integer height;
 
-    @Nullable
-    @Min(value = 1, message = "Count must be greater than 0")
-    Integer count;
+  @Nullable
+  @Min(value = 1, message = "Count must be greater than 0")
+  Integer count;
 }

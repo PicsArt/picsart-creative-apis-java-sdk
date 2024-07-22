@@ -24,27 +24,31 @@
 
 package com.picsart.creativeapis.busobj.image.result;
 
-import lombok.EqualsAndHashCode;
 import com.picsart.creativeapis.busobj.image.Image;
 import com.picsart.creativeapis.busobj.result.Metadata;
+import lombok.EqualsAndHashCode;
 
 /**
- * This class represents the result of an effect operation.
- * It includes properties for metadata, status, and the image with the effect applied.
+ * This class represents the result of an effect operation. It includes properties for metadata,
+ * status, and the image with the effect applied.
  */
 @EqualsAndHashCode(callSuper = true)
 public class EffectResult extends ResultWithImageAndStatus {
 
-    public EffectResult(Metadata metadata, String status, Image image) {
-        super(metadata, status, image);
-    }
+  public EffectResult(Metadata metadata, String status, Image image) {
+    super(metadata, status, image);
+  }
 
-    @Override
-    public String toString() {
-        return "EffectResult{" +
-                "status='" + status + '\'' +
-                ", image=" + image +
-                ", metadata=" + metadata +
-                '}';
-    }
+  @Override
+  public String toString() {
+    return "EffectResult{"
+        + "status='"
+        + status
+        + '\''
+        + ", image="
+        + image
+        + ", metadata="
+        + metadata
+        + '}';
+  }
 }

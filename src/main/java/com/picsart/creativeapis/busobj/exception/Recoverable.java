@@ -24,9 +24,5 @@
 
 package com.picsart.creativeapis.busobj.exception;
 
-
-/**
- * Marker interface for exceptions that are recoverable.
- */
-public interface Recoverable {
-}
+/** Marker interface for exceptions that are recoverable. */
+public interface Recoverable {}

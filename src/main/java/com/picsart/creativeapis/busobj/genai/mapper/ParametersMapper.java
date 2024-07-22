@@ -24,18 +24,18 @@
 
 package com.picsart.creativeapis.busobj.genai.mapper;
 
-import org.mapstruct.Mapper;
-import org.mapstruct.factory.Mappers;
 import com.picsart.creativeapis.busobj.genai.parameters.Text2ImageParameters;
 import com.picsart.creativeapis.busobj.genai.request.Text2ImageRequest;
+import org.mapstruct.Mapper;
+import org.mapstruct.factory.Mappers;
 
 /**
- * This interface provides methods for mapping genAI api parameters to requests.
- * It uses the MapStruct library to generate the implementation of these methods.
+ * This interface provides methods for mapping genAI api parameters to requests. It uses the
+ * MapStruct library to generate the implementation of these methods.
  */
 @Mapper
 public interface ParametersMapper {
-    ParametersMapper INSTANCE = Mappers.getMapper(ParametersMapper.class);
+  ParametersMapper INSTANCE = Mappers.getMapper(ParametersMapper.class);
 
-    Text2ImageRequest toRequest(Text2ImageParameters parameters);
+  Text2ImageRequest toRequest(Text2ImageParameters parameters);
 }

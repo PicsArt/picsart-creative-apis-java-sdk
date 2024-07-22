@@ -30,34 +30,36 @@ import com.picsart.creativeapis.busobj.image.ImageSource;
 import com.picsart.creativeapis.busobj.image.parameters.UltraEnhanceParameters;
 import com.picsart.creativeapis.busobj.image.result.UltraEnhanceResult;
 import com.picsart.creativeapis.image.ImageApi;
+import java.util.concurrent.CountDownLatch;
 import reactor.core.publisher.Mono;
 
-import java.util.concurrent.CountDownLatch;
-
 public class UltraEnhanceExample {
-    public static void main(String[] args) throws InterruptedException {
-        ImageApi imageApi = PicsartEnterprise.createImageApi("YOUR_API_KEY");
-        ImageSource mainImage = ImageSource.fromUrl("https://url-to-your-image.jpg");
+  public static void main(String[] args) throws InterruptedException {
+    ImageApi imageApi = PicsartEnterprise.createImageApi("YOUR_API_KEY");
+    ImageSource mainImage = ImageSource.fromUrl("https://url-to-your-image.jpg");
 
-        // Create a CountDownLatch to keep the main thread alive (not for production code)
-        CountDownLatch latch = new CountDownLatch(1);
+    // Create a CountDownLatch to keep the main thread alive (not for production code)
+    CountDownLatch latch = new CountDownLatch(1);
 
-        UltraEnhanceParameters parameters = UltraEnhanceParameters.builder(mainImage)
-                .upscaleFactor(4)
-                .format(ImageFormat.PNG)
-                .build();
-        Mono<UltraEnhanceResult> resultMono = imageApi.ultraEnhance(parameters);
-        resultMono
-                .doFinally(signalType -> latch.countDown()) // Release the main thread (not for production code)
-                .subscribe(result -> { // non-blocking subscribe
-                    System.out.println("Result Image: " + result.image());
-                    System.out.println("Result metadata traceId: " + result.metadata().traceId());
-                    System.out.println("Result metadata rateLimit: " + result.metadata().rateLimit());
-                    System.out.println("Result metadata rateLimitRemaining: " + result.metadata().rateLimitRemaining());
-                    System.out.println("Result metadata rateLimitReset: " + result.metadata().rateLimitReset());
-                    System.out.println("Result metadata creditAvailable: " + result.metadata().creditAvailable());
-                });
-        // Keep the main thread alive for the example to finish (not for production code)
-        latch.await();
-    }
+    UltraEnhanceParameters parameters =
+        UltraEnhanceParameters.builder(mainImage).upscaleFactor(4).format(ImageFormat.PNG).build();
+    Mono<UltraEnhanceResult> resultMono = imageApi.ultraEnhance(parameters);
+    resultMono
+        .doFinally(
+            signalType -> latch.countDown()) // Release the main thread (not for production code)
+        .subscribe(
+            result -> { // non-blocking subscribe
+              System.out.println("Result Image: " + result.image());
+              System.out.println("Result metadata traceId: " + result.metadata().traceId());
+              System.out.println("Result metadata rateLimit: " + result.metadata().rateLimit());
+              System.out.println(
+                  "Result metadata rateLimitRemaining: " + result.metadata().rateLimitRemaining());
+              System.out.println(
+                  "Result metadata rateLimitReset: " + result.metadata().rateLimitReset());
+              System.out.println(
+                  "Result metadata creditAvailable: " + result.metadata().creditAvailable());
+            });
+    // Keep the main thread alive for the example to finish (not for production code)
+    latch.await();
+  }
 }

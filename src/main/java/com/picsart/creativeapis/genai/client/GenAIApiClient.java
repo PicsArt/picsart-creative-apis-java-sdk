@@ -31,16 +31,18 @@ import com.picsart.creativeapis.busobj.genai.response.Text2ImageResponse;
 import reactor.core.publisher.Mono;
 
 /**
- * This interface represents the client for the GenAI API.
- * It includes methods for performing operations on the API, such as generating an image from text.
+ * This interface represents the client for the GenAI API. It includes methods for performing
+ * operations on the API, such as generating an image from text.
  */
 public interface GenAIApiClient {
-    /**
-     * Generates an image from text using the GenAI API.
-     * @param config The configuration for the API.
-     * @param request The request for the Text2Image operation.
-     * @return A Mono that emits the HTTP response from the API. The body of the response is a Text2ImageResponse.
-     */
-    Mono<HttpResponseWithBody<Text2ImageResponse>> text2Image(ApiConfig config,
-                                                              Text2ImageRequest request);
+  /**
+   * Generates an image from text using the GenAI API.
+   *
+   * @param config The configuration for the API.
+   * @param request The request for the Text2Image operation.
+   * @return A Mono that emits the HTTP response from the API. The body of the response is a
+   *     Text2ImageResponse.
+   */
+  Mono<HttpResponseWithBody<Text2ImageResponse>> text2Image(
+      ApiConfig config, Text2ImageRequest request);
 }

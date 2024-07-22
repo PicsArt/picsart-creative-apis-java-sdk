@@ -24,10 +24,10 @@
 
 package com.picsart.creativeapis.genai.client;
 
-import com.picsart.creativeapis.http.ApiHttpClient;
-import lombok.NonNull;
-import lombok.experimental.FieldDefaults;
-import lombok.extern.slf4j.Slf4j;
+import static com.picsart.creativeapis.utils.Constants.*;
+import static com.picsart.creativeapis.utils.ValidationUtils.*;
+
+import com.picsart.creativeapis.AbstractApiClient;
 import com.picsart.creativeapis.busobj.ApiActions;
 import com.picsart.creativeapis.busobj.ApiConfig;
 import com.picsart.creativeapis.busobj.HttpResponseWithBody;
@@ -35,54 +35,61 @@ import com.picsart.creativeapis.busobj.genai.config.GenAIApiClientConfig;
 import com.picsart.creativeapis.busobj.genai.request.Text2ImageRequest;
 import com.picsart.creativeapis.busobj.genai.response.Text2ImageMiddleResponse;
 import com.picsart.creativeapis.busobj.genai.response.Text2ImageResponse;
-import com.picsart.creativeapis.AbstractApiClient;
+import com.picsart.creativeapis.http.ApiHttpClient;
+import lombok.NonNull;
+import lombok.experimental.FieldDefaults;
+import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Mono;
-
-import static com.picsart.creativeapis.utils.Constants.*;
-import static com.picsart.creativeapis.utils.ValidationUtils.*;
 
 @Slf4j
 @FieldDefaults(makeFinal = true, level = lombok.AccessLevel.PRIVATE)
 public class GenAIApiClientImpl extends AbstractApiClient implements GenAIApiClient {
-    GenAIApiClientConfig clientConfig;
+  GenAIApiClientConfig clientConfig;
 
-    public GenAIApiClientImpl(@NonNull ApiHttpClient apiHttpClient, GenAIApiClientConfig clientConfig) {
-        super(apiHttpClient);
-        this.clientConfig = clientConfig;
-    }
+  public GenAIApiClientImpl(
+      @NonNull ApiHttpClient apiHttpClient, GenAIApiClientConfig clientConfig) {
+    super(apiHttpClient);
+    this.clientConfig = clientConfig;
+  }
 
-    @Override
-    public Mono<HttpResponseWithBody<Text2ImageResponse>> text2Image(ApiConfig config, Text2ImageRequest request) {
-        log.debug("Text2Image request: {}", request);
-        var apiKey = config.apiKey();
-        var baseUrl = config.baseUrl();
-        var validateRequestMono = validateRequestMono(request, ApiActions.TEXT2IMAGE.actionName());
-        var sendRequestMono = apiHttpClient.sendPostRequest(
-                        appendBaseUrl(baseUrl, ApiActions.TEXT2IMAGE.url()),
-                        apiKey,
-                        request,
-                        config.timeout())
-                .map(response -> response.parseBody(Text2ImageMiddleResponse.class))
-                .map(HttpResponseWithBody::getBody)
-                .map(Text2ImageMiddleResponse::inferenceId)
-                .delayElement(clientConfig.text2ImagePollingFirstDelay())
-                .flatMap(id -> getText2ImageAsyncResult(config, id));
-        return validateRequestMono.then(sendRequestMono);
-    }
+  @Override
+  public Mono<HttpResponseWithBody<Text2ImageResponse>> text2Image(
+      ApiConfig config, Text2ImageRequest request) {
+    log.debug("Text2Image request: {}", request);
+    var apiKey = config.apiKey();
+    var baseUrl = config.baseUrl();
+    var validateRequestMono = validateRequestMono(request, ApiActions.TEXT2IMAGE.actionName());
+    var sendRequestMono =
+        apiHttpClient
+            .sendPostRequest(
+                appendBaseUrl(baseUrl, ApiActions.TEXT2IMAGE.url()),
+                apiKey,
+                request,
+                config.timeout())
+            .map(response -> response.parseBody(Text2ImageMiddleResponse.class))
+            .map(HttpResponseWithBody::getBody)
+            .map(Text2ImageMiddleResponse::inferenceId)
+            .delayElement(clientConfig.text2ImagePollingFirstDelay())
+            .flatMap(id -> getText2ImageAsyncResult(config, id));
+    return validateRequestMono.then(sendRequestMono);
+  }
 
-    //TODO: use getAsyncResponse method from AbstractApiClient when status status issue will be fixed
-    private Mono<HttpResponseWithBody<Text2ImageResponse>> getText2ImageAsyncResult(ApiConfig config,
-                                                                                    String id) {
-        return apiHttpClient.sendGetRequest(
-                appendBaseUrl(config.baseUrl(),
-                        ApiActions.TEXT2IMAGE.url() + SLASH + INFERENCES_URL.formatted(id)),
-                config.apiKey(),
-                config.timeout()
-        ).map(response ->
-                response.parseBody(Text2ImageResponse.class)
-        ).filter(httpResponseWithParsedBody ->
-                "DONE".equalsIgnoreCase(httpResponseWithParsedBody.getBody().status())
-        ).repeatWhenEmpty(clientConfig.text2ImagePollingRepeatCount(),
-                repeat -> repeat.delayElements(clientConfig.text2ImagePollingRepeatDelay()));
-    }
+  // TODO: use getAsyncResponse method from AbstractApiClient when status status issue will be fixed
+  private Mono<HttpResponseWithBody<Text2ImageResponse>> getText2ImageAsyncResult(
+      ApiConfig config, String id) {
+    return apiHttpClient
+        .sendGetRequest(
+            appendBaseUrl(
+                config.baseUrl(),
+                ApiActions.TEXT2IMAGE.url() + SLASH + INFERENCES_URL.formatted(id)),
+            config.apiKey(),
+            config.timeout())
+        .map(response -> response.parseBody(Text2ImageResponse.class))
+        .filter(
+            httpResponseWithParsedBody ->
+                "DONE".equalsIgnoreCase(httpResponseWithParsedBody.getBody().status()))
+        .repeatWhenEmpty(
+            clientConfig.text2ImagePollingRepeatCount(),
+            repeat -> repeat.delayElements(clientConfig.text2ImagePollingRepeatDelay()));
+  }
 }

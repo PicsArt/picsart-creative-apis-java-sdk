@@ -25,26 +25,32 @@
 package com.picsart.creativeapis.busobj.image.request;
 
 import com.picsart.creativeapis.busobj.image.ImageFormat;
-
-import javax.annotation.Nullable;
 import java.io.File;
+import javax.annotation.Nullable;
 
 public class EnhanceFaceRequest extends RequestWithImageAndFormat {
 
-    public EnhanceFaceRequest(@Nullable String imageId,
-                              @Nullable String imageUrl,
-                              @Nullable File image,
-                              @Nullable ImageFormat format) {
-        super(imageId, imageUrl, image, format);
-    }
+  public EnhanceFaceRequest(
+      @Nullable String imageId,
+      @Nullable String imageUrl,
+      @Nullable File image,
+      @Nullable ImageFormat format) {
+    super(imageId, imageUrl, image, format);
+  }
 
-    @Override
-    public String toString() {
-        return "EnhanceFaceRequest{" +
-                "imageId='" + imageId + '\'' +
-                ", imageUrl='" + imageUrl + '\'' +
-                ", image=" + image +
-                ", format=" + format +
-                '}';
-    }
+  @Override
+  public String toString() {
+    return "EnhanceFaceRequest{"
+        + "imageId='"
+        + imageId
+        + '\''
+        + ", imageUrl='"
+        + imageUrl
+        + '\''
+        + ", image="
+        + image
+        + ", format="
+        + format
+        + '}';
+  }
 }

@@ -18,6 +18,12 @@ repositories {
     }
 }
 
+spotless {
+    java {
+        googleJavaFormat("1.22.0")
+    }
+}
+
 dependencies {
     implementation(platform("io.projectreactor:reactor-bom:2023.0.6"))
     implementation("jakarta.validation:jakarta.validation-api:3.1.0")

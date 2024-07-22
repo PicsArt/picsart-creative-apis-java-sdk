@@ -25,5 +25,7 @@
 package com.picsart.creativeapis.busobj.image;
 
 public enum UpscaleMode {
-    SYNC, ASYNC, AUTO
+  SYNC,
+  ASYNC,
+  AUTO
 }

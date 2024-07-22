@@ -25,26 +25,23 @@
 package com.picsart.creativeapis.busobj.image.request;
 
 import com.picsart.creativeapis.busobj.MultipartBodyRequest;
+import com.picsart.creativeapis.utils.ValidationUtils;
 import jakarta.validation.constraints.AssertTrue;
+import java.io.File;
+import javax.annotation.Nullable;
 import lombok.Data;
 import lombok.experimental.FieldDefaults;
-import com.picsart.creativeapis.utils.ValidationUtils;
-
-import javax.annotation.Nullable;
-import java.io.File;
 
 @Data
 @FieldDefaults(level = lombok.AccessLevel.PRIVATE, makeFinal = true)
 public class UploadRequest implements MultipartBodyRequest {
-    @Nullable
-    File image;
+  @Nullable File image;
 
-    @Nullable
-    String imageUrl;
+  @Nullable String imageUrl;
 
-    // only one of fields should be set
-    @AssertTrue(message = "Exactly one image source must be set")
-    boolean isImageSetCorrectly() {
-        return ValidationUtils.onlyOneNotEmpty(image, imageUrl);
-    }
+  // only one of fields should be set
+  @AssertTrue(message = "Exactly one image source must be set")
+  boolean isImageSetCorrectly() {
+    return ValidationUtils.onlyOneNotEmpty(image, imageUrl);
+  }
 }

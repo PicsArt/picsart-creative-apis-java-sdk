@@ -27,24 +27,25 @@ package com.picsart.creativeapis.examples.imageapi;
 import com.picsart.creativeapis.PicsartEnterprise;
 import com.picsart.creativeapis.busobj.image.result.BalanceResult;
 import com.picsart.creativeapis.image.ImageApi;
+import java.util.concurrent.CountDownLatch;
 import reactor.core.publisher.Mono;
 
-import java.util.concurrent.CountDownLatch;
-
 public class BalanceExample {
-    public static void main(String[] args) throws InterruptedException {
-        ImageApi imageApi = PicsartEnterprise.createImageApi("YOUR_API_KEY");
+  public static void main(String[] args) throws InterruptedException {
+    ImageApi imageApi = PicsartEnterprise.createImageApi("YOUR_API_KEY");
 
-        // Create a CountDownLatch to keep the main thread alive (not for production code)
-        CountDownLatch latch = new CountDownLatch(1);
+    // Create a CountDownLatch to keep the main thread alive (not for production code)
+    CountDownLatch latch = new CountDownLatch(1);
 
-        Mono<BalanceResult> resultMono = imageApi.balance();
-        resultMono
-                .doFinally(signalType -> latch.countDown()) // Release the main thread (not for production code)
-                .subscribe(result -> { // non-blocking subscribe
-                    System.out.println("Result credits: " + result.credits());
-                });
-        // Keep the main thread alive for the example to finish (not for production code)
-        latch.await();
-    }
+    Mono<BalanceResult> resultMono = imageApi.balance();
+    resultMono
+        .doFinally(
+            signalType -> latch.countDown()) // Release the main thread (not for production code)
+        .subscribe(
+            result -> { // non-blocking subscribe
+              System.out.println("Result credits: " + result.credits());
+            });
+    // Keep the main thread alive for the example to finish (not for production code)
+    latch.await();
+  }
 }

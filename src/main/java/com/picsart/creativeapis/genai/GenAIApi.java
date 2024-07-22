@@ -26,40 +26,41 @@ package com.picsart.creativeapis.genai;
 
 import com.picsart.creativeapis.busobj.genai.parameters.Text2ImageParameters;
 import com.picsart.creativeapis.busobj.genai.result.Text2ImageResult;
+import java.time.Duration;
 import reactor.core.publisher.Mono;
 
-import java.time.Duration;
-
-/**
- * This interface defines the operations that can be performed with the GenAI API.
- */
+/** This interface defines the operations that can be performed with the GenAI API. */
 public sealed interface GenAIApi permits GenAIApiImpl {
 
-    /**
-     * Sets the API key to be used for requests.
-     * @param apiKey The API key.
-     * @return An instance of GenAIApi with the API key set.
-     */
-    GenAIApi withApiKey(String apiKey);
+  /**
+   * Sets the API key to be used for requests.
+   *
+   * @param apiKey The API key.
+   * @return An instance of GenAIApi with the API key set.
+   */
+  GenAIApi withApiKey(String apiKey);
 
-    /**
-     * Sets the base URL for the API.
-     * @param baseUrl The base URL.
-     * @return An instance of GenAIApi with the base URL set.
-     */
-    GenAIApi withBaseUrl(String baseUrl);
+  /**
+   * Sets the base URL for the API.
+   *
+   * @param baseUrl The base URL.
+   * @return An instance of GenAIApi with the base URL set.
+   */
+  GenAIApi withBaseUrl(String baseUrl);
 
-    /**
-     * Sets the response timeout for the API.
-     * @param timeout The response timeout.
-     * @return An instance of GenAIApi with the response timeout set.
-     */
-    GenAIApi withResponseTimeout(Duration timeout);
+  /**
+   * Sets the response timeout for the API.
+   *
+   * @param timeout The response timeout.
+   * @return An instance of GenAIApi with the response timeout set.
+   */
+  GenAIApi withResponseTimeout(Duration timeout);
 
-    /**
-     * Generate an image based on the text provided.
-     * @param request The parameters for the operation.
-     * @return A Mono that emits the result of the operation.
-     */
-    Mono<Text2ImageResult> text2Image(Text2ImageParameters request);
+  /**
+   * Generate an image based on the text provided.
+   *
+   * @param request The parameters for the operation.
+   * @return A Mono that emits the result of the operation.
+   */
+  Mono<Text2ImageResult> text2Image(Text2ImageParameters request);
 }

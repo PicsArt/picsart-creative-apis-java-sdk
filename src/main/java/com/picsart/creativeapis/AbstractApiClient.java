@@ -25,42 +25,40 @@
 package com.picsart.creativeapis;
 
 import com.google.common.annotations.VisibleForTesting;
+import com.picsart.creativeapis.busobj.ApiConfig;
+import com.picsart.creativeapis.busobj.HttpResponseWithStringBody;
 import com.picsart.creativeapis.http.ApiHttpClient;
 import jakarta.validation.constraints.NotNull;
+import java.time.Duration;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import com.picsart.creativeapis.busobj.ApiConfig;
-import com.picsart.creativeapis.busobj.HttpResponseWithStringBody;
 import reactor.core.publisher.Mono;
-
-import java.time.Duration;
 
 @RequiredArgsConstructor
 @FieldDefaults(makeFinal = true, level = AccessLevel.PROTECTED)
 public abstract class AbstractApiClient {
-    ApiHttpClient apiHttpClient;
+  ApiHttpClient apiHttpClient;
 
-    @NotNull
-    private static String removeTailingSlashIfAny(String baseUrl) {
-        return baseUrl.endsWith("/") ? baseUrl.substring(0, baseUrl.length() - 1) : baseUrl;
-    }
+  @NotNull
+  private static String removeTailingSlashIfAny(String baseUrl) {
+    return baseUrl.endsWith("/") ? baseUrl.substring(0, baseUrl.length() - 1) : baseUrl;
+  }
 
-    @VisibleForTesting
-    public static String appendBaseUrl(String baseUrl, String url) {
-        return "%s/%s".formatted(removeTailingSlashIfAny(baseUrl), url);
-    }
+  @VisibleForTesting
+  public static String appendBaseUrl(String baseUrl, String url) {
+    return "%s/%s".formatted(removeTailingSlashIfAny(baseUrl), url);
+  }
 
-    protected Mono<HttpResponseWithStringBody> getAsyncResponse(ApiConfig config, String url,
-                                                                int repeatCount, Duration delay) {
-        return apiHttpClient.sendGetRequest(
-                        appendBaseUrl(config.baseUrl(), url),
-                        config.apiKey(),
-                        config.timeout())
-                .filter(httpResponseWithParsedBody -> {
-                    var code = httpResponseWithParsedBody.getHttpClientResponse().status().code();
-                    return code == 200;
-                })
-                .repeatWhenEmpty(repeatCount, repeat -> repeat.delayElements(delay));
-    }
+  protected Mono<HttpResponseWithStringBody> getAsyncResponse(
+      ApiConfig config, String url, int repeatCount, Duration delay) {
+    return apiHttpClient
+        .sendGetRequest(appendBaseUrl(config.baseUrl(), url), config.apiKey(), config.timeout())
+        .filter(
+            httpResponseWithParsedBody -> {
+              var code = httpResponseWithParsedBody.getHttpClientResponse().status().code();
+              return code == 200;
+            })
+        .repeatWhenEmpty(repeatCount, repeat -> repeat.delayElements(delay));
+  }
 }

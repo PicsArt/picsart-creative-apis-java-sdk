@@ -29,21 +29,25 @@ import com.picsart.creativeapis.busobj.result.Metadata;
 import lombok.EqualsAndHashCode;
 
 /**
- * This class represents the result of a surface map operation.
- * It includes properties for metadata, status, and the image with the surface map applied.
+ * This class represents the result of a surface map operation. It includes properties for metadata,
+ * status, and the image with the surface map applied.
  */
 @EqualsAndHashCode(callSuper = true)
 public class SurfaceMapResult extends ResultWithImageAndStatus {
-    public SurfaceMapResult(Metadata metadata, String status, Image image) {
-        super(metadata, status, image);
-    }
+  public SurfaceMapResult(Metadata metadata, String status, Image image) {
+    super(metadata, status, image);
+  }
 
-    @Override
-    public String toString() {
-        return "SurfaceMapResult{" +
-                "status='" + status + '\'' +
-                ", image=" + image +
-                ", metadata=" + metadata +
-                '}';
-    }
+  @Override
+  public String toString() {
+    return "SurfaceMapResult{"
+        + "status='"
+        + status
+        + '\''
+        + ", image="
+        + image
+        + ", metadata="
+        + metadata
+        + '}';
+  }
 }

@@ -32,45 +32,49 @@ import com.picsart.creativeapis.busobj.image.Scale;
 import com.picsart.creativeapis.busobj.image.parameters.RemoveBackgroundParameters;
 import com.picsart.creativeapis.busobj.image.result.RemoveBackgroundResult;
 import com.picsart.creativeapis.image.ImageApi;
+import java.util.concurrent.CountDownLatch;
 import reactor.core.publisher.Mono;
 
-import java.util.concurrent.CountDownLatch;
-
 public class RemoveBackgroundExample {
-    public static void main(String[] args) throws InterruptedException {
-        ImageApi imageApi = PicsartEnterprise.createImageApi("YOUR_API_KEY");
-        ImageSource mainImage = ImageSource.fromUrl("https://url-to-your-image.jpg");
-        ImageSource backgroundImage = ImageSource.fromImageId("your-background-image-id");
+  public static void main(String[] args) throws InterruptedException {
+    ImageApi imageApi = PicsartEnterprise.createImageApi("YOUR_API_KEY");
+    ImageSource mainImage = ImageSource.fromUrl("https://url-to-your-image.jpg");
+    ImageSource backgroundImage = ImageSource.fromImageId("your-background-image-id");
 
+    // Create a CountDownLatch to keep the main thread alive (not for production code)
+    CountDownLatch latch = new CountDownLatch(1);
 
-        // Create a CountDownLatch to keep the main thread alive (not for production code)
-        CountDownLatch latch = new CountDownLatch(1);
-
-        RemoveBackgroundParameters parameters = RemoveBackgroundParameters.builder(mainImage)
-                .bgImage(backgroundImage)
-                .outputType(OutputType.CUTOUT)
-                .bgBlur(10)
-                .bgWidth(800)
-                .bgHeight(800)
-                .scale(Scale.FIT)
-                .autoCenter(true)
-                .strokeSize(10)
-                .strokeColor("#000000")
-                .strokeOpacity(50)
-                .format(ImageFormat.PNG)
-                .build();
-        Mono<RemoveBackgroundResult> resultMono = imageApi.removeBackground(parameters);
-        resultMono
-                .doFinally(signalType -> latch.countDown()) // Release the main thread (not for production code)
-                .subscribe(result -> { // non-blocking subscribe
-                    System.out.println("Result Image: " + result.image());
-                    System.out.println("Result metadata traceId: " + result.metadata().traceId());
-                    System.out.println("Result metadata rateLimit: " + result.metadata().rateLimit());
-                    System.out.println("Result metadata rateLimitRemaining: " + result.metadata().rateLimitRemaining());
-                    System.out.println("Result metadata rateLimitReset: " + result.metadata().rateLimitReset());
-                    System.out.println("Result metadata creditAvailable: " + result.metadata().creditAvailable());
-                });
-        // Keep the main thread alive for the example to finish (not for production code)
-        latch.await();
-    }
+    RemoveBackgroundParameters parameters =
+        RemoveBackgroundParameters.builder(mainImage)
+            .bgImage(backgroundImage)
+            .outputType(OutputType.CUTOUT)
+            .bgBlur(10)
+            .bgWidth(800)
+            .bgHeight(800)
+            .scale(Scale.FIT)
+            .autoCenter(true)
+            .strokeSize(10)
+            .strokeColor("#000000")
+            .strokeOpacity(50)
+            .format(ImageFormat.PNG)
+            .build();
+    Mono<RemoveBackgroundResult> resultMono = imageApi.removeBackground(parameters);
+    resultMono
+        .doFinally(
+            signalType -> latch.countDown()) // Release the main thread (not for production code)
+        .subscribe(
+            result -> { // non-blocking subscribe
+              System.out.println("Result Image: " + result.image());
+              System.out.println("Result metadata traceId: " + result.metadata().traceId());
+              System.out.println("Result metadata rateLimit: " + result.metadata().rateLimit());
+              System.out.println(
+                  "Result metadata rateLimitRemaining: " + result.metadata().rateLimitRemaining());
+              System.out.println(
+                  "Result metadata rateLimitReset: " + result.metadata().rateLimitReset());
+              System.out.println(
+                  "Result metadata creditAvailable: " + result.metadata().creditAvailable());
+            });
+    // Keep the main thread alive for the example to finish (not for production code)
+    latch.await();
+  }
 }

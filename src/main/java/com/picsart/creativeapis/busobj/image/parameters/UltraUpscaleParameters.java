@@ -27,6 +27,7 @@ package com.picsart.creativeapis.busobj.image.parameters;
 import com.picsart.creativeapis.busobj.image.ImageFormat;
 import com.picsart.creativeapis.busobj.image.ImageSource;
 import com.picsart.creativeapis.busobj.image.UpscaleMode;
+import javax.annotation.Nullable;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Data;
@@ -34,67 +35,53 @@ import lombok.NonNull;
 import lombok.experimental.FieldDefaults;
 import org.checkerframework.common.value.qual.IntRange;
 
-import javax.annotation.Nullable;
-
 /**
- * This class represents the parameters for ultra upscaling an image.
- * It includes properties for the image source, the upscale factor, the desired format of the image, and the upscale 
- * mode.
- * Each property can be null except the image, which means that the api default values will be used for the
- * corresponding parameter.
+ * This class represents the parameters for ultra upscaling an image. It includes properties for the
+ * image source, the upscale factor, the desired format of the image, and the upscale mode. Each
+ * property can be null except the image, which means that the api default values will be used for
+ * the corresponding parameter.
  */
 @Data
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class UltraUpscaleParameters {
-    /**
-     * The source of the image to be upscaled.
-     */
-    ImageSource image;
+  /** The source of the image to be upscaled. */
+  ImageSource image;
 
-    /**
-     * The upscale factor for the upscaling. This is optional.
-     * Must be between 2 and 16, inclusive.
-     */
-    @IntRange(from = 2, to = 16)
-    @Nullable
-    Integer upscaleFactor;
+  /**
+   * The upscale factor for the upscaling. This is optional. Must be between 2 and 16, inclusive.
+   */
+  @IntRange(from = 2, to = 16)
+  @Nullable
+  Integer upscaleFactor;
 
-    /**
-     * The desired format of the image after upscaling. This is optional.
-     */
-    @Nullable
-    ImageFormat format;
+  /** The desired format of the image after upscaling. This is optional. */
+  @Nullable ImageFormat format;
 
-    /**
-     * The mode of the upscaling. This is optional.
-     */
-    @Nullable
-    UpscaleMode mode;
+  /** The mode of the upscaling. This is optional. */
+  @Nullable UpscaleMode mode;
 
-    /**
-     * Returns a new builder for UltraUpscaleParameters with the specified image source.
-     *
-     * @param image The source of the image to be upscaled.
-     * @return A new builder for UltraUpscaleParameters.
-     */
-    public static UltraUpscaleParametersBuilder builder(ImageSource image) {
-        return builder().image(image);
+  /**
+   * Returns a new builder for UltraUpscaleParameters with the specified image source.
+   *
+   * @param image The source of the image to be upscaled.
+   * @return A new builder for UltraUpscaleParameters.
+   */
+  public static UltraUpscaleParametersBuilder builder(ImageSource image) {
+    return builder().image(image);
+  }
+
+  private static UltraUpscaleParametersBuilder builder() {
+    return new UltraUpscaleParametersBuilder();
+  }
+
+  /** This class provides a builder for UltraUpscaleParameters. */
+  public static class UltraUpscaleParametersBuilder {
+    private ImageSource image;
+
+    private UltraUpscaleParametersBuilder image(@NonNull ImageSource image) {
+      this.image = image;
+      return this;
     }
-
-    private static UltraUpscaleParametersBuilder builder() {
-        return new UltraUpscaleParametersBuilder();
-    }
-
-    /**
-     * This class provides a builder for UltraUpscaleParameters.
-     */
-    public static class UltraUpscaleParametersBuilder {
-        private ImageSource image;
-
-        private UltraUpscaleParametersBuilder image(@NonNull ImageSource image) {
-            this.image = image;
-            return this;
-        }
-    }
+  }
 }

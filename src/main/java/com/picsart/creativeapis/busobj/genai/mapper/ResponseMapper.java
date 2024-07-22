@@ -24,22 +24,22 @@
 
 package com.picsart.creativeapis.busobj.genai.mapper;
 
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.factory.Mappers;
 import com.picsart.creativeapis.busobj.genai.response.Text2ImageResponse;
 import com.picsart.creativeapis.busobj.genai.result.Text2ImageResult;
 import com.picsart.creativeapis.busobj.mapper.MetadataMapper;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.factory.Mappers;
 import reactor.netty.http.client.HttpClientResponse;
 
 /**
- * This interface provides methods for mapping genAI api responses to results.
- * It uses the MapStruct library to generate the implementation of these methods.
+ * This interface provides methods for mapping genAI api responses to results. It uses the MapStruct
+ * library to generate the implementation of these methods.
  */
 @Mapper(uses = {MetadataMapper.class})
 public interface ResponseMapper {
-    ResponseMapper INSTANCE = Mappers.getMapper(ResponseMapper.class);
+  ResponseMapper INSTANCE = Mappers.getMapper(ResponseMapper.class);
 
-    @Mapping(target = "metadata", source = "httpClientResponse")
-    Text2ImageResult toResult(Text2ImageResponse response, HttpClientResponse httpClientResponse);
+  @Mapping(target = "metadata", source = "httpClientResponse")
+  Text2ImageResult toResult(Text2ImageResponse response, HttpClientResponse httpClientResponse);
 }

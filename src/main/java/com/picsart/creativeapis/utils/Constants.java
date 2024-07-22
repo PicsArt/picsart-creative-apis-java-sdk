@@ -24,24 +24,24 @@
 
 package com.picsart.creativeapis.utils;
 
-import lombok.experimental.UtilityClass;
-
 import java.time.Duration;
+import lombok.experimental.UtilityClass;
 
 @UtilityClass
 public class Constants {
 
-    public final String API_KEY_HEADER = "X-Picsart-API-Key";
+  public final String API_KEY_HEADER = "X-Picsart-API-Key";
 
-    public final String INFERENCES_URL = "inferences/%s";
-    public final Character SLASH = '/';
+  public final String INFERENCES_URL = "inferences/%s";
+  public final Character SLASH = '/';
 
-    public final Duration UPSCALE_ULTRA_POLLING_FIRST_DELAY = Duration.ofSeconds(20);
-    public final Duration UPSCALE_ULTRA_POLLING_REPEAT_DELAY = Duration.ofSeconds(10);
-    public final int UPSCALE_ULTRA_POLLING_REPEAT_COUNT = 3;
+  public final Duration UPSCALE_ULTRA_POLLING_FIRST_DELAY = Duration.ofSeconds(20);
+  public final Duration UPSCALE_ULTRA_POLLING_REPEAT_DELAY = Duration.ofSeconds(10);
+  public final int UPSCALE_ULTRA_POLLING_REPEAT_COUNT = 3;
 
-    public final Duration TEXT_2_IMAGE_POLLING_FIRST_DELAY = Duration.ofSeconds(1);
-    public final Duration TEXT_2_IMAGE_POLLING_REPEAT_DELAY = Duration.ofSeconds(1);
-    public final int TEXT_2_IMAGE_POLLING_REPEAT_COUNT = 3;
-    public final String USER_AGENT = "picsart-creative-apis-sdk:%s".formatted(VersionUtils.getVersion());
+  public final Duration TEXT_2_IMAGE_POLLING_FIRST_DELAY = Duration.ofSeconds(1);
+  public final Duration TEXT_2_IMAGE_POLLING_REPEAT_DELAY = Duration.ofSeconds(1);
+  public final int TEXT_2_IMAGE_POLLING_REPEAT_COUNT = 3;
+  public final String USER_AGENT =
+      "picsart-creative-apis-sdk:%s".formatted(VersionUtils.getVersion());
 }

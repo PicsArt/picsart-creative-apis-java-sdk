@@ -25,5 +25,6 @@
 package com.picsart.creativeapis.busobj.image;
 
 public enum Scale {
-    FIT, FILL
+  FIT,
+  FILL
 }

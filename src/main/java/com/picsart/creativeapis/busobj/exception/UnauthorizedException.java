@@ -27,20 +27,22 @@ package com.picsart.creativeapis.busobj.exception;
 import com.picsart.creativeapis.busobj.result.Metadata;
 import io.netty.handler.codec.http.HttpResponseStatus;
 
-/**
- * Exception thrown when the server returns a 401 Unauthorized response.
- */
+/** Exception thrown when the server returns a 401 Unauthorized response. */
 public class UnauthorizedException extends FailureResponseException {
-    public UnauthorizedException(String message, Metadata metadata) {
-        super(message, HttpResponseStatus.UNAUTHORIZED, metadata);
-    }
+  public UnauthorizedException(String message, Metadata metadata) {
+    super(message, HttpResponseStatus.UNAUTHORIZED, metadata);
+  }
 
-    @Override
-    public String toString() {
-        return "UnauthorizedException{" +
-                "httpStatus=" + getHttpStatus() +
-                ", message='" + getMessage() + '\'' +
-                ", metadata=" + getMetadata() +
-                '}';
-    }
+  @Override
+  public String toString() {
+    return "UnauthorizedException{"
+        + "httpStatus="
+        + getHttpStatus()
+        + ", message='"
+        + getMessage()
+        + '\''
+        + ", metadata="
+        + getMetadata()
+        + '}';
+  }
 }

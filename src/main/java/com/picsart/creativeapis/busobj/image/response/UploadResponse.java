@@ -28,7 +28,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.picsart.creativeapis.busobj.image.Image;
 
 public class UploadResponse extends ResponseWithImageAndStatus {
-    public UploadResponse(@JsonProperty("status") String status, @JsonProperty("data") Image image) {
-        super(status, image);
-    }
+  public UploadResponse(@JsonProperty("status") String status, @JsonProperty("data") Image image) {
+    super(status, image);
+  }
 }

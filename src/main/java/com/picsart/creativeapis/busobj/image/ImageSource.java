@@ -24,38 +24,34 @@
 
 package com.picsart.creativeapis.busobj.image;
 
+import java.io.File;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
-import java.io.File;
-
-/**
- * This class represents an image source.
- */
+/** This class represents an image source. */
 @Getter
 @RequiredArgsConstructor(access = lombok.AccessLevel.PROTECTED)
 @FieldDefaults(makeFinal = true, level = lombok.AccessLevel.PRIVATE)
 public sealed class ImageSource permits ImageUrl, ImageId, ImageFile {
-    ImageSourceType type;
+  ImageSourceType type;
 
+  public static ImageUrl fromUrl(@NonNull String url) {
+    return new ImageUrl(url);
+  }
 
-    public static ImageUrl fromUrl(@NonNull String url) {
-        return new ImageUrl(url);
-    }
+  public static ImageId fromImageId(@NonNull String id) {
+    return new ImageId(id);
+  }
 
-    public static ImageId fromImageId(@NonNull String id) {
-        return new ImageId(id);
-    }
+  public static ImageFile fromFile(@NonNull File file) {
+    return new ImageFile(file);
+  }
 
-    public static ImageFile fromFile(@NonNull File file) {
-        return new ImageFile(file);
-    }
-
-    public enum ImageSourceType {
-        URL,
-        ID,
-        FILE
-    }
+  public enum ImageSourceType {
+    URL,
+    ID,
+    FILE
+  }
 }

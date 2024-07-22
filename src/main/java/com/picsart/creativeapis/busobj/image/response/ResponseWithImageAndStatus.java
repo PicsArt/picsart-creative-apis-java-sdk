@@ -24,14 +24,14 @@
 
 package com.picsart.creativeapis.busobj.image.response;
 
+import com.picsart.creativeapis.busobj.image.Image;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.experimental.FieldDefaults;
-import com.picsart.creativeapis.busobj.image.Image;
 
 @Data
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 public class ResponseWithImageAndStatus {
-    String status;
-    Image image;
+  String status;
+  Image image;
 }

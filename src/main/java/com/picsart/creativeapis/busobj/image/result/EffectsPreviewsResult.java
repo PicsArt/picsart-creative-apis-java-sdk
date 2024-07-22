@@ -25,36 +25,37 @@
 package com.picsart.creativeapis.busobj.image.result;
 
 import com.picsart.creativeapis.busobj.image.ImageWithEffect;
+import com.picsart.creativeapis.busobj.result.Metadata;
+import com.picsart.creativeapis.busobj.result.ResultWithMetadata;
+import java.util.List;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.experimental.Accessors;
 import lombok.experimental.FieldDefaults;
-import com.picsart.creativeapis.busobj.result.Metadata;
-import com.picsart.creativeapis.busobj.result.ResultWithMetadata;
-
-import java.util.List;
 
 /**
- * This class represents the result of an effects previews operation.
- * It includes properties for metadata and a list of images with effects applied.
+ * This class represents the result of an effects previews operation. It includes properties for
+ * metadata and a list of images with effects applied.
  */
 @Getter
 @Accessors(fluent = true)
 @EqualsAndHashCode(callSuper = true)
 @FieldDefaults(makeFinal = true, level = lombok.AccessLevel.PRIVATE)
 public class EffectsPreviewsResult extends ResultWithMetadata {
-    List<ImageWithEffect> effectsPreviews;
+  List<ImageWithEffect> effectsPreviews;
 
-    public EffectsPreviewsResult(List<ImageWithEffect> effectsPreviews, Metadata metadata) {
-        super(metadata);
-        this.effectsPreviews = effectsPreviews;
-    }
+  public EffectsPreviewsResult(List<ImageWithEffect> effectsPreviews, Metadata metadata) {
+    super(metadata);
+    this.effectsPreviews = effectsPreviews;
+  }
 
-    @Override
-    public String toString() {
-        return "EffectsPreviewsResult{" +
-                "effectsPreviews=" + effectsPreviews +
-                ", metadata=" + metadata() +
-                '}';
-    }
+  @Override
+  public String toString() {
+    return "EffectsPreviewsResult{"
+        + "effectsPreviews="
+        + effectsPreviews
+        + ", metadata="
+        + metadata()
+        + '}';
+  }
 }

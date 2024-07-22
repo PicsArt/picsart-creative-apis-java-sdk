@@ -24,26 +24,30 @@
 
 package com.picsart.creativeapis.busobj.image.result;
 
-import lombok.EqualsAndHashCode;
 import com.picsart.creativeapis.busobj.image.Image;
 import com.picsart.creativeapis.busobj.result.Metadata;
+import lombok.EqualsAndHashCode;
 
 /**
- * This class represents the result of an image adjustment operation.
- * It includes properties for metadata, status, and the adjusted image.
+ * This class represents the result of an image adjustment operation. It includes properties for
+ * metadata, status, and the adjusted image.
  */
 @EqualsAndHashCode(callSuper = true)
 public class AdjustResult extends ResultWithImageAndStatus {
-    public AdjustResult(Metadata metadata, String status, Image image) {
-        super(metadata, status, image);
-    }
+  public AdjustResult(Metadata metadata, String status, Image image) {
+    super(metadata, status, image);
+  }
 
-    @Override
-    public String toString() {
-        return "AdjustResult{" +
-                "status='" + status + '\'' +
-                ", image=" + image +
-                ", metadata=" + metadata +
-                '}';
-    }
+  @Override
+  public String toString() {
+    return "AdjustResult{"
+        + "status='"
+        + status
+        + '\''
+        + ", image="
+        + image
+        + ", metadata="
+        + metadata
+        + '}';
+  }
 }

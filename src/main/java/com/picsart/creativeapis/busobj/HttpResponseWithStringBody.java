@@ -28,40 +28,40 @@ import com.picsart.creativeapis.utils.JacksonUtils;
 import reactor.netty.http.client.HttpClientResponse;
 
 /**
- * This class represents an HTTP response with a body of type String.
- * It extends the HttpResponseWithBody class and includes methods for creating a new HttpResponseWithStringBody and
+ * This class represents an HTTP response with a body of type String. It extends the
+ * HttpResponseWithBody class and includes methods for creating a new HttpResponseWithStringBody and
  * parsing the body of the response.
  */
 public class HttpResponseWithStringBody extends HttpResponseWithBody<String> {
-    /**
-     * Constructs a new HttpResponseWithStringBody with the specified HttpClientResponse and body.
-     *
-     * @param httpClientResponse The HttpClientResponse of the HTTP response.
-     * @param body               The body of the HTTP response.
-     */
-    protected HttpResponseWithStringBody(HttpClientResponse httpClientResponse, String body) {
-        super(httpClientResponse, body);
-    }
+  /**
+   * Constructs a new HttpResponseWithStringBody with the specified HttpClientResponse and body.
+   *
+   * @param httpClientResponse The HttpClientResponse of the HTTP response.
+   * @param body The body of the HTTP response.
+   */
+  protected HttpResponseWithStringBody(HttpClientResponse httpClientResponse, String body) {
+    super(httpClientResponse, body);
+  }
 
-    /**
-     * Returns a new HttpResponseWithStringBody with the specified HttpClientResponse and body.
-     *
-     * @param httpClientResponse The HttpClientResponse of the HTTP response.
-     * @param body               The body of the HTTP response.
-     * @return A new HttpResponseWithStringBody.
-     */
-    public static HttpResponseWithStringBody of(HttpClientResponse httpClientResponse, String body) {
-        return new HttpResponseWithStringBody(httpClientResponse, body);
-    }
+  /**
+   * Returns a new HttpResponseWithStringBody with the specified HttpClientResponse and body.
+   *
+   * @param httpClientResponse The HttpClientResponse of the HTTP response.
+   * @param body The body of the HTTP response.
+   * @return A new HttpResponseWithStringBody.
+   */
+  public static HttpResponseWithStringBody of(HttpClientResponse httpClientResponse, String body) {
+    return new HttpResponseWithStringBody(httpClientResponse, body);
+  }
 
-    /**
-     * Parses the body of the HTTP response and returns a new HttpResponseWithBody with the parsed body.
-     * The body is parsed from a JSON string to an object of the specified class.
-     *
-     * @param clazz The class of the object to parse the body to.
-     * @return A new HttpResponseWithBody with the parsed body.
-     */
-    public <T> HttpResponseWithBody<T> parseBody(Class<T> clazz) {
-        return of(getHttpClientResponse(), JacksonUtils.fromJson(getBody(), clazz));
-    }
+  /**
+   * Parses the body of the HTTP response and returns a new HttpResponseWithBody with the parsed
+   * body. The body is parsed from a JSON string to an object of the specified class.
+   *
+   * @param clazz The class of the object to parse the body to.
+   * @return A new HttpResponseWithBody with the parsed body.
+   */
+  public <T> HttpResponseWithBody<T> parseBody(Class<T> clazz) {
+    return of(getHttpClientResponse(), JacksonUtils.fromJson(getBody(), clazz));
+  }
 }

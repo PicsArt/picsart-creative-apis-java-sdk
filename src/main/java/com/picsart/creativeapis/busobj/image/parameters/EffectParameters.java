@@ -26,69 +26,58 @@ package com.picsart.creativeapis.busobj.image.parameters;
 
 import com.picsart.creativeapis.busobj.image.ImageFormat;
 import com.picsart.creativeapis.busobj.image.ImageSource;
+import javax.annotation.Nullable;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
 import lombok.experimental.FieldDefaults;
 
-import javax.annotation.Nullable;
-
 /**
- * This class represents the parameters for applying an effect to an image.
- * It includes properties for the image source, the name of the effect, and the desired format of the image.
+ * This class represents the parameters for applying an effect to an image. It includes properties
+ * for the image source, the name of the effect, and the desired format of the image.
  */
 @Data
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class EffectParameters {
-    /**
-     * The source of the image to which the effect will be applied.
-     */
-    ImageSource image;
+  /** The source of the image to which the effect will be applied. */
+  ImageSource image;
 
-    /**
-     * The name of the effect to be applied.
-     */
-    String effectName;
+  /** The name of the effect to be applied. */
+  String effectName;
 
-    /**
-     * The desired format of the image after the effect is applied. This is optional.
-     */
-    @Nullable
-    ImageFormat format;
+  /** The desired format of the image after the effect is applied. This is optional. */
+  @Nullable ImageFormat format;
 
-    private static EffectParametersBuilder builder() {
-        return new EffectParametersBuilder();
+  private static EffectParametersBuilder builder() {
+    return new EffectParametersBuilder();
+  }
+
+  /**
+   * Returns a new builder for EffectParameters with the specified image source and effect name.
+   *
+   * @param image The source of the image to which the effect will be applied.
+   * @param effectName The name of the effect to be applied.
+   * @return A new builder for EffectParameters.
+   */
+  public static EffectParametersBuilder builder(ImageSource image, String effectName) {
+    return builder().image(image).effectName(effectName);
+  }
+
+  /** This class provides a builder for EffectParameters. */
+  public static class EffectParametersBuilder {
+    private ImageSource image;
+    private String effectName;
+
+    private EffectParametersBuilder image(@NonNull ImageSource image) {
+      this.image = image;
+      return this;
     }
 
-    /**
-     * Returns a new builder for EffectParameters with the specified image source and effect name.
-     *
-     * @param image      The source of the image to which the effect will be applied.
-     * @param effectName The name of the effect to be applied.
-     * @return A new builder for EffectParameters.
-     */
-    public static EffectParametersBuilder builder(ImageSource image, String effectName) {
-        return builder().image(image).effectName(effectName);
+    private EffectParametersBuilder effectName(@NonNull String effectName) {
+      this.effectName = effectName;
+      return this;
     }
-
-    /**
-     * This class provides a builder for EffectParameters.
-     */
-    public static class EffectParametersBuilder {
-        private ImageSource image;
-        private String effectName;
-
-        private EffectParametersBuilder image(@NonNull ImageSource image) {
-            this.image = image;
-            return this;
-        }
-
-        private EffectParametersBuilder effectName(@NonNull String effectName) {
-            this.effectName = effectName;
-            return this;
-        }
-    }
-
+  }
 }

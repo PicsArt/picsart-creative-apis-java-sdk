@@ -24,5 +24,4 @@
 
 package com.picsart.creativeapis.busobj.genai.response;
 
-public record Text2ImageMiddleResponse(String inferenceId) {
-}
+public record Text2ImageMiddleResponse(String inferenceId) {}

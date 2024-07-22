@@ -25,5 +25,9 @@
 package com.picsart.creativeapis.busobj.image;
 
 public enum BackgroundTexturePattern {
-    HEX, MIRROR, DIAMOND, HEX2, TILE
+  HEX,
+  MIRROR,
+  DIAMOND,
+  HEX2,
+  TILE
 }

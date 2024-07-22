@@ -24,6 +24,4 @@
 
 package com.picsart.creativeapis.busobj.image.response;
 
-
-public record BalanceResponse(Integer credits) {
-}
+public record BalanceResponse(Integer credits) {}

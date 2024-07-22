@@ -24,8 +24,5 @@
 
 package com.picsart.creativeapis.busobj.image;
 
-/**
- * This class represents an effect that can be applied to an image.
- */
-public record Effect(String name) {
-}
+/** This class represents an effect that can be applied to an image. */
+public record Effect(String name) {}

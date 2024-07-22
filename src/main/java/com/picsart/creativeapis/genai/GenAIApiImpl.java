@@ -24,48 +24,50 @@
 
 package com.picsart.creativeapis.genai;
 
-import com.picsart.creativeapis.genai.client.GenAIApiClient;
-import lombok.AccessLevel;
-import lombok.RequiredArgsConstructor;
-import lombok.With;
-import lombok.experimental.FieldDefaults;
 import com.picsart.creativeapis.busobj.ApiConfig;
 import com.picsart.creativeapis.busobj.genai.mapper.ParametersMapper;
 import com.picsart.creativeapis.busobj.genai.mapper.ResponseMapper;
 import com.picsart.creativeapis.busobj.genai.parameters.Text2ImageParameters;
 import com.picsart.creativeapis.busobj.genai.result.Text2ImageResult;
-import reactor.core.publisher.Mono;
-
+import com.picsart.creativeapis.genai.client.GenAIApiClient;
 import java.time.Duration;
+import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
+import lombok.With;
+import lombok.experimental.FieldDefaults;
+import reactor.core.publisher.Mono;
 
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 @RequiredArgsConstructor
 public final class GenAIApiImpl implements GenAIApi {
 
-    @With(AccessLevel.PRIVATE)
-    ApiConfig config;
+  @With(AccessLevel.PRIVATE)
+  ApiConfig config;
 
-    GenAIApiClient client;
+  GenAIApiClient client;
 
-    @Override
-    public GenAIApi withApiKey(String apiKey) {
-        return withConfig(config.withApiKey(apiKey));
-    }
+  @Override
+  public GenAIApi withApiKey(String apiKey) {
+    return withConfig(config.withApiKey(apiKey));
+  }
 
-    @Override
-    public GenAIApi withBaseUrl(String baseUrl) {
-        return withConfig(config.withBaseUrl(baseUrl));
-    }
+  @Override
+  public GenAIApi withBaseUrl(String baseUrl) {
+    return withConfig(config.withBaseUrl(baseUrl));
+  }
 
-    @Override
-    public GenAIApi withResponseTimeout(Duration timeout) {
-        return withConfig(config.withTimeout(timeout));
-    }
+  @Override
+  public GenAIApi withResponseTimeout(Duration timeout) {
+    return withConfig(config.withTimeout(timeout));
+  }
 
-    @Override
-    public Mono<Text2ImageResult> text2Image(Text2ImageParameters request) {
-        return client.text2Image(config, ParametersMapper.INSTANCE.toRequest(request))
-                .map(response ->
-                        ResponseMapper.INSTANCE.toResult(response.getBody(), response.getHttpClientResponse()));
-    }
+  @Override
+  public Mono<Text2ImageResult> text2Image(Text2ImageParameters request) {
+    return client
+        .text2Image(config, ParametersMapper.INSTANCE.toRequest(request))
+        .map(
+            response ->
+                ResponseMapper.INSTANCE.toResult(
+                    response.getBody(), response.getHttpClientResponse()));
+  }
 }

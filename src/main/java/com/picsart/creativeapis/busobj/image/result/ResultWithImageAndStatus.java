@@ -24,30 +24,30 @@
 
 package com.picsart.creativeapis.busobj.image.result;
 
+import com.picsart.creativeapis.busobj.image.Image;
+import com.picsart.creativeapis.busobj.result.Metadata;
+import com.picsart.creativeapis.busobj.result.ResultWithMetadata;
 import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.experimental.Accessors;
 import lombok.experimental.FieldDefaults;
-import com.picsart.creativeapis.busobj.image.Image;
-import com.picsart.creativeapis.busobj.result.Metadata;
-import com.picsart.creativeapis.busobj.result.ResultWithMetadata;
 
 /**
- * This class represents the result of an image operation.
- * It includes properties for metadata, status, and the image.
+ * This class represents the result of an image operation. It includes properties for metadata,
+ * status, and the image.
  */
 @Getter
 @Accessors(fluent = true)
 @EqualsAndHashCode(callSuper = true)
 @FieldDefaults(makeFinal = true, level = AccessLevel.PROTECTED)
 public class ResultWithImageAndStatus extends ResultWithMetadata {
-    String status;
-    Image image;
+  String status;
+  Image image;
 
-    public ResultWithImageAndStatus(Metadata metadata, String status, Image image) {
-        super(metadata);
-        this.status = status;
-        this.image = image;
-    }
+  public ResultWithImageAndStatus(Metadata metadata, String status, Image image) {
+    super(metadata);
+    this.status = status;
+    this.image = image;
+  }
 }

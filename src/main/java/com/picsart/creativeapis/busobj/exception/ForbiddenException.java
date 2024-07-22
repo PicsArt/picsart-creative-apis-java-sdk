@@ -27,21 +27,23 @@ package com.picsart.creativeapis.busobj.exception;
 import com.picsart.creativeapis.busobj.result.Metadata;
 import io.netty.handler.codec.http.HttpResponseStatus;
 
-/**
- * Exception thrown when the server returns a 403 Forbidden response.
- */
+/** Exception thrown when the server returns a 403 Forbidden response. */
 public class ForbiddenException extends FailureResponseException {
 
-    public ForbiddenException(String message, Metadata metadata) {
-        super(message, HttpResponseStatus.FORBIDDEN, metadata);
-    }
+  public ForbiddenException(String message, Metadata metadata) {
+    super(message, HttpResponseStatus.FORBIDDEN, metadata);
+  }
 
-    @Override
-    public String toString() {
-        return "ForbiddenException{" +
-                "httpStatus=" + getHttpStatus() +
-                ", message='" + getMessage() + '\'' +
-                ", metadata=" + getMetadata() +
-                '}';
-    }
+  @Override
+  public String toString() {
+    return "ForbiddenException{"
+        + "httpStatus="
+        + getHttpStatus()
+        + ", message='"
+        + getMessage()
+        + '\''
+        + ", metadata="
+        + getMetadata()
+        + '}';
+  }
 }
