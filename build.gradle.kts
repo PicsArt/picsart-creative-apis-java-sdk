@@ -4,9 +4,10 @@ plugins {
     id("java-library")
     id("maven-publish")
     id("org.cadixdev.licenser") version "0.6.1"
+    id("com.diffplug.spotless") version "6.25.0"
 }
 group = "com.picsart"
-version = "1.0-SNAPSHOT"
+version = "1.0"
 
 repositories {
     mavenCentral()
