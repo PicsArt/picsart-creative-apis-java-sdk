@@ -30,9 +30,8 @@ import lombok.EqualsAndHashCode;
 
 @EqualsAndHashCode(callSuper = true)
 public class SurfaceMapResponse extends ResponseWithImageAndStatus {
-    public SurfaceMapResponse(@JsonProperty("status") String status,
-                              @JsonProperty("data") Image image) {
-        super(status, image);
-    }
-
+  public SurfaceMapResponse(
+      @JsonProperty("status") String status, @JsonProperty("data") Image image) {
+    super(status, image);
+  }
 }

@@ -27,19 +27,22 @@ package com.picsart.creativeapis.busobj.exception;
 import com.picsart.creativeapis.busobj.result.Metadata;
 import io.netty.handler.codec.http.HttpResponseStatus;
 
-/**
- * Exception thrown when the server returns a 500 Internal Server Error response.
- */
+/** Exception thrown when the server returns a 500 Internal Server Error response. */
 public class InternalServerErrorException extends FailureResponseException implements Recoverable {
-    public InternalServerErrorException(String message, Metadata metadata) {
-        super(message, HttpResponseStatus.INTERNAL_SERVER_ERROR, metadata);
-    }
-    @Override
-    public String toString() {
-        return "InternalServerErrorException{" +
-                "httpStatus=" + getHttpStatus() +
-                ", message='" + getMessage() + '\'' +
-                ", metadata=" + getMetadata() +
-                '}';
-    }
+  public InternalServerErrorException(String message, Metadata metadata) {
+    super(message, HttpResponseStatus.INTERNAL_SERVER_ERROR, metadata);
+  }
+
+  @Override
+  public String toString() {
+    return "InternalServerErrorException{"
+        + "httpStatus="
+        + getHttpStatus()
+        + ", message='"
+        + getMessage()
+        + '\''
+        + ", metadata="
+        + getMetadata()
+        + '}';
+  }
 }

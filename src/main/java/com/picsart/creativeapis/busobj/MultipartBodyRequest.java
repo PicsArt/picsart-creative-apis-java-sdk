@@ -28,7 +28,7 @@ import com.picsart.creativeapis.utils.MultipartRequestBodyUtils;
 import reactor.netty.http.client.HttpClientForm;
 
 public interface MultipartBodyRequest {
-    default void addBodyToForm(HttpClientForm form) {
-        MultipartRequestBodyUtils.addRequestToClientForm(form, this);
-    }
+  default void addBodyToForm(HttpClientForm form) {
+    MultipartRequestBodyUtils.addRequestToClientForm(form, this);
+  }
 }

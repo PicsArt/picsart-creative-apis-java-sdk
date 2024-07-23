@@ -24,27 +24,31 @@
 
 package com.picsart.creativeapis.busobj.image.result;
 
-import lombok.EqualsAndHashCode;
 import com.picsart.creativeapis.busobj.image.Image;
 import com.picsart.creativeapis.busobj.result.Metadata;
+import lombok.EqualsAndHashCode;
 
 /**
- * This class represents the result of a remove background operation.
- * It includes properties for metadata, status, and the image with the background removed.
+ * This class represents the result of a remove background operation. It includes properties for
+ * metadata, status, and the image with the background removed.
  */
 @EqualsAndHashCode(callSuper = true)
 public class RemoveBackgroundResult extends ResultWithImageAndStatus {
 
-    public RemoveBackgroundResult(Metadata metadata, String status, Image image) {
-        super(metadata, status, image);
-    }
+  public RemoveBackgroundResult(Metadata metadata, String status, Image image) {
+    super(metadata, status, image);
+  }
 
-    @Override
-    public String toString() {
-        return "RemoveBackgroundResult{" +
-                "status='" + status + '\'' +
-                ", image=" + image +
-                ", metadata=" + metadata +
-                '}';
-    }
+  @Override
+  public String toString() {
+    return "RemoveBackgroundResult{"
+        + "status='"
+        + status
+        + '\''
+        + ", image="
+        + image
+        + ", metadata="
+        + metadata
+        + '}';
+  }
 }

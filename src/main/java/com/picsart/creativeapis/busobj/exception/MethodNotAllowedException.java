@@ -27,20 +27,22 @@ package com.picsart.creativeapis.busobj.exception;
 import com.picsart.creativeapis.busobj.result.Metadata;
 import io.netty.handler.codec.http.HttpResponseStatus;
 
-/**
- * Exception thrown when the server returns a 405 Method Not Allowed response.
- */
+/** Exception thrown when the server returns a 405 Method Not Allowed response. */
 public class MethodNotAllowedException extends FailureResponseException {
-    public MethodNotAllowedException(String message, Metadata metadata) {
-        super(message, HttpResponseStatus.METHOD_NOT_ALLOWED, metadata);
-    }
+  public MethodNotAllowedException(String message, Metadata metadata) {
+    super(message, HttpResponseStatus.METHOD_NOT_ALLOWED, metadata);
+  }
 
-    @Override
-    public String toString() {
-        return "MethodNotAllowedException{" +
-                "httpStatus=" + getHttpStatus() +
-                ", message='" + getMessage() + '\'' +
-                ", metadata=" + getMetadata() +
-                '}';
-    }
+  @Override
+  public String toString() {
+    return "MethodNotAllowedException{"
+        + "httpStatus="
+        + getHttpStatus()
+        + ", message='"
+        + getMessage()
+        + '\''
+        + ", metadata="
+        + getMetadata()
+        + '}';
+  }
 }

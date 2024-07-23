@@ -28,26 +28,28 @@ import com.picsart.creativeapis.busobj.result.Metadata;
 import io.netty.handler.codec.http.HttpResponseStatus;
 import lombok.Getter;
 
-/**
- * Exception thrown when the server returns a non-2xx response.
- */
+/** Exception thrown when the server returns a non-2xx response. */
 @Getter
 public class FailureResponseException extends ApiException {
-    private final HttpResponseStatus httpStatus;
-    private final Metadata metadata;
+  private final HttpResponseStatus httpStatus;
+  private final Metadata metadata;
 
-    public FailureResponseException(String message, HttpResponseStatus status, Metadata metadata) {
-        super(message);
-        this.httpStatus = status;
-        this.metadata = metadata;
-    }
+  public FailureResponseException(String message, HttpResponseStatus status, Metadata metadata) {
+    super(message);
+    this.httpStatus = status;
+    this.metadata = metadata;
+  }
 
-    @Override
-    public String toString() {
-        return "FailureResponseException{" +
-                "httpStatus=" + httpStatus +
-                ", message='" + getMessage() + '\'' +
-                ", metadata=" + metadata +
-                '}';
-    }
+  @Override
+  public String toString() {
+    return "FailureResponseException{"
+        + "httpStatus="
+        + httpStatus
+        + ", message='"
+        + getMessage()
+        + '\''
+        + ", metadata="
+        + metadata
+        + '}';
+  }
 }

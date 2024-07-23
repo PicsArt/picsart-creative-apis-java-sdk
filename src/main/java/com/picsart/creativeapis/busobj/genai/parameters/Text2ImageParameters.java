@@ -24,75 +24,62 @@
 
 package com.picsart.creativeapis.busobj.genai.parameters;
 
+import javax.annotation.Nullable;
 import lombok.Builder;
 import lombok.Data;
 import lombok.experimental.FieldDefaults;
 
-import javax.annotation.Nullable;
-
-
 /**
- * This class represents the parameters for the Text2Image operation in the GenAI API.
- * It includes properties for the prompt, negative prompt, width, height, and count of images to generate.
+ * This class represents the parameters for the Text2Image operation in the GenAI API. It includes
+ * properties for the prompt, negative prompt, width, height, and count of images to generate.
  */
 @Data
 @Builder
 @FieldDefaults(makeFinal = true, level = lombok.AccessLevel.PRIVATE)
 public class Text2ImageParameters {
-    /**
-     * The prompt to generate the image from.
-     */
-    String prompt;
+  /** The prompt to generate the image from. */
+  String prompt;
 
-    /**
-     * The negative prompt to generate the image from.
-     */
-    String negativePrompt;
+  /** The negative prompt to generate the image from. */
+  String negativePrompt;
 
-    /**
-     * The width of the image to generate. This is optional.
-     */
-    @Nullable
-    Integer width;
+  /** The width of the image to generate. This is optional. */
+  @Nullable Integer width;
 
-    /**
-     * The height of the image to generate. This is optional.
-     */
-    @Nullable
-    Integer height;
+  /** The height of the image to generate. This is optional. */
+  @Nullable Integer height;
 
-    /**
-     * The number of images to generate. This is optional.
-     */
-    @Nullable
-    Integer count;
+  /** The number of images to generate. This is optional. */
+  @Nullable Integer count;
 
-    /**
-     * Returns a new builder for Text2ImageParameters with the specified prompt and negative prompt.
-     * @param prompt The prompt to generate the image from.
-     * @param negativePrompt The negative prompt to generate the image from.
-     * @return A new builder for Text2ImageParameters.
-     */
-    public static Text2ImageParameters.Text2ImageParametersBuilder builder(String prompt, String negativePrompt) {
-        return builder().prompt(prompt).negativePrompt(negativePrompt);
+  /**
+   * Returns a new builder for Text2ImageParameters with the specified prompt and negative prompt.
+   *
+   * @param prompt The prompt to generate the image from.
+   * @param negativePrompt The negative prompt to generate the image from.
+   * @return A new builder for Text2ImageParameters.
+   */
+  public static Text2ImageParameters.Text2ImageParametersBuilder builder(
+      String prompt, String negativePrompt) {
+    return builder().prompt(prompt).negativePrompt(negativePrompt);
+  }
+
+  private static Text2ImageParameters.Text2ImageParametersBuilder builder() {
+    return new Text2ImageParameters.Text2ImageParametersBuilder();
+  }
+
+  public static class Text2ImageParametersBuilder {
+    private String prompt;
+    private String negativePrompt;
+
+    private Text2ImageParameters.Text2ImageParametersBuilder prompt(String prompt) {
+      this.prompt = prompt;
+      return this;
     }
 
-    private static Text2ImageParameters.Text2ImageParametersBuilder builder() {
-        return new Text2ImageParameters.Text2ImageParametersBuilder();
+    private Text2ImageParameters.Text2ImageParametersBuilder negativePrompt(String negativePrompt) {
+      this.negativePrompt = negativePrompt;
+      return this;
     }
-
-    public static class Text2ImageParametersBuilder {
-        private String prompt;
-        private String negativePrompt;
-
-        private Text2ImageParameters.Text2ImageParametersBuilder prompt(String prompt) {
-            this.prompt = prompt;
-            return this;
-        }
-
-        private Text2ImageParameters.Text2ImageParametersBuilder negativePrompt(String negativePrompt) {
-            this.negativePrompt = negativePrompt;
-            return this;
-        }
-    }
+  }
 }

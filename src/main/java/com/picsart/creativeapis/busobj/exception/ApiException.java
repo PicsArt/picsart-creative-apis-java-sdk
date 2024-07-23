@@ -24,29 +24,24 @@
 
 package com.picsart.creativeapis.busobj.exception;
 
-/**
- * Exception thrown when an API call fails.
- */
+/** Exception thrown when an API call fails. */
 public class ApiException extends RuntimeException {
-    public ApiException() {
-    }
+  public ApiException() {}
 
-    public ApiException(String message) {
-        super(message);
-    }
+  public ApiException(String message) {
+    super(message);
+  }
 
-    public ApiException(String message, Throwable cause) {
-        super(message, cause);
-    }
+  public ApiException(String message, Throwable cause) {
+    super(message, cause);
+  }
 
-    public ApiException(Throwable cause) {
-        super(cause);
-    }
+  public ApiException(Throwable cause) {
+    super(cause);
+  }
 
-    @Override
-    public String toString() {
-        return "ApiException{" +
-                "message='" + getMessage() + '\'' +
-                '}';
-    }
+  @Override
+  public String toString() {
+    return "ApiException{" + "message='" + getMessage() + '\'' + '}';
+  }
 }

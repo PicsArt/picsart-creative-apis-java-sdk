@@ -27,29 +27,33 @@ package com.picsart.creativeapis.examples.imageapi;
 import com.picsart.creativeapis.PicsartEnterprise;
 import com.picsart.creativeapis.busobj.image.result.ListEffectsResult;
 import com.picsart.creativeapis.image.ImageApi;
+import java.util.concurrent.CountDownLatch;
 import reactor.core.publisher.Mono;
 
-import java.util.concurrent.CountDownLatch;
-
 public class ListEffectsExample {
-    public static void main(String[] args) throws InterruptedException {
-        ImageApi imageApi = PicsartEnterprise.createImageApi("YOUR_API_KEY");
+  public static void main(String[] args) throws InterruptedException {
+    ImageApi imageApi = PicsartEnterprise.createImageApi("YOUR_API_KEY");
 
-        // Create a CountDownLatch to keep the main thread alive (not for production code)
-        CountDownLatch latch = new CountDownLatch(1);
+    // Create a CountDownLatch to keep the main thread alive (not for production code)
+    CountDownLatch latch = new CountDownLatch(1);
 
-        Mono<ListEffectsResult> resultMono = imageApi.listEffects();
-        resultMono
-                .doFinally(signalType -> latch.countDown()) // Release the main thread (not for production code)
-                .subscribe(result -> { // non-blocking subscribe
-                    System.out.println("Effects: " + result.effects());
-                    System.out.println("Result metadata traceId: " + result.metadata().traceId());
-                    System.out.println("Result metadata rateLimit: " + result.metadata().rateLimit());
-                    System.out.println("Result metadata rateLimitRemaining: " + result.metadata().rateLimitRemaining());
-                    System.out.println("Result metadata rateLimitReset: " + result.metadata().rateLimitReset());
-                    System.out.println("Result metadata creditAvailable: " + result.metadata().creditAvailable());
-                });
-        // Keep the main thread alive for the example to finish (not for production code)
-        latch.await();
-    }
+    Mono<ListEffectsResult> resultMono = imageApi.listEffects();
+    resultMono
+        .doFinally(
+            signalType -> latch.countDown()) // Release the main thread (not for production code)
+        .subscribe(
+            result -> { // non-blocking subscribe
+              System.out.println("Effects: " + result.effects());
+              System.out.println("Result metadata traceId: " + result.metadata().traceId());
+              System.out.println("Result metadata rateLimit: " + result.metadata().rateLimit());
+              System.out.println(
+                  "Result metadata rateLimitRemaining: " + result.metadata().rateLimitRemaining());
+              System.out.println(
+                  "Result metadata rateLimitReset: " + result.metadata().rateLimitReset());
+              System.out.println(
+                  "Result metadata creditAvailable: " + result.metadata().creditAvailable());
+            });
+    // Keep the main thread alive for the example to finish (not for production code)
+    latch.await();
+  }
 }

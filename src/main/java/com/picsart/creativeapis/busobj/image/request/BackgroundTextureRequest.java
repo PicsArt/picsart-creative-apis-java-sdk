@@ -24,91 +24,100 @@
 
 package com.picsart.creativeapis.busobj.image.request;
 
+import com.picsart.creativeapis.busobj.image.BackgroundTexturePattern;
 import com.picsart.creativeapis.busobj.image.ImageFormat;
 import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
+import java.io.File;
+import javax.annotation.Nullable;
 import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.experimental.FieldDefaults;
-import com.picsart.creativeapis.busobj.image.BackgroundTexturePattern;
-
-import javax.annotation.Nullable;
-import java.io.File;
 
 @Getter
 @EqualsAndHashCode(callSuper = true)
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class BackgroundTextureRequest extends RequestWithImageAndFormat {
 
-    @Nullable
-    @Min(value = 1, message = "Width must be greater than 0")
-    @Max(value = 8000, message = "Width must be less than 8000")
-    Integer width;
+  @Nullable
+  @Min(value = 1, message = "Width must be greater than 0")
+  @Max(value = 8000, message = "Width must be less than 8000")
+  Integer width;
 
-    @Nullable
-    @Min(value = 1, message = "Height must be greater than 0")
-    @Max(value = 8000, message = "Height must be less than 8000")
-    Integer height;
+  @Nullable
+  @Min(value = 1, message = "Height must be greater than 0")
+  @Max(value = 8000, message = "Height must be less than 8000")
+  Integer height;
 
-    @Nullable
-    Integer offsetX;
+  @Nullable Integer offsetX;
 
-    @Nullable
-    Integer offsetY;
+  @Nullable Integer offsetY;
 
-    @Nullable
-    BackgroundTexturePattern pattern;
+  @Nullable BackgroundTexturePattern pattern;
 
-    @Nullable
-    @Min(value = -180, message = "Rotate must be in range [-180, 180]")
-    @Max(value = 180, message = "Rotate must be in range [-180, 180]")
-    Integer rotate;
+  @Nullable
+  @Min(value = -180, message = "Rotate must be in range [-180, 180]")
+  @Max(value = 180, message = "Rotate must be in range [-180, 180]")
+  Integer rotate;
 
-    @Nullable
-    Float scale;
+  @Nullable Float scale;
 
-    public BackgroundTextureRequest(@Nullable String imageId,
-                                    @Nullable String imageUrl,
-                                    @Nullable File image,
-                                    @Nullable ImageFormat format,
-                                    @Nullable Integer width,
-                                    @Nullable Integer height,
-                                    @Nullable Integer offsetX,
-                                    @Nullable Integer offsetY,
-                                    @Nullable BackgroundTexturePattern pattern,
-                                    @Nullable Integer rotate,
-                                    @Nullable Float scale) {
-        super(imageId, imageUrl, image, format);
-        this.width = width;
-        this.height = height;
-        this.offsetX = offsetX;
-        this.offsetY = offsetY;
-        this.pattern = pattern;
-        this.rotate = rotate;
-        this.scale = scale;
-    }
+  public BackgroundTextureRequest(
+      @Nullable String imageId,
+      @Nullable String imageUrl,
+      @Nullable File image,
+      @Nullable ImageFormat format,
+      @Nullable Integer width,
+      @Nullable Integer height,
+      @Nullable Integer offsetX,
+      @Nullable Integer offsetY,
+      @Nullable BackgroundTexturePattern pattern,
+      @Nullable Integer rotate,
+      @Nullable Float scale) {
+    super(imageId, imageUrl, image, format);
+    this.width = width;
+    this.height = height;
+    this.offsetX = offsetX;
+    this.offsetY = offsetY;
+    this.pattern = pattern;
+    this.rotate = rotate;
+    this.scale = scale;
+  }
 
-    @AssertTrue(message = "Scale must be in range [0.5, 10]")
-    private boolean isScaleValid() {
-        return scale == null || (scale >= 0.5 && scale <= 10);
-    }
+  @AssertTrue(message = "Scale must be in range [0.5, 10]")
+  private boolean isScaleValid() {
+    return scale == null || (scale >= 0.5 && scale <= 10);
+  }
 
-    @Override
-    public String toString() {
-        return "BackgroundTextureRequest{" +
-                "width=" + width +
-                ", height=" + height +
-                ", offsetX=" + offsetX +
-                ", offsetY=" + offsetY +
-                ", pattern=" + pattern +
-                ", rotate=" + rotate +
-                ", scale=" + scale +
-                ", imageId='" + imageId + '\'' +
-                ", imageUrl='" + imageUrl + '\'' +
-                ", image=" + image +
-                ", format=" + format +
-                '}';
-    }
+  @Override
+  public String toString() {
+    return "BackgroundTextureRequest{"
+        + "width="
+        + width
+        + ", height="
+        + height
+        + ", offsetX="
+        + offsetX
+        + ", offsetY="
+        + offsetY
+        + ", pattern="
+        + pattern
+        + ", rotate="
+        + rotate
+        + ", scale="
+        + scale
+        + ", imageId='"
+        + imageId
+        + '\''
+        + ", imageUrl='"
+        + imageUrl
+        + '\''
+        + ", image="
+        + image
+        + ", format="
+        + format
+        + '}';
+  }
 }

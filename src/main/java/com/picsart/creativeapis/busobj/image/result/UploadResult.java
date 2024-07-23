@@ -29,21 +29,25 @@ import com.picsart.creativeapis.busobj.result.Metadata;
 import lombok.EqualsAndHashCode;
 
 /**
- * This class represents the result of an upload operation.
- * It includes properties for metadata, status, and the uploaded image.
+ * This class represents the result of an upload operation. It includes properties for metadata,
+ * status, and the uploaded image.
  */
 @EqualsAndHashCode(callSuper = true)
 public class UploadResult extends ResultWithImageAndStatus {
-    public UploadResult(Metadata metadata, String status, Image image) {
-        super(metadata, status, image);
-    }
+  public UploadResult(Metadata metadata, String status, Image image) {
+    super(metadata, status, image);
+  }
 
-    @Override
-    public String toString() {
-        return "UploadResult{" +
-                "status='" + status + '\'' +
-                ", image=" + image +
-                ", metadata=" + metadata +
-                '}';
-    }
+  @Override
+  public String toString() {
+    return "UploadResult{"
+        + "status='"
+        + status
+        + '\''
+        + ", image="
+        + image
+        + ", metadata="
+        + metadata
+        + '}';
+  }
 }

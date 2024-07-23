@@ -25,13 +25,13 @@
 package com.picsart.creativeapis.busobj.image.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.EqualsAndHashCode;
 import com.picsart.creativeapis.busobj.image.Image;
+import lombok.EqualsAndHashCode;
 
-//TODO: add toString to all responses
+// TODO: add toString to all responses
 @EqualsAndHashCode(callSuper = true)
 public class EffectResponse extends ResponseWithImageAndStatus {
-    public EffectResponse(@JsonProperty("status") String status, @JsonProperty("data") Image image) {
-        super(status, image);
-    }
+  public EffectResponse(@JsonProperty("status") String status, @JsonProperty("data") Image image) {
+    super(status, image);
+  }
 }

@@ -24,34 +24,29 @@
 
 package com.picsart.creativeapis.busobj.image.request;
 
-import jakarta.validation.constraints.AssertTrue;
-import lombok.AccessLevel;
-import lombok.Data;
-import lombok.experimental.FieldDefaults;
 import com.picsart.creativeapis.busobj.MultipartBodyRequest;
 import com.picsart.creativeapis.busobj.image.ImageFormat;
 import com.picsart.creativeapis.utils.ValidationUtils;
-
-import javax.annotation.Nullable;
+import jakarta.validation.constraints.AssertTrue;
 import java.io.File;
+import javax.annotation.Nullable;
+import lombok.AccessLevel;
+import lombok.Data;
+import lombok.experimental.FieldDefaults;
 
 @Data
 @FieldDefaults(makeFinal = true, level = AccessLevel.PROTECTED)
 public class RequestWithImageAndFormat implements MultipartBodyRequest {
-    @Nullable
-    String imageId;
+  @Nullable String imageId;
 
-    @Nullable
-    String imageUrl;
+  @Nullable String imageUrl;
 
-    @Nullable
-    File image;
+  @Nullable File image;
 
-    @Nullable
-    ImageFormat format;
+  @Nullable ImageFormat format;
 
-    @AssertTrue(message = "Exactly one image source must be set")
-    private boolean isImageSetCorrectly() {
-        return ValidationUtils.onlyOneNotEmpty(imageId, imageUrl, image);
-    }
+  @AssertTrue(message = "Exactly one image source must be set")
+  private boolean isImageSetCorrectly() {
+    return ValidationUtils.onlyOneNotEmpty(imageId, imageUrl, image);
+  }
 }

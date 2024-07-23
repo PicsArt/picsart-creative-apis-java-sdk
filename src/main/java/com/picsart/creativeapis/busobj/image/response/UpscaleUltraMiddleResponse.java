@@ -24,5 +24,4 @@
 
 package com.picsart.creativeapis.busobj.image.response;
 
-public record UpscaleUltraMiddleResponse(String transactionId) {
-}
+public record UpscaleUltraMiddleResponse(String transactionId) {}

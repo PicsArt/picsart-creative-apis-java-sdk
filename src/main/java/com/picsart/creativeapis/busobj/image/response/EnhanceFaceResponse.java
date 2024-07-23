@@ -25,12 +25,13 @@
 package com.picsart.creativeapis.busobj.image.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.EqualsAndHashCode;
 import com.picsart.creativeapis.busobj.image.Image;
+import lombok.EqualsAndHashCode;
 
 @EqualsAndHashCode(callSuper = true)
 public class EnhanceFaceResponse extends ResponseWithImageAndStatus {
-    public EnhanceFaceResponse(@JsonProperty("status") String status, @JsonProperty("data") Image image) {
-        super(status, image);
-    }
+  public EnhanceFaceResponse(
+      @JsonProperty("status") String status, @JsonProperty("data") Image image) {
+    super(status, image);
+  }
 }

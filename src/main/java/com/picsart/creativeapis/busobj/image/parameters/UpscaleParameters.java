@@ -24,66 +24,54 @@
 
 package com.picsart.creativeapis.busobj.image.parameters;
 
+import com.picsart.creativeapis.busobj.image.ImageFormat;
+import com.picsart.creativeapis.busobj.image.ImageSource;
+import javax.annotation.Nullable;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
 import lombok.experimental.FieldDefaults;
-import com.picsart.creativeapis.busobj.image.ImageFormat;
-import com.picsart.creativeapis.busobj.image.ImageSource;
-
-import javax.annotation.Nullable;
 
 /**
- * This class represents the parameters for upscaling an image.
- * It includes properties for the image source, the upscale factor, and the desired format of the image.
- * Each property can be null except the image, which means that the api default values will be used for the
- * corresponding parameter.
+ * This class represents the parameters for upscaling an image. It includes properties for the image
+ * source, the upscale factor, and the desired format of the image. Each property can be null except
+ * the image, which means that the api default values will be used for the corresponding parameter.
  */
 @Data
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class UpscaleParameters {
-    /**
-     * The source of the image to be upscaled.
-     */
-    ImageSource image;
+  /** The source of the image to be upscaled. */
+  ImageSource image;
 
-    /**
-     * The upscale factor for the upscaling. This is optional.
-     * Allowed values: 2, 4, 8, 16.
-     */
-    @Nullable
-    Integer upscaleFactor;
+  /** The upscale factor for the upscaling. This is optional. Allowed values: 2, 4, 8, 16. */
+  @Nullable Integer upscaleFactor;
 
-    /**
-     * The desired format of the image after upscaling. This is optional.
-     */
-    @Nullable
-    ImageFormat format;
+  /** The desired format of the image after upscaling. This is optional. */
+  @Nullable ImageFormat format;
 
-    /**
-     * Returns a new builder for UpscaleParameters with the specified image source.
-     * @param image The source of the image to be upscaled.
-     * @return A new builder for UpscaleParameters.
-     */
-    public static UpscaleParametersBuilder builder(ImageSource image) {
-        return builder().image(image);
+  /**
+   * Returns a new builder for UpscaleParameters with the specified image source.
+   *
+   * @param image The source of the image to be upscaled.
+   * @return A new builder for UpscaleParameters.
+   */
+  public static UpscaleParametersBuilder builder(ImageSource image) {
+    return builder().image(image);
+  }
+
+  private static UpscaleParametersBuilder builder() {
+    return new UpscaleParametersBuilder();
+  }
+
+  /** This class provides a builder for UpscaleParameters. */
+  public static class UpscaleParametersBuilder {
+    private ImageSource image;
+
+    private UpscaleParametersBuilder image(@NonNull ImageSource image) {
+      this.image = image;
+      return this;
     }
-
-    private static UpscaleParametersBuilder builder() {
-        return new UpscaleParametersBuilder();
-    }
-
-    /**
-     * This class provides a builder for UpscaleParameters.
-     */
-    public static class UpscaleParametersBuilder {
-        private ImageSource image;
-
-        private UpscaleParametersBuilder image(@NonNull ImageSource image) {
-            this.image = image;
-            return this;
-        }
-    }
+  }
 }

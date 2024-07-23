@@ -24,42 +24,43 @@
 
 package com.picsart.creativeapis.genai;
 
+import com.picsart.creativeapis.PicsartEnterprise;
+import com.picsart.creativeapis.busobj.genai.parameters.Text2ImageParameters;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
-import com.picsart.creativeapis.busobj.genai.parameters.Text2ImageParameters;
-import com.picsart.creativeapis.PicsartEnterprise;
 import reactor.core.publisher.Hooks;
 import reactor.test.StepVerifier;
-
 
 @ExtendWith(MockitoExtension.class)
 public class GenAIApiIntegrationTest {
 
-    private static final String API_KEY = System.getProperty("API_KEY");
+  private static final String API_KEY = System.getProperty("API_KEY");
 
-    private GenAIApi genAIApi;
+  private GenAIApi genAIApi;
 
-    @BeforeEach
-    public void setup() {
-        Hooks.onOperatorDebug();
-        genAIApi = PicsartEnterprise.createGenAIApi(API_KEY);
-    }
+  @BeforeEach
+  public void setup() {
+    Hooks.onOperatorDebug();
+    genAIApi = PicsartEnterprise.createGenAIApi(API_KEY);
+  }
 
-    @DisplayName("Should return Text2ImageResult when text2Image is called with valid parameters")
-    @Test
-    public void text2ImageSmokeTest() {
-        var text2ImageResultMono = genAIApi.text2Image(Text2ImageParameters.builder("cats vs dogs", "fighting")
+  @DisplayName("Should return Text2ImageResult when text2Image is called with valid parameters")
+  @Test
+  public void text2ImageSmokeTest() {
+    var text2ImageResultMono =
+        genAIApi.text2Image(
+            Text2ImageParameters.builder("cats vs dogs", "fighting")
                 .count(1)
                 .height(64)
                 .width(64)
                 .build());
 
-        // Then
-        StepVerifier.create(text2ImageResultMono)
-                .expectNextMatches(response -> response.images().size() == 1)
-                .verifyComplete();
-    }
+    // Then
+    StepVerifier.create(text2ImageResultMono)
+        .expectNextMatches(response -> response.images().size() == 1)
+        .verifyComplete();
+  }
 }

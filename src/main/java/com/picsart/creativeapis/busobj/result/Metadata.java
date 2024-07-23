@@ -26,10 +26,9 @@ package com.picsart.creativeapis.busobj.result;
 
 import javax.annotation.Nullable;
 
-public record Metadata(@Nullable Integer rateLimit,
-                       @Nullable Integer rateLimitRemaining,
-                       @Nullable Integer rateLimitReset,
-                       @Nullable String traceId,
-                       @Nullable Integer creditAvailable) {
-
-}
+public record Metadata(
+    @Nullable Integer rateLimit,
+    @Nullable Integer rateLimitRemaining,
+    @Nullable Integer rateLimitReset,
+    @Nullable String traceId,
+    @Nullable Integer creditAvailable) {}

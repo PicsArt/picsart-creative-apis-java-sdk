@@ -32,26 +32,23 @@ import lombok.experimental.Accessors;
 import lombok.experimental.FieldDefaults;
 
 /**
- * This class represents the result of a balance operation.
- * It includes properties for metadata and the number of credits.
+ * This class represents the result of a balance operation. It includes properties for metadata and
+ * the number of credits.
  */
 @Getter
 @Accessors(fluent = true)
 @EqualsAndHashCode(callSuper = true)
 @FieldDefaults(makeFinal = true, level = lombok.AccessLevel.PRIVATE)
 public class BalanceResult extends ResultWithMetadata {
-    Integer credits;
+  Integer credits;
 
-    public BalanceResult(Metadata metadata, Integer credits) {
-        super(metadata);
-        this.credits = credits;
-    }
+  public BalanceResult(Metadata metadata, Integer credits) {
+    super(metadata);
+    this.credits = credits;
+  }
 
-    @Override
-    public String toString() {
-        return "BalanceResult{" +
-                "credits=" + credits +
-                ", metadata=" + metadata() +
-                '}';
-    }
+  @Override
+  public String toString() {
+    return "BalanceResult{" + "credits=" + credits + ", metadata=" + metadata() + '}';
+  }
 }

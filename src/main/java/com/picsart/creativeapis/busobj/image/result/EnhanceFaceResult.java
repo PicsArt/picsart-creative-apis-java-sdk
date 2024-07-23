@@ -24,27 +24,31 @@
 
 package com.picsart.creativeapis.busobj.image.result;
 
-import lombok.EqualsAndHashCode;
 import com.picsart.creativeapis.busobj.image.Image;
 import com.picsart.creativeapis.busobj.result.Metadata;
+import lombok.EqualsAndHashCode;
 
 /**
- * This class represents the result of an enhance face operation.
- * It includes properties for metadata, status, and the enhanced image.
+ * This class represents the result of an enhance face operation. It includes properties for
+ * metadata, status, and the enhanced image.
  */
 @EqualsAndHashCode(callSuper = true)
 public class EnhanceFaceResult extends ResultWithImageAndStatus {
 
-    public EnhanceFaceResult(Metadata metadata, String status, Image image) {
-        super(metadata, status, image);
-    }
+  public EnhanceFaceResult(Metadata metadata, String status, Image image) {
+    super(metadata, status, image);
+  }
 
-    @Override
-    public String toString() {
-        return "EnhanceFaceResult{" +
-                "status='" + status + '\'' +
-                ", image=" + image +
-                ", metadata=" + metadata +
-                '}';
-    }
+  @Override
+  public String toString() {
+    return "EnhanceFaceResult{"
+        + "status='"
+        + status
+        + '\''
+        + ", image="
+        + image
+        + ", metadata="
+        + metadata
+        + '}';
+  }
 }

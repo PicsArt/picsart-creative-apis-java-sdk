@@ -25,20 +25,13 @@
 package com.picsart.creativeapis.http;
 
 import com.picsart.creativeapis.busobj.HttpResponseWithStringBody;
-import reactor.core.publisher.Mono;
-
 import java.time.Duration;
+import reactor.core.publisher.Mono;
 
 public interface ApiHttpClient {
 
-    Mono<HttpResponseWithStringBody> sendGetRequest(
-            String url,
-            String apiKey,
-            Duration timeout);
+  Mono<HttpResponseWithStringBody> sendGetRequest(String url, String apiKey, Duration timeout);
 
-    Mono<HttpResponseWithStringBody> sendPostRequest(
-            String url,
-            String apiKey,
-            Object request,
-            Duration timeout);
+  Mono<HttpResponseWithStringBody> sendPostRequest(
+      String url, String apiKey, Object request, Duration timeout);
 }

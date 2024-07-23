@@ -27,19 +27,22 @@ package com.picsart.creativeapis.busobj.exception;
 import com.picsart.creativeapis.busobj.result.Metadata;
 import io.netty.handler.codec.http.HttpResponseStatus;
 
-/**
- * Exception thrown when the server returns a 504 Gateway Timeout response.
- */
+/** Exception thrown when the server returns a 504 Gateway Timeout response. */
 public class GatewayTimeoutException extends FailureResponseException implements Recoverable {
-    public GatewayTimeoutException(String message, Metadata metadata) {
-        super(message, HttpResponseStatus.GATEWAY_TIMEOUT, metadata);
-    }
-    @Override
-    public String toString() {
-        return "GatewayTimeoutException{" +
-                "httpStatus=" + getHttpStatus() +
-                ", message='" + getMessage() + '\'' +
-                ", metadata=" + getMetadata() +
-                '}';
-    }
+  public GatewayTimeoutException(String message, Metadata metadata) {
+    super(message, HttpResponseStatus.GATEWAY_TIMEOUT, metadata);
+  }
+
+  @Override
+  public String toString() {
+    return "GatewayTimeoutException{"
+        + "httpStatus="
+        + getHttpStatus()
+        + ", message='"
+        + getMessage()
+        + '\''
+        + ", metadata="
+        + getMetadata()
+        + '}';
+  }
 }

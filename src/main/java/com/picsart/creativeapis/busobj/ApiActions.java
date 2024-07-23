@@ -28,45 +28,41 @@ import lombok.Getter;
 import lombok.experimental.Accessors;
 
 /**
- * This enum represents the different API actions that can be performed.
- * Each API action has a name and a URL associated with it.
+ * This enum represents the different API actions that can be performed. Each API action has a name
+ * and a URL associated with it.
  */
 @Getter
 @Accessors(fluent = true)
 public enum ApiActions {
-    TEXT2IMAGE("text2image", "text2image"),
-    REMOVE_BACKGROUND("removeBackground", "removebg"),
-    EFFECT("effect", "effects"),
-    LIST_EFFECTS("listEffects", "effects"),
-    ULTRA_UPSCALE("ultraUpscale", "upscale/ultra"),
-    UPSCALE("upscale", "upscale"),
-    ULTRA_ENHANCE("ultraEnhance", "upscale/enhance"),
-    ENHANCE_FACE("enhanceFace", "enhance/face"),
-    EFFECTS_PREVIEWS("effectsPreviews", "effects/previews"),
-    ADJUST("adjust", "adjust"),
-    BACKGROUND_TEXTURE("backgroundTexture", "background/texture"),
-    SURFACE_MAP("surfaceMap", "surfacemap"),
-    UPLOAD("upload", "upload"),
-    BALANCE("balance", "balance");
+  TEXT2IMAGE("text2image", "text2image"),
+  REMOVE_BACKGROUND("removeBackground", "removebg"),
+  EFFECT("effect", "effects"),
+  LIST_EFFECTS("listEffects", "effects"),
+  ULTRA_UPSCALE("ultraUpscale", "upscale/ultra"),
+  UPSCALE("upscale", "upscale"),
+  ULTRA_ENHANCE("ultraEnhance", "upscale/enhance"),
+  ENHANCE_FACE("enhanceFace", "enhance/face"),
+  EFFECTS_PREVIEWS("effectsPreviews", "effects/previews"),
+  ADJUST("adjust", "adjust"),
+  BACKGROUND_TEXTURE("backgroundTexture", "background/texture"),
+  SURFACE_MAP("surfaceMap", "surfacemap"),
+  UPLOAD("upload", "upload"),
+  BALANCE("balance", "balance");
 
+  /** The name of the API action. */
+  private final String actionName;
 
-    /**
-     * The name of the API action.
-     */
-    private final String actionName;
+  /** The URL of the API action. */
+  private final String url;
 
-    /**
-     * The URL of the API action.
-     */
-    private final String url;
-
-    /**
-     * Constructs a new ApiActions with the specified action name and URL.
-     * @param actionName The name of the API action.
-     * @param url The URL of the API action.
-     */
-    ApiActions(String actionName, String url) {
-        this.actionName = actionName;
-        this.url = url;
-    }
+  /**
+   * Constructs a new ApiActions with the specified action name and URL.
+   *
+   * @param actionName The name of the API action.
+   * @param url The URL of the API action.
+   */
+  ApiActions(String actionName, String url) {
+    this.actionName = actionName;
+    this.url = url;
+  }
 }

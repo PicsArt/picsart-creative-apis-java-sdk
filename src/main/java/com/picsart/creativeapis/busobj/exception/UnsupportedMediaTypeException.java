@@ -27,20 +27,22 @@ package com.picsart.creativeapis.busobj.exception;
 import com.picsart.creativeapis.busobj.result.Metadata;
 import io.netty.handler.codec.http.HttpResponseStatus;
 
-/**
- * Exception thrown when the server returns a 415 Unsupported Media Type response.
- */
+/** Exception thrown when the server returns a 415 Unsupported Media Type response. */
 public class UnsupportedMediaTypeException extends FailureResponseException {
-    public UnsupportedMediaTypeException(String message, Metadata metadata) {
-        super(message, HttpResponseStatus.UNSUPPORTED_MEDIA_TYPE, metadata);
-    }
+  public UnsupportedMediaTypeException(String message, Metadata metadata) {
+    super(message, HttpResponseStatus.UNSUPPORTED_MEDIA_TYPE, metadata);
+  }
 
-    @Override
-    public String toString() {
-        return "UnsupportedMediaTypeException{" +
-                "httpStatus=" + getHttpStatus() +
-                ", message='" + getMessage() + '\'' +
-                ", metadata=" + getMetadata() +
-                '}';
-    }
+  @Override
+  public String toString() {
+    return "UnsupportedMediaTypeException{"
+        + "httpStatus="
+        + getHttpStatus()
+        + ", message='"
+        + getMessage()
+        + '\''
+        + ", metadata="
+        + getMetadata()
+        + '}';
+  }
 }

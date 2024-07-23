@@ -24,25 +24,22 @@
 
 package com.picsart.creativeapis.busobj.image;
 
+import java.io.File;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 import lombok.experimental.FieldDefaults;
 
-import java.io.File;
-
-/**
- * This class represents an image source that is a file.
- */
+/** This class represents an image source that is a file. */
 @Getter
 @ToString
 @EqualsAndHashCode(callSuper = false)
 @FieldDefaults(makeFinal = true, level = lombok.AccessLevel.PRIVATE)
 public final class ImageFile extends ImageSource {
-    File file;
+  File file;
 
-    public ImageFile(File file) {
-        super(ImageSourceType.FILE);
-        this.file = file;
-    }
+  public ImageFile(File file) {
+    super(ImageSourceType.FILE);
+    this.file = file;
+  }
 }

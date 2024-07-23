@@ -27,20 +27,22 @@ package com.picsart.creativeapis.busobj.exception;
 import com.picsart.creativeapis.busobj.result.Metadata;
 import io.netty.handler.codec.http.HttpResponseStatus;
 
-/**
- * Exception thrown when the server returns a 413 Request Entity Too Large response.
- */
+/** Exception thrown when the server returns a 413 Request Entity Too Large response. */
 public class RequestEntityTooLargeException extends FailureResponseException {
-    public RequestEntityTooLargeException(String message, Metadata metadata) {
-        super(message, HttpResponseStatus.REQUEST_ENTITY_TOO_LARGE, metadata);
-    }
+  public RequestEntityTooLargeException(String message, Metadata metadata) {
+    super(message, HttpResponseStatus.REQUEST_ENTITY_TOO_LARGE, metadata);
+  }
 
-    @Override
-    public String toString() {
-        return "RequestEntityTooLargeException{" +
-                "httpStatus=" + getHttpStatus() +
-                ", message='" + getMessage() + '\'' +
-                ", metadata=" + getMetadata() +
-                '}';
-    }
+  @Override
+  public String toString() {
+    return "RequestEntityTooLargeException{"
+        + "httpStatus="
+        + getHttpStatus()
+        + ", message='"
+        + getMessage()
+        + '\''
+        + ", metadata="
+        + getMetadata()
+        + '}';
+  }
 }

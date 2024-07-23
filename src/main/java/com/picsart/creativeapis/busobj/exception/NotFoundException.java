@@ -27,20 +27,22 @@ package com.picsart.creativeapis.busobj.exception;
 import com.picsart.creativeapis.busobj.result.Metadata;
 import io.netty.handler.codec.http.HttpResponseStatus;
 
-/**
- * Exception thrown when the server returns a 404 Not Found response.
- */
+/** Exception thrown when the server returns a 404 Not Found response. */
 public class NotFoundException extends FailureResponseException {
-    public NotFoundException(String message, Metadata metadata) {
-        super(message, HttpResponseStatus.NOT_FOUND, metadata);
-    }
+  public NotFoundException(String message, Metadata metadata) {
+    super(message, HttpResponseStatus.NOT_FOUND, metadata);
+  }
 
-    @Override
-    public String toString() {
-        return "NotFoundException{" +
-                "httpStatus=" + getHttpStatus() +
-                ", message='" + getMessage() + '\'' +
-                ", metadata=" + getMetadata() +
-                '}';
-    }
+  @Override
+  public String toString() {
+    return "NotFoundException{"
+        + "httpStatus="
+        + getHttpStatus()
+        + ", message='"
+        + getMessage()
+        + '\''
+        + ", metadata="
+        + getMetadata()
+        + '}';
+  }
 }

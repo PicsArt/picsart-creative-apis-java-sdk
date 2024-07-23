@@ -24,36 +24,31 @@
 
 package com.picsart.creativeapis.busobj.genai.result;
 
-import lombok.Getter;
-import lombok.experimental.Accessors;
-import lombok.experimental.FieldDefaults;
 import com.picsart.creativeapis.busobj.image.Image;
 import com.picsart.creativeapis.busobj.result.Metadata;
 import com.picsart.creativeapis.busobj.result.ResultWithMetadata;
-
 import java.util.List;
+import lombok.Getter;
+import lombok.experimental.Accessors;
+import lombok.experimental.FieldDefaults;
 
 /**
- * This class represents the result of a text2Image operation in the GenAI API.
- * It includes the metadata and the generated images.
+ * This class represents the result of a text2Image operation in the GenAI API. It includes the
+ * metadata and the generated images.
  */
 @Getter
 @Accessors(fluent = true)
 @FieldDefaults(makeFinal = true, level = lombok.AccessLevel.PRIVATE)
 public class Text2ImageResult extends ResultWithMetadata {
-    List<Image> images;
+  List<Image> images;
 
-    public Text2ImageResult(List<Image> images, Metadata metadata) {
-        super(metadata);
-        this.images = images;
-    }
+  public Text2ImageResult(List<Image> images, Metadata metadata) {
+    super(metadata);
+    this.images = images;
+  }
 
-    @Override
-    public String toString() {
-        return "Text2ImageResult{" +
-                "images=" + images +
-                ", metadata=" + metadata() +
-                '}';
-    }
-
+  @Override
+  public String toString() {
+    return "Text2ImageResult{" + "images=" + images + ", metadata=" + metadata() + '}';
+  }
 }

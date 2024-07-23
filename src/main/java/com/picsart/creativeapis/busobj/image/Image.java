@@ -29,27 +29,25 @@ import lombok.*;
 import lombok.experimental.Accessors;
 import lombok.experimental.FieldDefaults;
 
-/**
- * This class represents an image.
- */
+/** This class represents an image. */
 @Getter
 @EqualsAndHashCode
 @Accessors(fluent = true)
 @ToString
 @FieldDefaults(makeFinal = true, level = AccessLevel.PROTECTED)
 public class Image {
-    String id;
-    String url;
+  String id;
+  String url;
 
-    public Image(@JsonProperty("id") String id, @JsonProperty("url") String url) {
-        this.id = id;
-        this.url = url;
-    }
+  public Image(@JsonProperty("id") String id, @JsonProperty("url") String url) {
+    this.id = id;
+    this.url = url;
+  }
 
-    public ImageSource toImageSource() {
-        if (url != null) {
-            return ImageSource.fromUrl(url);
-        }
-        return ImageSource.fromImageId(id);
+  public ImageSource toImageSource() {
+    if (url != null) {
+      return ImageSource.fromUrl(url);
     }
+    return ImageSource.fromImageId(id);
+  }
 }

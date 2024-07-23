@@ -26,8 +26,6 @@ package com.picsart.creativeapis.busobj.image.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.picsart.creativeapis.busobj.image.Effect;
-
 import java.util.List;
 
-public record ListEffectsResponse(@JsonProperty("data") List<Effect> effects) {
-}
+public record ListEffectsResponse(@JsonProperty("data") List<Effect> effects) {}

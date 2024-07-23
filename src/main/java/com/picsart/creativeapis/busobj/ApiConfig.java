@@ -24,6 +24,7 @@
 
 package com.picsart.creativeapis.busobj;
 
+import java.time.Duration;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -31,35 +32,21 @@ import lombok.With;
 import lombok.experimental.Accessors;
 import lombok.experimental.FieldDefaults;
 
-import java.time.Duration;
-
 /**
- * This class represents the configuration for an API.
- * It includes the API key, base URL, and timeout duration.
+ * This class represents the configuration for an API. It includes the API key, base URL, and
+ * timeout duration.
  */
 @Getter
 @RequiredArgsConstructor
 @FieldDefaults(makeFinal = true, level = lombok.AccessLevel.PRIVATE)
 @Accessors(fluent = true)
 public class ApiConfig {
-    /**
-     * The API key for the API.
-     */
-    @With
-    @NonNull
-    String apiKey;
+  /** The API key for the API. */
+  @With @NonNull String apiKey;
 
-    /**
-     * The base URL for the API.
-     */
-    @With
-    @NonNull
-    String baseUrl;
+  /** The base URL for the API. */
+  @With @NonNull String baseUrl;
 
-    /**
-     * The timeout duration for the API.
-     */
-    @With
-    @NonNull
-    Duration timeout;
+  /** The timeout duration for the API. */
+  @With @NonNull Duration timeout;
 }

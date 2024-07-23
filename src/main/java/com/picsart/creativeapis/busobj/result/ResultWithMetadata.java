@@ -35,5 +35,5 @@ import lombok.experimental.FieldDefaults;
 @RequiredArgsConstructor
 @FieldDefaults(makeFinal = true, level = AccessLevel.PROTECTED)
 public class ResultWithMetadata {
-    Metadata metadata;
+  Metadata metadata;
 }

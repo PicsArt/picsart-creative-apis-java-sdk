@@ -30,44 +30,49 @@ import com.picsart.creativeapis.busobj.image.ImageSource;
 import com.picsart.creativeapis.busobj.image.parameters.AdjustParameters;
 import com.picsart.creativeapis.busobj.image.result.AdjustResult;
 import com.picsart.creativeapis.image.ImageApi;
+import java.util.concurrent.CountDownLatch;
 import reactor.core.publisher.Mono;
 
-import java.util.concurrent.CountDownLatch;
-
 public class AdjustExample {
-    public static void main(String[] args) throws InterruptedException {
-        ImageApi imageApi = PicsartEnterprise.createImageApi("YOUR_API_KEY");
-        ImageSource mainImage = ImageSource.fromUrl("https://url-to-your-image.jpg");
+  public static void main(String[] args) throws InterruptedException {
+    ImageApi imageApi = PicsartEnterprise.createImageApi("YOUR_API_KEY");
+    ImageSource mainImage = ImageSource.fromUrl("https://url-to-your-image.jpg");
 
-        // Create a CountDownLatch to keep the main thread alive (not for production code)
-        CountDownLatch latch = new CountDownLatch(1);
+    // Create a CountDownLatch to keep the main thread alive (not for production code)
+    CountDownLatch latch = new CountDownLatch(1);
 
-        AdjustParameters parameters = AdjustParameters.builder(mainImage)
-                .format(ImageFormat.PNG)
-                .brightness(50)
-                .contrast(50)
-                .clarity(50)
-                .saturation(50)
-                .hue(50)
-                .shadows(50)
-                .highlights(50)
-                .temperature(50)
-                .sharpen(50)
-                .noise(50)
-                .vignette(50)
-                .build();
-        Mono<AdjustResult> resultMono = imageApi.adjust(parameters);
-        resultMono
-                .doFinally(signalType -> latch.countDown()) // Release the main thread (not for production code)
-                .subscribe(result -> { // non-blocking subscribe
-                    System.out.println("Result Image: " + result.image());
-                    System.out.println("Result metadata traceId: " + result.metadata().traceId());
-                    System.out.println("Result metadata rateLimit: " + result.metadata().rateLimit());
-                    System.out.println("Result metadata rateLimitRemaining: " + result.metadata().rateLimitRemaining());
-                    System.out.println("Result metadata rateLimitReset: " + result.metadata().rateLimitReset());
-                    System.out.println("Result metadata creditAvailable: " + result.metadata().creditAvailable());
-                });
-        // Keep the main thread alive for the example to finish (not for production code)
-        latch.await();
-    }
+    AdjustParameters parameters =
+        AdjustParameters.builder(mainImage)
+            .format(ImageFormat.PNG)
+            .brightness(50)
+            .contrast(50)
+            .clarity(50)
+            .saturation(50)
+            .hue(50)
+            .shadows(50)
+            .highlights(50)
+            .temperature(50)
+            .sharpen(50)
+            .noise(50)
+            .vignette(50)
+            .build();
+    Mono<AdjustResult> resultMono = imageApi.adjust(parameters);
+    resultMono
+        .doFinally(
+            signalType -> latch.countDown()) // Release the main thread (not for production code)
+        .subscribe(
+            result -> { // non-blocking subscribe
+              System.out.println("Result Image: " + result.image());
+              System.out.println("Result metadata traceId: " + result.metadata().traceId());
+              System.out.println("Result metadata rateLimit: " + result.metadata().rateLimit());
+              System.out.println(
+                  "Result metadata rateLimitRemaining: " + result.metadata().rateLimitRemaining());
+              System.out.println(
+                  "Result metadata rateLimitReset: " + result.metadata().rateLimitReset());
+              System.out.println(
+                  "Result metadata creditAvailable: " + result.metadata().creditAvailable());
+            });
+    // Keep the main thread alive for the example to finish (not for production code)
+    latch.await();
+  }
 }

@@ -24,45 +24,42 @@
 
 package com.picsart.creativeapis.busobj.genai.config;
 
+import static com.picsart.creativeapis.utils.Constants.*;
+
+import java.time.Duration;
 import lombok.Builder;
 import lombok.Data;
 import lombok.experimental.Accessors;
 import lombok.experimental.FieldDefaults;
 
-import java.time.Duration;
-
-import static com.picsart.creativeapis.utils.Constants.*;
-
 /**
- * This class represents the configuration for the GenAI API client.
- * It includes properties for the text2Image polling repeat count, text2Image polling repeat delay, and text2Image
- * polling first delay.
+ * This class represents the configuration for the GenAI API client. It includes properties for the
+ * text2Image polling repeat count, text2Image polling repeat delay, and text2Image polling first
+ * delay.
  */
 @Builder
 @Data
 @Accessors(fluent = true)
 @FieldDefaults(makeFinal = true, level = lombok.AccessLevel.PRIVATE)
 public class GenAIApiClientConfig {
-    /**
-     * The default configuration for the GenAI API client.
-     */
-    public static final GenAIApiClientConfig DEFAULT = GenAIApiClientConfig.builder().build();
+  /** The default configuration for the GenAI API client. */
+  public static final GenAIApiClientConfig DEFAULT = GenAIApiClientConfig.builder().build();
 
-    /**
-     * The number of times to repeat the text2Image polling. Defaults to TEXT_2_IMAGE_POLLING_REPEAT_COUNT.
-     */
-    @Builder.Default
-    int text2ImagePollingRepeatCount = TEXT_2_IMAGE_POLLING_REPEAT_COUNT;
+  /**
+   * The number of times to repeat the text2Image polling. Defaults to
+   * TEXT_2_IMAGE_POLLING_REPEAT_COUNT.
+   */
+  @Builder.Default int text2ImagePollingRepeatCount = TEXT_2_IMAGE_POLLING_REPEAT_COUNT;
 
-    /**
-     * The delay between each text2Image polling repeat. Defaults to TEXT_2_IMAGE_POLLING_REPEAT_DELAY.
-     */
-    @Builder.Default
-    Duration text2ImagePollingRepeatDelay = TEXT_2_IMAGE_POLLING_REPEAT_DELAY;
+  /**
+   * The delay between each text2Image polling repeat. Defaults to
+   * TEXT_2_IMAGE_POLLING_REPEAT_DELAY.
+   */
+  @Builder.Default Duration text2ImagePollingRepeatDelay = TEXT_2_IMAGE_POLLING_REPEAT_DELAY;
 
-    /**
-     * The initial delay before starting the text2Image polling. Defaults to TEXT_2_IMAGE_POLLING_FIRST_DELAY.
-     */
-    @Builder.Default
-    Duration text2ImagePollingFirstDelay = TEXT_2_IMAGE_POLLING_FIRST_DELAY;
+  /**
+   * The initial delay before starting the text2Image polling. Defaults to
+   * TEXT_2_IMAGE_POLLING_FIRST_DELAY.
+   */
+  @Builder.Default Duration text2ImagePollingFirstDelay = TEXT_2_IMAGE_POLLING_FIRST_DELAY;
 }

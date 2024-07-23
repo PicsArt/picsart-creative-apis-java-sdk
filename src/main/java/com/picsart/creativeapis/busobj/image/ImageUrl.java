@@ -29,18 +29,16 @@ import lombok.Getter;
 import lombok.ToString;
 import lombok.experimental.FieldDefaults;
 
-/**
- * This class represents an image source that is a URL.
- */
+/** This class represents an image source that is a URL. */
 @Getter
 @ToString
 @EqualsAndHashCode(callSuper = false)
 @FieldDefaults(makeFinal = true, level = lombok.AccessLevel.PRIVATE)
 public final class ImageUrl extends ImageSource {
-    String url;
+  String url;
 
-    public ImageUrl(String url) {
-        super(ImageSourceType.URL);
-        this.url = url;
-    }
+  public ImageUrl(String url) {
+    super(ImageSourceType.URL);
+    this.url = url;
+  }
 }

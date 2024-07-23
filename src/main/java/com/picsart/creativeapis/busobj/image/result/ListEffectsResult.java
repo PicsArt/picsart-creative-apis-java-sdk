@@ -24,37 +24,33 @@
 
 package com.picsart.creativeapis.busobj.image.result;
 
+import com.picsart.creativeapis.busobj.image.Effect;
+import com.picsart.creativeapis.busobj.result.Metadata;
+import com.picsart.creativeapis.busobj.result.ResultWithMetadata;
+import java.util.List;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.experimental.Accessors;
 import lombok.experimental.FieldDefaults;
-import com.picsart.creativeapis.busobj.image.Effect;
-import com.picsart.creativeapis.busobj.result.Metadata;
-import com.picsart.creativeapis.busobj.result.ResultWithMetadata;
-
-import java.util.List;
 
 /**
- * This class represents the result of a list effects operation.
- * It includes properties for metadata and a list of effects.
+ * This class represents the result of a list effects operation. It includes properties for metadata
+ * and a list of effects.
  */
 @Getter
 @Accessors(fluent = true)
 @EqualsAndHashCode(callSuper = true)
 @FieldDefaults(makeFinal = true, level = lombok.AccessLevel.PRIVATE)
 public class ListEffectsResult extends ResultWithMetadata {
-    List<Effect> effects;
+  List<Effect> effects;
 
-    public ListEffectsResult(List<Effect> effects, Metadata metadata) {
-        super(metadata);
-        this.effects = effects;
-    }
+  public ListEffectsResult(List<Effect> effects, Metadata metadata) {
+    super(metadata);
+    this.effects = effects;
+  }
 
-    @Override
-    public String toString() {
-        return "ListEffectsResult{" +
-                "effects=" + effects +
-                ", metadata=" + metadata() +
-                '}';
-    }
+  @Override
+  public String toString() {
+    return "ListEffectsResult{" + "effects=" + effects + ", metadata=" + metadata() + '}';
+  }
 }

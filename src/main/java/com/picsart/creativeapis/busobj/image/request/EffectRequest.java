@@ -24,42 +24,49 @@
 
 package com.picsart.creativeapis.busobj.image.request;
 
+import com.picsart.creativeapis.busobj.image.ImageFormat;
 import jakarta.validation.constraints.NotBlank;
+import java.io.File;
+import javax.annotation.Nullable;
 import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.experimental.FieldDefaults;
-import com.picsart.creativeapis.busobj.image.ImageFormat;
-
-import javax.annotation.Nullable;
-import java.io.File;
 
 @Getter
 @EqualsAndHashCode(callSuper = true)
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class EffectRequest extends RequestWithImageAndFormat {
 
-    @NotBlank(message = "Effect name must be set")
-    String effectName;
+  @NotBlank(message = "Effect name must be set")
+  String effectName;
 
+  public EffectRequest(
+      @Nullable String imageId,
+      @Nullable String imageUrl,
+      @Nullable File image,
+      @Nullable ImageFormat format,
+      String effectName) {
+    super(imageId, imageUrl, image, format);
+    this.effectName = effectName;
+  }
 
-    public EffectRequest(@Nullable String imageId,
-                         @Nullable String imageUrl,
-                         @Nullable File image,
-                         @Nullable ImageFormat format,
-                         String effectName) {
-        super(imageId, imageUrl, image, format);
-        this.effectName = effectName;
-    }
-
-    @Override
-    public String toString() {
-        return "EffectRequest{" +
-                "effectName='" + effectName + '\'' +
-                ", imageId='" + imageId + '\'' +
-                ", imageUrl='" + imageUrl + '\'' +
-                ", image=" + image +
-                ", format=" + format +
-                '}';
-    }
+  @Override
+  public String toString() {
+    return "EffectRequest{"
+        + "effectName='"
+        + effectName
+        + '\''
+        + ", imageId='"
+        + imageId
+        + '\''
+        + ", imageUrl='"
+        + imageUrl
+        + '\''
+        + ", image="
+        + image
+        + ", format="
+        + format
+        + '}';
+  }
 }

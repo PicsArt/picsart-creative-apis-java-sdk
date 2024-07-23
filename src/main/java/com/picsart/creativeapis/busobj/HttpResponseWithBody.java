@@ -31,30 +31,27 @@ import lombok.experimental.FieldDefaults;
 import reactor.netty.http.client.HttpClientResponse;
 
 /**
- * This class represents an HTTP response with a body of type T.
- * It includes properties for the HttpClientResponse and the body of the response.
+ * This class represents an HTTP response with a body of type T. It includes properties for the
+ * HttpClientResponse and the body of the response.
  */
 @Data
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 @FieldDefaults(makeFinal = true, level = lombok.AccessLevel.PRIVATE)
 public class HttpResponseWithBody<T> {
-    /**
-     * The HttpClientResponse of the HTTP response.
-     */
-    HttpClientResponse httpClientResponse;
+  /** The HttpClientResponse of the HTTP response. */
+  HttpClientResponse httpClientResponse;
 
-    /**
-     * The body of the HTTP response.
-     */
-    T body;
+  /** The body of the HTTP response. */
+  T body;
 
-    /**
-     * Returns a new HttpResponseWithBody with the specified HttpClientResponse and body.
-     * @param httpClientResponse The HttpClientResponse of the HTTP response.
-     * @param body The body of the HTTP response.
-     * @return A new HttpResponseWithBody.
-     */
-    public static <T> HttpResponseWithBody<T> of(HttpClientResponse httpClientResponse, T body) {
-        return new HttpResponseWithBody<>(httpClientResponse, body);
-    }
+  /**
+   * Returns a new HttpResponseWithBody with the specified HttpClientResponse and body.
+   *
+   * @param httpClientResponse The HttpClientResponse of the HTTP response.
+   * @param body The body of the HTTP response.
+   * @return A new HttpResponseWithBody.
+   */
+  public static <T> HttpResponseWithBody<T> of(HttpClientResponse httpClientResponse, T body) {
+    return new HttpResponseWithBody<>(httpClientResponse, body);
+  }
 }

@@ -31,20 +31,20 @@ import reactor.netty.http.client.HttpClientResponse;
 
 @Mapper
 public interface MetadataMapper {
-    MetadataMapper INSTANCE = Mappers.getMapper(MetadataMapper.class);
+  MetadataMapper INSTANCE = Mappers.getMapper(MetadataMapper.class);
 
-    String RATE_LIMIT = "X-Picsart-Ratelimit-Limit";
-    String RATE_LIMIT_REMAINING = "X-Picsart-Ratelimit-Available";
-    String RATE_LIMIT_RESET = "X-Picsart-Ratelimit-Reset-Time";
-    String CORRELATION_ID = "x-picsart-correlation-id";
-    String CREDIT_AVAILABLE = "x-picsart-credit-available";
+  String RATE_LIMIT = "X-Picsart-Ratelimit-Limit";
+  String RATE_LIMIT_REMAINING = "X-Picsart-Ratelimit-Available";
+  String RATE_LIMIT_RESET = "X-Picsart-Ratelimit-Reset-Time";
+  String CORRELATION_ID = "x-picsart-correlation-id";
+  String CREDIT_AVAILABLE = "x-picsart-credit-available";
 
-    default Metadata toMetadata(HttpClientResponse httpClientResponse) {
-        var rateLimit = httpClientResponse.responseHeaders().getInt(RATE_LIMIT);
-        var rateLimitRemaining = httpClientResponse.responseHeaders().getInt(RATE_LIMIT_REMAINING);
-        var rateLimitReset = httpClientResponse.responseHeaders().getInt(RATE_LIMIT_RESET);
-        var traceId = httpClientResponse.responseHeaders().get(CORRELATION_ID);
-        var creditAvailable = httpClientResponse.responseHeaders().getInt(CREDIT_AVAILABLE);
-        return new Metadata(rateLimit, rateLimitRemaining, rateLimitReset, traceId, creditAvailable);
-    }
+  default Metadata toMetadata(HttpClientResponse httpClientResponse) {
+    var rateLimit = httpClientResponse.responseHeaders().getInt(RATE_LIMIT);
+    var rateLimitRemaining = httpClientResponse.responseHeaders().getInt(RATE_LIMIT_REMAINING);
+    var rateLimitReset = httpClientResponse.responseHeaders().getInt(RATE_LIMIT_RESET);
+    var traceId = httpClientResponse.responseHeaders().get(CORRELATION_ID);
+    var creditAvailable = httpClientResponse.responseHeaders().getInt(CREDIT_AVAILABLE);
+    return new Metadata(rateLimit, rateLimitRemaining, rateLimitReset, traceId, creditAvailable);
+  }
 }

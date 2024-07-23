@@ -33,21 +33,21 @@ import lombok.experimental.UtilityClass;
 
 @UtilityClass
 public class JacksonUtils {
-    private final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
+  private final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
-    static {
-        OBJECT_MAPPER.setSerializationInclusion(JsonInclude.Include.NON_NULL);
-        OBJECT_MAPPER.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-        OBJECT_MAPPER.setPropertyNamingStrategy(PropertyNamingStrategies.SNAKE_CASE);
-    }
+  static {
+    OBJECT_MAPPER.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+    OBJECT_MAPPER.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+    OBJECT_MAPPER.setPropertyNamingStrategy(PropertyNamingStrategies.SNAKE_CASE);
+  }
 
-    @SneakyThrows
-    public <T> T fromJson(String json, Class<T> clazz) {
-        return OBJECT_MAPPER.readValue(json, clazz);
-    }
+  @SneakyThrows
+  public <T> T fromJson(String json, Class<T> clazz) {
+    return OBJECT_MAPPER.readValue(json, clazz);
+  }
 
-    @SneakyThrows
-    public String toJson(Object object) {
-        return OBJECT_MAPPER.writeValueAsString(object);
-    }
+  @SneakyThrows
+  public String toJson(Object object) {
+    return OBJECT_MAPPER.writeValueAsString(object);
+  }
 }

@@ -26,9 +26,6 @@ package com.picsart.creativeapis.busobj.genai.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.picsart.creativeapis.busobj.image.Image;
-
 import java.util.List;
 
-
-public record Text2ImageResponse(String status, @JsonProperty("data") List<Image> images) {
-}
+public record Text2ImageResponse(String status, @JsonProperty("data") List<Image> images) {}

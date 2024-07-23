@@ -29,18 +29,16 @@ import lombok.Getter;
 import lombok.ToString;
 import lombok.experimental.FieldDefaults;
 
-/**
- * This class represents an image source that is an ID.
- */
+/** This class represents an image source that is an ID. */
 @Getter
 @ToString
 @EqualsAndHashCode(callSuper = false)
 @FieldDefaults(makeFinal = true, level = lombok.AccessLevel.PRIVATE)
 public final class ImageId extends ImageSource {
-    String id;
+  String id;
 
-    public ImageId(String id) {
-        super(ImageSourceType.ID);
-        this.id = id;
-    }
+  public ImageId(String id) {
+    super(ImageSourceType.ID);
+    this.id = id;
+  }
 }

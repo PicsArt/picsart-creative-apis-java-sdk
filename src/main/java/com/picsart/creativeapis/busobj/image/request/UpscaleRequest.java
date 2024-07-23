@@ -24,50 +24,56 @@
 
 package com.picsart.creativeapis.busobj.image.request;
 
+import com.picsart.creativeapis.busobj.image.ImageFormat;
 import jakarta.validation.constraints.AssertTrue;
+import java.io.File;
+import javax.annotation.Nullable;
 import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.experimental.FieldDefaults;
-import com.picsart.creativeapis.busobj.image.ImageFormat;
-
-import javax.annotation.Nullable;
-import java.io.File;
 
 @Getter
 @EqualsAndHashCode(callSuper = true)
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class UpscaleRequest extends RequestWithImageAndFormat {
 
-    @Nullable
-    Integer upscaleFactor;
+  @Nullable Integer upscaleFactor;
 
-    public UpscaleRequest(@Nullable String imageId,
-                          @Nullable String imageUrl,
-                          @Nullable File image,
-                          @Nullable ImageFormat format,
-                          @Nullable Integer upscaleFactor) {
-        super(imageId, imageUrl, image, format);
-        this.upscaleFactor = upscaleFactor;
-    }
+  public UpscaleRequest(
+      @Nullable String imageId,
+      @Nullable String imageUrl,
+      @Nullable File image,
+      @Nullable ImageFormat format,
+      @Nullable Integer upscaleFactor) {
+    super(imageId, imageUrl, image, format);
+    this.upscaleFactor = upscaleFactor;
+  }
 
-    @AssertTrue(message = "Upscale factor can be 2, 4, 6 or 8")
-    private boolean isUpscaleFactorCorrect() {
-        return upscaleFactor == null
-                || upscaleFactor == 2
-                || upscaleFactor == 4
-                || upscaleFactor == 6
-                || upscaleFactor == 8;
-    }
+  @AssertTrue(message = "Upscale factor can be 2, 4, 6 or 8")
+  private boolean isUpscaleFactorCorrect() {
+    return upscaleFactor == null
+        || upscaleFactor == 2
+        || upscaleFactor == 4
+        || upscaleFactor == 6
+        || upscaleFactor == 8;
+  }
 
-    @Override
-    public String toString() {
-        return "UpscaleRequest{" +
-                "upscaleFactor=" + upscaleFactor +
-                ", format=" + format +
-                ", image=" + image +
-                ", imageUrl='" + imageUrl + '\'' +
-                ", imageId='" + imageId + '\'' +
-                '}';
-    }
+  @Override
+  public String toString() {
+    return "UpscaleRequest{"
+        + "upscaleFactor="
+        + upscaleFactor
+        + ", format="
+        + format
+        + ", image="
+        + image
+        + ", imageUrl='"
+        + imageUrl
+        + '\''
+        + ", imageId='"
+        + imageId
+        + '\''
+        + '}';
+  }
 }

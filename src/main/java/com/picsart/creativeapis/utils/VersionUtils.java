@@ -25,28 +25,27 @@
 package com.picsart.creativeapis.utils;
 
 import com.fasterxml.jackson.core.util.VersionUtil;
-import lombok.experimental.UtilityClass;
-import lombok.extern.slf4j.Slf4j;
-
 import java.io.IOException;
 import java.util.Properties;
+import lombok.experimental.UtilityClass;
+import lombok.extern.slf4j.Slf4j;
 
 @UtilityClass
 @Slf4j
 class VersionUtils {
-    String getVersion() {
-        var properties = new Properties();
-        try (var inputStream = VersionUtil.class
-                .getClassLoader().getResourceAsStream("version.properties")) {
-            if (inputStream != null) {
-                properties.load(inputStream);
-                return properties.getProperty("version");
-            } else {
-                log.error("version.properties file not found");
-            }
-        } catch (IOException e) {
-            log.error("Error reading version properties file", e);
-        }
-        return "unknown";
+  String getVersion() {
+    var properties = new Properties();
+    try (var inputStream =
+        VersionUtil.class.getClassLoader().getResourceAsStream("version.properties")) {
+      if (inputStream != null) {
+        properties.load(inputStream);
+        return properties.getProperty("version");
+      } else {
+        log.error("version.properties file not found");
+      }
+    } catch (IOException e) {
+      log.error("Error reading version properties file", e);
     }
+    return "unknown";
+  }
 }

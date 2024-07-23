@@ -24,107 +24,83 @@
 
 package com.picsart.creativeapis.busobj.image.parameters;
 
+import com.picsart.creativeapis.busobj.image.BackgroundTexturePattern;
+import com.picsart.creativeapis.busobj.image.ImageFormat;
+import com.picsart.creativeapis.busobj.image.ImageSource;
+import javax.annotation.Nullable;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
 import lombok.experimental.FieldDefaults;
 import org.checkerframework.common.value.qual.IntRange;
-import com.picsart.creativeapis.busobj.image.BackgroundTexturePattern;
-import com.picsart.creativeapis.busobj.image.ImageFormat;
-import com.picsart.creativeapis.busobj.image.ImageSource;
-
-import javax.annotation.Nullable;
 
 /**
- * This class represents the parameters for generating a background texture for an image.
- * It includes properties for the image source, the desired format of the image, the dimensions of the texture,
- * the offset of the texture, the pattern of the texture, the rotation of the texture, and the scale of the texture.
- * Each property can be null except the image, which means that the api default values will be used for the 
- * corresponding parameter.
+ * This class represents the parameters for generating a background texture for an image. It
+ * includes properties for the image source, the desired format of the image, the dimensions of the
+ * texture, the offset of the texture, the pattern of the texture, the rotation of the texture, and
+ * the scale of the texture. Each property can be null except the image, which means that the api
+ * default values will be used for the corresponding parameter.
  */
 @Data
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class BackgroundTextureParameters {
-    /**
-     * The source of the image for which the background texture will be generated.
-     */
-    ImageSource image;
+  /** The source of the image for which the background texture will be generated. */
+  ImageSource image;
 
-    /**
-     * The desired format of the image after the background texture is generated. This is optional.
-     */
-    @Nullable
-    ImageFormat format;
+  /**
+   * The desired format of the image after the background texture is generated. This is optional.
+   */
+  @Nullable ImageFormat format;
 
-    /**
-     * The desired width of the texture. This is optional.
-     * Must be in the range [1, 8000].
-     */
-    @Nullable
-    @IntRange(from = 1, to = 8000)
-    Integer width;
+  /** The desired width of the texture. This is optional. Must be in the range [1, 8000]. */
+  @Nullable
+  @IntRange(from = 1, to = 8000)
+  Integer width;
 
-    /**
-     * The desired height of the texture. This is optional.
-     * Must be in the range [1, 8000].
-     */
-    @Nullable
-    @IntRange(from = 1, to = 8000)
-    Integer height;
+  /** The desired height of the texture. This is optional. Must be in the range [1, 8000]. */
+  @Nullable
+  @IntRange(from = 1, to = 8000)
+  Integer height;
 
-    /**
-     * The desired horizontal offset of the texture. This is optional.
-     */
-    @Nullable
-    Integer offsetX;
+  /** The desired horizontal offset of the texture. This is optional. */
+  @Nullable Integer offsetX;
 
-    /**
-     * The desired vertical offset of the texture. This is optional.
-     */
-    @Nullable
-    Integer offsetY;
+  /** The desired vertical offset of the texture. This is optional. */
+  @Nullable Integer offsetY;
 
-    /**
-     * The desired pattern of the texture. This is optional.
-     */
-    @Nullable
-    BackgroundTexturePattern pattern;
+  /** The desired pattern of the texture. This is optional. */
+  @Nullable BackgroundTexturePattern pattern;
 
-    /**
-     * The desired rotation of the texture. This is optional.
-     * Must be in the range [-180, 180].
-     */
-    @Nullable
-    @IntRange(from = -180, to = 180)
-    Integer rotate;
+  /** The desired rotation of the texture. This is optional. Must be in the range [-180, 180]. */
+  @Nullable
+  @IntRange(from = -180, to = 180)
+  Integer rotate;
 
-    /**
-     * The desired scale of the texture. This is optional.
-     */
-    @Nullable
-    Float scale;
+  /** The desired scale of the texture. This is optional. */
+  @Nullable Float scale;
 
-    /**
-     * Returns a new builder for BackgroundTextureParameters with the specified image source.
-     * @param image The source of the image for which the background texture will be generated.
-     * @return A new builder for BackgroundTextureParameters.
-     */
-    public static BackgroundTextureParametersBuilder builder(ImageSource image) {
-        return builder().image(image);
+  /**
+   * Returns a new builder for BackgroundTextureParameters with the specified image source.
+   *
+   * @param image The source of the image for which the background texture will be generated.
+   * @return A new builder for BackgroundTextureParameters.
+   */
+  public static BackgroundTextureParametersBuilder builder(ImageSource image) {
+    return builder().image(image);
+  }
+
+  private static BackgroundTextureParametersBuilder builder() {
+    return new BackgroundTextureParametersBuilder();
+  }
+
+  public static class BackgroundTextureParametersBuilder {
+    private ImageSource image;
+
+    private BackgroundTextureParametersBuilder image(@NonNull ImageSource image) {
+      this.image = image;
+      return this;
     }
-
-    private static BackgroundTextureParametersBuilder builder() {
-        return new BackgroundTextureParametersBuilder();
-    }
-
-    public static class BackgroundTextureParametersBuilder {
-        private ImageSource image;
-
-        private BackgroundTextureParametersBuilder image(@NonNull ImageSource image) {
-            this.image = image;
-            return this;
-        }
-    }
+  }
 }
