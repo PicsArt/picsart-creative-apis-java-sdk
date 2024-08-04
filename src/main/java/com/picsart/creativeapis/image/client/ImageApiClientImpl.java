@@ -40,10 +40,8 @@ import com.picsart.creativeapis.http.ApiHttpClient;
 import io.netty.handler.codec.http.HttpResponseStatus;
 import lombok.NonNull;
 import lombok.experimental.FieldDefaults;
-import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Mono;
 
-@Slf4j
 @FieldDefaults(makeFinal = true, level = lombok.AccessLevel.PRIVATE)
 public class ImageApiClientImpl extends AbstractApiClient implements ImageApiClient {
   ImageApiClientConfig clientConfig;

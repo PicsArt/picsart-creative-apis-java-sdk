@@ -31,18 +31,20 @@ import com.picsart.creativeapis.busobj.image.response.ErrorResponse;
 import com.picsart.creativeapis.utils.Constants;
 import com.picsart.creativeapis.utils.ExceptionUtils;
 import com.picsart.creativeapis.utils.JacksonUtils;
-import io.netty.handler.codec.http.*;
+import io.netty.handler.codec.http.HttpHeaderNames;
+import io.netty.handler.codec.http.HttpHeaderValues;
+import io.netty.handler.codec.http.HttpHeaders;
+import io.netty.handler.codec.http.HttpStatusClass;
 import java.time.Duration;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
-import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Mono;
 import reactor.netty.ByteBufFlux;
 import reactor.netty.http.client.HttpClient;
 
-@Slf4j
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 public class ApiHttpClientImpl implements ApiHttpClient {
+  private final System.Logger log = System.getLogger(ApiHttpClientImpl.class.getName());
   HttpClient client;
 
   public ApiHttpClientImpl() {
@@ -107,7 +109,8 @@ public class ApiHttpClientImpl implements ApiHttpClient {
                       .asString()
                       .doOnNext(
                           body ->
-                              log.debug(
+                              log.log(
+                                  System.Logger.Level.DEBUG,
                                   """
                                             Response received for {} request to '{}'
                                             RequestBody: {}
@@ -132,8 +135,13 @@ public class ApiHttpClientImpl implements ApiHttpClient {
         .onErrorMap(
             e -> !(e instanceof ApiException),
             e -> {
-              log.error(
-                  "Error sending {} request to '{}'\nRequestBody: {}", method, url, request, e);
+              log.log(
+                  System.Logger.Level.ERROR,
+                  "Error sending {} request to '{}'\nRequestBody: {}",
+                  method,
+                  url,
+                  request,
+                  e);
               return new ApiException("Error sending request", e);
             });
   }

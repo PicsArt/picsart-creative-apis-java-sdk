@@ -38,10 +38,8 @@ import com.picsart.creativeapis.busobj.genai.response.Text2ImageResponse;
 import com.picsart.creativeapis.http.ApiHttpClient;
 import lombok.NonNull;
 import lombok.experimental.FieldDefaults;
-import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Mono;
 
-@Slf4j
 @FieldDefaults(makeFinal = true, level = lombok.AccessLevel.PRIVATE)
 public class GenAIApiClientImpl extends AbstractApiClient implements GenAIApiClient {
   GenAIApiClientConfig clientConfig;
@@ -55,7 +53,6 @@ public class GenAIApiClientImpl extends AbstractApiClient implements GenAIApiCli
   @Override
   public Mono<HttpResponseWithBody<Text2ImageResponse>> text2Image(
       ApiConfig config, Text2ImageRequest request) {
-    log.debug("Text2Image request: {}", request);
     var apiKey = config.apiKey();
     var baseUrl = config.baseUrl();
     var validateRequestMono = validateRequestMono(request, ApiActions.TEXT2IMAGE.actionName());
