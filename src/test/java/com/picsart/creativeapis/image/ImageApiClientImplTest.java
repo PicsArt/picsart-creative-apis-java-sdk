@@ -28,7 +28,6 @@ import static com.picsart.creativeapis.utils.Constants.SLASH;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import com.picsart.creativeapis.AbstractApiClient;
 import com.picsart.creativeapis.busobj.ApiActions;
 import com.picsart.creativeapis.busobj.ApiConfig;
 import com.picsart.creativeapis.busobj.HttpResponseWithStringBody;
@@ -42,6 +41,7 @@ import com.picsart.creativeapis.busobj.image.response.*;
 import com.picsart.creativeapis.busobj.result.Metadata;
 import com.picsart.creativeapis.http.ApiHttpClient;
 import com.picsart.creativeapis.image.client.ImageApiClientImpl;
+import com.picsart.creativeapis.utils.UrlUtils;
 import io.netty.handler.codec.http.HttpResponseStatus;
 import java.io.File;
 import java.time.Duration;
@@ -197,7 +197,7 @@ public class ImageApiClientImplTest {
     var httpClientResponse200 = mock(HttpClientResponse.class);
     when(httpClientResponse200.status()).thenReturn(new HttpResponseStatus(200, "OK"));
     when(apiHttpClient.sendPostRequest(
-            AbstractApiClient.appendBaseUrl(BASE_URL, ApiActions.REMOVE_BACKGROUND.url()),
+            UrlUtils.appendBaseUrl(BASE_URL, ApiActions.REMOVE_BACKGROUND.url()),
             API_KEY,
             VALID_RB_REQUEST,
             TIMEOUT))
@@ -221,7 +221,7 @@ public class ImageApiClientImplTest {
   public void shouldReturnErrorMonoWhenRemoveBackgroundIsCalledWithInvalidRequest() {
     // Given
     when(apiHttpClient.sendPostRequest(
-            AbstractApiClient.appendBaseUrl(BASE_URL, ApiActions.REMOVE_BACKGROUND.url()),
+            UrlUtils.appendBaseUrl(BASE_URL, ApiActions.REMOVE_BACKGROUND.url()),
             API_KEY,
             INVALID_RB_REQUEST,
             TIMEOUT))
@@ -253,7 +253,7 @@ public class ImageApiClientImplTest {
   public void shouldReturnErrorMonoWhenRemoveBackgroundIsCalledAndDownstreamServiceIsUnavailable() {
     // Given
     when(apiHttpClient.sendPostRequest(
-            AbstractApiClient.appendBaseUrl(BASE_URL, ApiActions.REMOVE_BACKGROUND.url()),
+            UrlUtils.appendBaseUrl(BASE_URL, ApiActions.REMOVE_BACKGROUND.url()),
             API_KEY,
             VALID_RB_REQUEST,
             TIMEOUT))
@@ -289,7 +289,7 @@ public class ImageApiClientImplTest {
     var httpClientResponse200 = mock(HttpClientResponse.class);
     when(httpClientResponse200.status()).thenReturn(new HttpResponseStatus(200, "OK"));
     when(apiHttpClient.sendPostRequest(
-            AbstractApiClient.appendBaseUrl(BASE_URL, ApiActions.EFFECT.url()),
+            UrlUtils.appendBaseUrl(BASE_URL, ApiActions.EFFECT.url()),
             API_KEY,
             VALID_EFFECT_REQUEST,
             TIMEOUT))
@@ -313,7 +313,7 @@ public class ImageApiClientImplTest {
   public void shouldReturnErrorMonoWhenEffectIsCalledWithInvalidRequest() {
     // Given
     when(apiHttpClient.sendPostRequest(
-            AbstractApiClient.appendBaseUrl(BASE_URL, ApiActions.EFFECT.url()),
+            UrlUtils.appendBaseUrl(BASE_URL, ApiActions.EFFECT.url()),
             API_KEY,
             INVALID_EFFECT_REQUEST,
             TIMEOUT))
@@ -342,7 +342,7 @@ public class ImageApiClientImplTest {
   public void shouldReturnErrorMonoWhenEffectIsCalledAndDownstreamServiceIsUnavailable() {
     // Given
     when(apiHttpClient.sendPostRequest(
-            AbstractApiClient.appendBaseUrl(BASE_URL, ApiActions.EFFECT.url()),
+            UrlUtils.appendBaseUrl(BASE_URL, ApiActions.EFFECT.url()),
             API_KEY,
             VALID_EFFECT_REQUEST,
             TIMEOUT))
@@ -387,7 +387,7 @@ public class ImageApiClientImplTest {
     var httpClientResponse200 = mock(HttpClientResponse.class);
     when(httpClientResponse200.status()).thenReturn(new HttpResponseStatus(200, "OK"));
     when(apiHttpClient.sendGetRequest(
-            AbstractApiClient.appendBaseUrl(BASE_URL, ApiActions.EFFECT.url()), API_KEY, TIMEOUT))
+            UrlUtils.appendBaseUrl(BASE_URL, ApiActions.EFFECT.url()), API_KEY, TIMEOUT))
         .thenReturn(
             Mono.just(HttpResponseWithStringBody.of(httpClientResponse200, validResponseBody)));
 
@@ -409,7 +409,7 @@ public class ImageApiClientImplTest {
   public void shouldReturnErrorMonoWhenListEffectsIsCalledAndDownstreamServiceIsUnavailable() {
     // Given
     when(apiHttpClient.sendGetRequest(
-            AbstractApiClient.appendBaseUrl(BASE_URL, ApiActions.EFFECT.url()), API_KEY, TIMEOUT))
+            UrlUtils.appendBaseUrl(BASE_URL, ApiActions.EFFECT.url()), API_KEY, TIMEOUT))
         .thenReturn(Mono.error(new ServiceUnavailableException("Service Unavailable", METADATA)));
 
     // When
@@ -451,7 +451,7 @@ public class ImageApiClientImplTest {
     when(httpClientResponse202.status()).thenReturn(new HttpResponseStatus(202, "Accepted"));
     var expectedResponse = new UltraUpscaleResponse("DONE", new Image("testId", "testUrl"));
     when(apiHttpClient.sendPostRequest(
-            AbstractApiClient.appendBaseUrl(BASE_URL, ApiActions.ULTRA_UPSCALE.url()),
+            UrlUtils.appendBaseUrl(BASE_URL, ApiActions.ULTRA_UPSCALE.url()),
             API_KEY,
             VALID_UPSCALE_ULTRA_REQUEST,
             TIMEOUT))
@@ -460,7 +460,7 @@ public class ImageApiClientImplTest {
                 HttpResponseWithStringBody.of(httpClientResponse202, validMiddleResponseBody)));
 
     when(apiHttpClient.sendGetRequest(
-            AbstractApiClient.appendBaseUrl(
+            UrlUtils.appendBaseUrl(
                 BASE_URL, ApiActions.ULTRA_UPSCALE.url() + SLASH + "testTransactionId"),
             API_KEY,
             TIMEOUT))
@@ -484,7 +484,7 @@ public class ImageApiClientImplTest {
   public void shouldReturnErrorMonoWhenUltraUpscaleIsCalledWithInvalidRequest() {
     // Given
     when(apiHttpClient.sendPostRequest(
-            AbstractApiClient.appendBaseUrl(BASE_URL, ApiActions.ULTRA_UPSCALE.url()),
+            UrlUtils.appendBaseUrl(BASE_URL, ApiActions.ULTRA_UPSCALE.url()),
             API_KEY,
             INVALID_UPSCALE_ULTRA_REQUEST,
             TIMEOUT))
@@ -513,7 +513,7 @@ public class ImageApiClientImplTest {
   public void shouldReturnErrorMonoWhenUpscaleUltrasIsCalledAndDownstreamServiceIsUnavailable() {
     // Given
     when(apiHttpClient.sendPostRequest(
-            AbstractApiClient.appendBaseUrl(BASE_URL, ApiActions.ULTRA_UPSCALE.url()),
+            UrlUtils.appendBaseUrl(BASE_URL, ApiActions.ULTRA_UPSCALE.url()),
             API_KEY,
             VALID_UPSCALE_ULTRA_REQUEST,
             TIMEOUT))
@@ -555,7 +555,7 @@ public class ImageApiClientImplTest {
     var httpClientResponse202 = mock(HttpClientResponse.class);
     when(httpClientResponse202.status()).thenReturn(new HttpResponseStatus(202, "Accepted"));
     when(apiHttpClient.sendPostRequest(
-            AbstractApiClient.appendBaseUrl(BASE_URL, ApiActions.ULTRA_UPSCALE.url()),
+            UrlUtils.appendBaseUrl(BASE_URL, ApiActions.ULTRA_UPSCALE.url()),
             API_KEY,
             VALID_UPSCALE_ULTRA_REQUEST,
             TIMEOUT))
@@ -564,7 +564,7 @@ public class ImageApiClientImplTest {
                 HttpResponseWithStringBody.of(httpClientResponse202, validMiddleResponseBody)));
 
     when(apiHttpClient.sendGetRequest(
-            AbstractApiClient.appendBaseUrl(
+            UrlUtils.appendBaseUrl(
                 BASE_URL, ApiActions.ULTRA_UPSCALE.url() + SLASH + "testTransactionId"),
             API_KEY,
             TIMEOUT))
@@ -601,7 +601,7 @@ public class ImageApiClientImplTest {
     var httpClientResponse200 = mock(HttpClientResponse.class);
     when(httpClientResponse200.status()).thenReturn(new HttpResponseStatus(200, "OK"));
     when(apiHttpClient.sendPostRequest(
-            AbstractApiClient.appendBaseUrl(BASE_URL, ApiActions.UPSCALE.url()),
+            UrlUtils.appendBaseUrl(BASE_URL, ApiActions.UPSCALE.url()),
             API_KEY,
             VALID_UPSCALE_REQUEST,
             TIMEOUT))
@@ -625,7 +625,7 @@ public class ImageApiClientImplTest {
   public void shouldReturnErrorMonoWhenUpscaleIsCalledWithInvalidRequest() {
     // Given
     when(apiHttpClient.sendPostRequest(
-            AbstractApiClient.appendBaseUrl(BASE_URL, ApiActions.UPSCALE.url()),
+            UrlUtils.appendBaseUrl(BASE_URL, ApiActions.UPSCALE.url()),
             API_KEY,
             INVALID_UPSCALE_REQUEST,
             TIMEOUT))
@@ -654,7 +654,7 @@ public class ImageApiClientImplTest {
   public void shouldReturnErrorMonoWhenUpscaleIsCalledAndDownstreamServiceIsUnavailable() {
     // Given
     when(apiHttpClient.sendPostRequest(
-            AbstractApiClient.appendBaseUrl(BASE_URL, ApiActions.UPSCALE.url()),
+            UrlUtils.appendBaseUrl(BASE_URL, ApiActions.UPSCALE.url()),
             API_KEY,
             VALID_UPSCALE_REQUEST,
             TIMEOUT))
@@ -690,7 +690,7 @@ public class ImageApiClientImplTest {
     var httpClientResponse200 = mock(HttpClientResponse.class);
     when(httpClientResponse200.status()).thenReturn(new HttpResponseStatus(200, "OK"));
     when(apiHttpClient.sendPostRequest(
-            AbstractApiClient.appendBaseUrl(BASE_URL, ApiActions.ULTRA_ENHANCE.url()),
+            UrlUtils.appendBaseUrl(BASE_URL, ApiActions.ULTRA_ENHANCE.url()),
             API_KEY,
             VALID_ULTRA_ENHANCE_REQUEST,
             TIMEOUT))
@@ -714,7 +714,7 @@ public class ImageApiClientImplTest {
   public void shouldReturnErrorMonoWhenUltraEnhanceIsCalledWithInvalidRequest() {
     // Given
     when(apiHttpClient.sendPostRequest(
-            AbstractApiClient.appendBaseUrl(BASE_URL, ApiActions.ULTRA_ENHANCE.url()),
+            UrlUtils.appendBaseUrl(BASE_URL, ApiActions.ULTRA_ENHANCE.url()),
             API_KEY,
             INVALID_ULTRA_ENHANCE_REQUEST,
             TIMEOUT))
@@ -743,7 +743,7 @@ public class ImageApiClientImplTest {
   public void shouldReturnErrorMonoWhenUltraEnhanceIsCalledAndDownstreamServiceIsUnavailable() {
     // Given
     when(apiHttpClient.sendPostRequest(
-            AbstractApiClient.appendBaseUrl(BASE_URL, ApiActions.ULTRA_ENHANCE.url()),
+            UrlUtils.appendBaseUrl(BASE_URL, ApiActions.ULTRA_ENHANCE.url()),
             API_KEY,
             VALID_ULTRA_ENHANCE_REQUEST,
             TIMEOUT))
@@ -780,7 +780,7 @@ public class ImageApiClientImplTest {
     var httpClientResponse200 = mock(HttpClientResponse.class);
     when(httpClientResponse200.status()).thenReturn(new HttpResponseStatus(200, "OK"));
     when(apiHttpClient.sendPostRequest(
-            AbstractApiClient.appendBaseUrl(BASE_URL, ApiActions.ENHANCE_FACE.url()),
+            UrlUtils.appendBaseUrl(BASE_URL, ApiActions.ENHANCE_FACE.url()),
             API_KEY,
             VALID_FACE_ENHANCE_REQUEST,
             TIMEOUT))
@@ -804,7 +804,7 @@ public class ImageApiClientImplTest {
   public void shouldReturnErrorMonoWhenEnhanceFaceIsCalledWithInvalidRequest() {
     // Given
     when(apiHttpClient.sendPostRequest(
-            AbstractApiClient.appendBaseUrl(BASE_URL, ApiActions.ENHANCE_FACE.url()),
+            UrlUtils.appendBaseUrl(BASE_URL, ApiActions.ENHANCE_FACE.url()),
             API_KEY,
             INVALID_FACE_ENHANCE_REQUEST,
             TIMEOUT))
@@ -832,7 +832,7 @@ public class ImageApiClientImplTest {
   public void shouldReturnErrorMonoWhenEnhanceFaceIsCalledAndDownstreamServiceIsUnavailable() {
     // Given
     when(apiHttpClient.sendPostRequest(
-            AbstractApiClient.appendBaseUrl(BASE_URL, ApiActions.ENHANCE_FACE.url()),
+            UrlUtils.appendBaseUrl(BASE_URL, ApiActions.ENHANCE_FACE.url()),
             API_KEY,
             VALID_FACE_ENHANCE_REQUEST,
             TIMEOUT))
@@ -882,7 +882,7 @@ public class ImageApiClientImplTest {
     var httpClientResponse200 = mock(HttpClientResponse.class);
     when(httpClientResponse200.status()).thenReturn(new HttpResponseStatus(200, "OK"));
     when(apiHttpClient.sendPostRequest(
-            AbstractApiClient.appendBaseUrl(BASE_URL, ApiActions.EFFECTS_PREVIEWS.url()),
+            UrlUtils.appendBaseUrl(BASE_URL, ApiActions.EFFECTS_PREVIEWS.url()),
             API_KEY,
             VALID_EFFECTS_PREVIEWS_REQUEST,
             TIMEOUT))
@@ -906,7 +906,7 @@ public class ImageApiClientImplTest {
   public void shouldReturnErrorMonoWhenEffectsPreviewsIsCalledWithInvalidRequest() {
     // Given
     when(apiHttpClient.sendPostRequest(
-            AbstractApiClient.appendBaseUrl(BASE_URL, ApiActions.EFFECTS_PREVIEWS.url()),
+            UrlUtils.appendBaseUrl(BASE_URL, ApiActions.EFFECTS_PREVIEWS.url()),
             API_KEY,
             INVALID_EFFECTS_PREVIEWS_REQUEST,
             TIMEOUT))
@@ -935,7 +935,7 @@ public class ImageApiClientImplTest {
   public void shouldReturnErrorMonoWhenEffectsPreviewsIsCalledAndDownstreamServiceIsUnavailable() {
     // Given
     when(apiHttpClient.sendPostRequest(
-            AbstractApiClient.appendBaseUrl(BASE_URL, ApiActions.EFFECTS_PREVIEWS.url()),
+            UrlUtils.appendBaseUrl(BASE_URL, ApiActions.EFFECTS_PREVIEWS.url()),
             API_KEY,
             VALID_EFFECTS_PREVIEWS_REQUEST,
             TIMEOUT))
@@ -971,7 +971,7 @@ public class ImageApiClientImplTest {
     var httpClientResponse200 = mock(HttpClientResponse.class);
     when(httpClientResponse200.status()).thenReturn(new HttpResponseStatus(200, "OK"));
     when(apiHttpClient.sendPostRequest(
-            AbstractApiClient.appendBaseUrl(BASE_URL, ApiActions.ADJUST.url()),
+            UrlUtils.appendBaseUrl(BASE_URL, ApiActions.ADJUST.url()),
             API_KEY,
             VALID_ADJUST_REQUEST,
             TIMEOUT))
@@ -995,7 +995,7 @@ public class ImageApiClientImplTest {
   public void shouldReturnErrorMonoWhenAdjustIsCalledWithInvalidRequest() {
     // Given
     when(apiHttpClient.sendPostRequest(
-            AbstractApiClient.appendBaseUrl(BASE_URL, ApiActions.ADJUST.url()),
+            UrlUtils.appendBaseUrl(BASE_URL, ApiActions.ADJUST.url()),
             API_KEY,
             INVALID_ADJUST_REQUEST,
             TIMEOUT))
@@ -1034,7 +1034,7 @@ public class ImageApiClientImplTest {
   public void shouldReturnErrorMonoWhenAdjustIsCalledAndDownstreamServiceIsUnavailable() {
     // Given
     when(apiHttpClient.sendPostRequest(
-            AbstractApiClient.appendBaseUrl(BASE_URL, ApiActions.ADJUST.url()),
+            UrlUtils.appendBaseUrl(BASE_URL, ApiActions.ADJUST.url()),
             API_KEY,
             VALID_ADJUST_REQUEST,
             TIMEOUT))
@@ -1071,7 +1071,7 @@ public class ImageApiClientImplTest {
     var httpClientResponse200 = mock(HttpClientResponse.class);
     when(httpClientResponse200.status()).thenReturn(new HttpResponseStatus(200, "OK"));
     when(apiHttpClient.sendPostRequest(
-            AbstractApiClient.appendBaseUrl(BASE_URL, ApiActions.BACKGROUND_TEXTURE.url()),
+            UrlUtils.appendBaseUrl(BASE_URL, ApiActions.BACKGROUND_TEXTURE.url()),
             API_KEY,
             VALID_TEXTURE_GENERATOR_REQUEST,
             TIMEOUT))
@@ -1095,7 +1095,7 @@ public class ImageApiClientImplTest {
   public void shouldReturnErrorMonoWhenBackgroundTextureIsCalledWithInvalidRequest() {
     // Given
     when(apiHttpClient.sendPostRequest(
-            AbstractApiClient.appendBaseUrl(BASE_URL, ApiActions.BACKGROUND_TEXTURE.url()),
+            UrlUtils.appendBaseUrl(BASE_URL, ApiActions.BACKGROUND_TEXTURE.url()),
             API_KEY,
             INVALID_TEXTURE_GENERATOR_REQUEST,
             TIMEOUT))
@@ -1129,7 +1129,7 @@ public class ImageApiClientImplTest {
       shouldReturnErrorMonoWhenBackgroundTextureIsCalledAndDownstreamServiceIsUnavailable() {
     // Given
     when(apiHttpClient.sendPostRequest(
-            AbstractApiClient.appendBaseUrl(BASE_URL, ApiActions.BACKGROUND_TEXTURE.url()),
+            UrlUtils.appendBaseUrl(BASE_URL, ApiActions.BACKGROUND_TEXTURE.url()),
             API_KEY,
             VALID_TEXTURE_GENERATOR_REQUEST,
             TIMEOUT))
@@ -1165,7 +1165,7 @@ public class ImageApiClientImplTest {
     var httpClientResponse200 = mock(HttpClientResponse.class);
     when(httpClientResponse200.status()).thenReturn(new HttpResponseStatus(200, "OK"));
     when(apiHttpClient.sendPostRequest(
-            AbstractApiClient.appendBaseUrl(BASE_URL, ApiActions.SURFACE_MAP.url()),
+            UrlUtils.appendBaseUrl(BASE_URL, ApiActions.SURFACE_MAP.url()),
             API_KEY,
             VALID_SURFACE_MAP_REQUEST,
             TIMEOUT))
@@ -1189,7 +1189,7 @@ public class ImageApiClientImplTest {
   public void shouldReturnErrorMonoWhenSurfaceMapIsCalledWithInvalidRequest() {
     // Given
     when(apiHttpClient.sendPostRequest(
-            AbstractApiClient.appendBaseUrl(BASE_URL, ApiActions.SURFACE_MAP.url()),
+            UrlUtils.appendBaseUrl(BASE_URL, ApiActions.SURFACE_MAP.url()),
             API_KEY,
             INVALID_SURFACE_MAP_REQUEST,
             TIMEOUT))
@@ -1219,7 +1219,7 @@ public class ImageApiClientImplTest {
   public void shouldReturnErrorMonoWhenSurfaceMapIsCalledAndDownstreamServiceIsUnavailable() {
     // Given
     when(apiHttpClient.sendPostRequest(
-            AbstractApiClient.appendBaseUrl(BASE_URL, ApiActions.SURFACE_MAP.url()),
+            UrlUtils.appendBaseUrl(BASE_URL, ApiActions.SURFACE_MAP.url()),
             API_KEY,
             VALID_SURFACE_MAP_REQUEST,
             TIMEOUT))
@@ -1255,7 +1255,7 @@ public class ImageApiClientImplTest {
     var httpClientResponse200 = mock(HttpClientResponse.class);
     when(httpClientResponse200.status()).thenReturn(new HttpResponseStatus(200, "OK"));
     when(apiHttpClient.sendPostRequest(
-            AbstractApiClient.appendBaseUrl(BASE_URL, ApiActions.UPLOAD.url()),
+            UrlUtils.appendBaseUrl(BASE_URL, ApiActions.UPLOAD.url()),
             API_KEY,
             VALID_UPLOAD_REQUEST,
             TIMEOUT))
@@ -1279,7 +1279,7 @@ public class ImageApiClientImplTest {
   public void shouldReturnErrorMonoWhenUploadIsCalledWithInvalidRequest() {
     // Given
     when(apiHttpClient.sendPostRequest(
-            AbstractApiClient.appendBaseUrl(BASE_URL, ApiActions.UPLOAD.url()),
+            UrlUtils.appendBaseUrl(BASE_URL, ApiActions.UPLOAD.url()),
             API_KEY,
             INVALID_UPLOAD_REQUEST,
             TIMEOUT))
@@ -1307,7 +1307,7 @@ public class ImageApiClientImplTest {
   public void shouldReturnErrorMonoWhenUploadIsCalledAndDownstreamServiceIsUnavailable() {
     // Given
     when(apiHttpClient.sendPostRequest(
-            AbstractApiClient.appendBaseUrl(BASE_URL, ApiActions.UPLOAD.url()),
+            UrlUtils.appendBaseUrl(BASE_URL, ApiActions.UPLOAD.url()),
             API_KEY,
             VALID_UPLOAD_REQUEST,
             TIMEOUT))
@@ -1340,7 +1340,7 @@ public class ImageApiClientImplTest {
     var httpClientResponse200 = mock(HttpClientResponse.class);
     when(httpClientResponse200.status()).thenReturn(new HttpResponseStatus(200, "OK"));
     when(apiHttpClient.sendGetRequest(
-            AbstractApiClient.appendBaseUrl(BASE_URL, ApiActions.BALANCE.url()), API_KEY, TIMEOUT))
+            UrlUtils.appendBaseUrl(BASE_URL, ApiActions.BALANCE.url()), API_KEY, TIMEOUT))
         .thenReturn(
             Mono.just(HttpResponseWithStringBody.of(httpClientResponse200, validResponseBody)));
 
@@ -1362,7 +1362,7 @@ public class ImageApiClientImplTest {
   void shouldReturnErrorMonoWhenBalanceIsCalledAndDownstreamServiceIsUnavailable() {
     // Given
     when(apiHttpClient.sendGetRequest(
-            AbstractApiClient.appendBaseUrl(BASE_URL, ApiActions.BALANCE.url()), API_KEY, TIMEOUT))
+            UrlUtils.appendBaseUrl(BASE_URL, ApiActions.BALANCE.url()), API_KEY, TIMEOUT))
         .thenReturn(Mono.error(new ServiceUnavailableException("Service Unavailable", METADATA)));
 
     // When

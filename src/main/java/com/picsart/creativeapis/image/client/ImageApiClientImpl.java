@@ -37,6 +37,7 @@ import com.picsart.creativeapis.busobj.image.request.*;
 import com.picsart.creativeapis.busobj.image.response.*;
 import com.picsart.creativeapis.busobj.mapper.MetadataMapper;
 import com.picsart.creativeapis.http.ApiHttpClient;
+import com.picsart.creativeapis.utils.UrlUtils;
 import io.netty.handler.codec.http.HttpResponseStatus;
 import lombok.NonNull;
 import lombok.experimental.FieldDefaults;
@@ -62,7 +63,7 @@ public class ImageApiClientImpl extends AbstractApiClient implements ImageApiCli
     var sendRequestMono =
         apiHttpClient
             .sendPostRequest(
-                appendBaseUrl(baseUrl, ApiActions.REMOVE_BACKGROUND.url()),
+                UrlUtils.appendBaseUrl(baseUrl, ApiActions.REMOVE_BACKGROUND.url()),
                 apiKey,
                 request,
                 config.timeout())
@@ -79,7 +80,10 @@ public class ImageApiClientImpl extends AbstractApiClient implements ImageApiCli
     var sendRequestMono =
         apiHttpClient
             .sendPostRequest(
-                appendBaseUrl(baseUrl, ApiActions.EFFECT.url()), apiKey, request, config.timeout())
+                UrlUtils.appendBaseUrl(baseUrl, ApiActions.EFFECT.url()),
+                apiKey,
+                request,
+                config.timeout())
             .map(response -> response.parseBody(EffectResponse.class));
     return validateRequestMono.then(sendRequestMono);
   }
@@ -90,7 +94,9 @@ public class ImageApiClientImpl extends AbstractApiClient implements ImageApiCli
     var baseUrl = config.baseUrl();
     return apiHttpClient
         .sendGetRequest(
-            appendBaseUrl(baseUrl, ApiActions.LIST_EFFECTS.url()), apiKey, config.timeout())
+            UrlUtils.appendBaseUrl(baseUrl, ApiActions.LIST_EFFECTS.url()),
+            apiKey,
+            config.timeout())
         .map(response -> response.parseBody(ListEffectsResponse.class));
   }
 
@@ -103,7 +109,7 @@ public class ImageApiClientImpl extends AbstractApiClient implements ImageApiCli
     var sendRequestMono =
         apiHttpClient
             .sendPostRequest(
-                appendBaseUrl(baseUrl, ApiActions.ULTRA_UPSCALE.url()),
+                UrlUtils.appendBaseUrl(baseUrl, ApiActions.ULTRA_UPSCALE.url()),
                 apiKey,
                 request,
                 config.timeout())
@@ -138,7 +144,10 @@ public class ImageApiClientImpl extends AbstractApiClient implements ImageApiCli
     var sendRequestMono =
         apiHttpClient
             .sendPostRequest(
-                appendBaseUrl(baseUrl, ApiActions.UPSCALE.url()), apiKey, request, config.timeout())
+                UrlUtils.appendBaseUrl(baseUrl, ApiActions.UPSCALE.url()),
+                apiKey,
+                request,
+                config.timeout())
             .map(response -> response.parseBody(UpscaleResponse.class));
     return validateRequestMono.then(sendRequestMono);
   }
@@ -152,7 +161,7 @@ public class ImageApiClientImpl extends AbstractApiClient implements ImageApiCli
     var sendRequestMono =
         apiHttpClient
             .sendPostRequest(
-                appendBaseUrl(baseUrl, ApiActions.ULTRA_ENHANCE.url()),
+                UrlUtils.appendBaseUrl(baseUrl, ApiActions.ULTRA_ENHANCE.url()),
                 apiKey,
                 request,
                 config.timeout())
@@ -169,7 +178,7 @@ public class ImageApiClientImpl extends AbstractApiClient implements ImageApiCli
     var sendRequestMono =
         apiHttpClient
             .sendPostRequest(
-                appendBaseUrl(baseUrl, ApiActions.ENHANCE_FACE.url()),
+                UrlUtils.appendBaseUrl(baseUrl, ApiActions.ENHANCE_FACE.url()),
                 apiKey,
                 request,
                 config.timeout())
@@ -187,7 +196,7 @@ public class ImageApiClientImpl extends AbstractApiClient implements ImageApiCli
     var sendRequestMono =
         apiHttpClient
             .sendPostRequest(
-                appendBaseUrl(baseUrl, ApiActions.EFFECTS_PREVIEWS.url()),
+                UrlUtils.appendBaseUrl(baseUrl, ApiActions.EFFECTS_PREVIEWS.url()),
                 apiKey,
                 request,
                 config.timeout())
@@ -204,7 +213,10 @@ public class ImageApiClientImpl extends AbstractApiClient implements ImageApiCli
     var sendRequestMono =
         apiHttpClient
             .sendPostRequest(
-                appendBaseUrl(baseUrl, ApiActions.ADJUST.url()), apiKey, request, config.timeout())
+                UrlUtils.appendBaseUrl(baseUrl, ApiActions.ADJUST.url()),
+                apiKey,
+                request,
+                config.timeout())
             .map(response -> response.parseBody(AdjustResponse.class));
     return validateRequestMono.then(sendRequestMono);
   }
@@ -219,7 +231,7 @@ public class ImageApiClientImpl extends AbstractApiClient implements ImageApiCli
     var sendRequestMono =
         apiHttpClient
             .sendPostRequest(
-                appendBaseUrl(baseUrl, ApiActions.BACKGROUND_TEXTURE.url()),
+                UrlUtils.appendBaseUrl(baseUrl, ApiActions.BACKGROUND_TEXTURE.url()),
                 apiKey,
                 request,
                 config.timeout())
@@ -236,7 +248,7 @@ public class ImageApiClientImpl extends AbstractApiClient implements ImageApiCli
     var sendRequestMono =
         apiHttpClient
             .sendPostRequest(
-                appendBaseUrl(baseUrl, ApiActions.SURFACE_MAP.url()),
+                UrlUtils.appendBaseUrl(baseUrl, ApiActions.SURFACE_MAP.url()),
                 apiKey,
                 request,
                 config.timeout())
@@ -253,7 +265,10 @@ public class ImageApiClientImpl extends AbstractApiClient implements ImageApiCli
     var sendRequestMono =
         apiHttpClient
             .sendPostRequest(
-                appendBaseUrl(baseUrl, ApiActions.UPLOAD.url()), apiKey, request, config.timeout())
+                UrlUtils.appendBaseUrl(baseUrl, ApiActions.UPLOAD.url()),
+                apiKey,
+                request,
+                config.timeout())
             .map(response -> response.parseBody(UploadResponse.class));
     return validateRequestMono.then(sendRequestMono);
   }
@@ -263,7 +278,8 @@ public class ImageApiClientImpl extends AbstractApiClient implements ImageApiCli
     var apiKey = config.apiKey();
     var baseUrl = config.baseUrl();
     return apiHttpClient
-        .sendGetRequest(appendBaseUrl(baseUrl, ApiActions.BALANCE.url()), apiKey, config.timeout())
+        .sendGetRequest(
+            UrlUtils.appendBaseUrl(baseUrl, ApiActions.BALANCE.url()), apiKey, config.timeout())
         .map(response -> response.parseBody(BalanceResponse.class));
   }
 
