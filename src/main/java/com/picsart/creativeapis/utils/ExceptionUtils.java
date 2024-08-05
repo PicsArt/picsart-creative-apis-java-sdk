@@ -24,7 +24,6 @@
 
 package com.picsart.creativeapis.utils;
 
-import com.google.common.collect.ImmutableMap;
 import com.picsart.creativeapis.busobj.exception.*;
 import com.picsart.creativeapis.busobj.mapper.MetadataMapper;
 import com.picsart.creativeapis.busobj.result.Metadata;
@@ -40,26 +39,26 @@ public class ExceptionUtils {
       HTTP_RESPONSE_TO_EXCEPTION_MAP;
 
   static {
-    var builder =
-        ImmutableMap
-            .<HttpResponseStatus, BiFunction<String, Metadata, FailureResponseException>>builder();
-    builder.put(HttpResponseStatus.BAD_REQUEST, BadRequestException::new);
-    builder.put(HttpResponseStatus.UNAUTHORIZED, UnauthorizedException::new);
-    builder.put(HttpResponseStatus.FORBIDDEN, ForbiddenException::new);
-    builder.put(HttpResponseStatus.NOT_FOUND, NotFoundException::new);
-    builder.put(HttpResponseStatus.METHOD_NOT_ALLOWED, MethodNotAllowedException::new);
-    builder.put(HttpResponseStatus.REQUEST_TIMEOUT, RequestTimeoutException::new);
-    builder.put(HttpResponseStatus.REQUEST_ENTITY_TOO_LARGE, RequestEntityTooLargeException::new);
-    builder.put(HttpResponseStatus.UNSUPPORTED_MEDIA_TYPE, UnsupportedMediaTypeException::new);
-    builder.put(HttpResponseStatus.TOO_MANY_REQUESTS, TooManyRequestsException::new);
-    builder.put(
-        HttpResponseStatus.REQUEST_HEADER_FIELDS_TOO_LARGE,
-        RequestHeaderFieldsTooLargeException::new);
-    builder.put(HttpResponseStatus.INTERNAL_SERVER_ERROR, InternalServerErrorException::new);
-    builder.put(HttpResponseStatus.BAD_GATEWAY, BadGatewayException::new);
-    builder.put(HttpResponseStatus.SERVICE_UNAVAILABLE, ServiceUnavailableException::new);
-    builder.put(HttpResponseStatus.GATEWAY_TIMEOUT, GatewayTimeoutException::new);
-    HTTP_RESPONSE_TO_EXCEPTION_MAP = builder.build();
+    HTTP_RESPONSE_TO_EXCEPTION_MAP =
+        Map.ofEntries(
+            Map.entry(HttpResponseStatus.BAD_REQUEST, BadRequestException::new),
+            Map.entry(HttpResponseStatus.UNAUTHORIZED, UnauthorizedException::new),
+            Map.entry(HttpResponseStatus.FORBIDDEN, ForbiddenException::new),
+            Map.entry(HttpResponseStatus.NOT_FOUND, NotFoundException::new),
+            Map.entry(HttpResponseStatus.METHOD_NOT_ALLOWED, MethodNotAllowedException::new),
+            Map.entry(HttpResponseStatus.REQUEST_TIMEOUT, RequestTimeoutException::new),
+            Map.entry(
+                HttpResponseStatus.REQUEST_ENTITY_TOO_LARGE, RequestEntityTooLargeException::new),
+            Map.entry(
+                HttpResponseStatus.UNSUPPORTED_MEDIA_TYPE, UnsupportedMediaTypeException::new),
+            Map.entry(HttpResponseStatus.TOO_MANY_REQUESTS, TooManyRequestsException::new),
+            Map.entry(
+                HttpResponseStatus.REQUEST_HEADER_FIELDS_TOO_LARGE,
+                RequestHeaderFieldsTooLargeException::new),
+            Map.entry(HttpResponseStatus.INTERNAL_SERVER_ERROR, InternalServerErrorException::new),
+            Map.entry(HttpResponseStatus.BAD_GATEWAY, BadGatewayException::new),
+            Map.entry(HttpResponseStatus.SERVICE_UNAVAILABLE, ServiceUnavailableException::new),
+            Map.entry(HttpResponseStatus.GATEWAY_TIMEOUT, GatewayTimeoutException::new));
   }
 
   public FailureResponseException mapToFailureResponseException(

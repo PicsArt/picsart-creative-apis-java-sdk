@@ -28,11 +28,11 @@ import com.fasterxml.jackson.core.util.VersionUtil;
 import java.io.IOException;
 import java.util.Properties;
 import lombok.experimental.UtilityClass;
-import lombok.extern.slf4j.Slf4j;
 
 @UtilityClass
-@Slf4j
 class VersionUtils {
+  private static final System.Logger log = System.getLogger(VersionUtils.class.getName());
+
   String getVersion() {
     var properties = new Properties();
     try (var inputStream =
@@ -41,10 +41,10 @@ class VersionUtils {
         properties.load(inputStream);
         return properties.getProperty("version");
       } else {
-        log.error("version.properties file not found");
+        log.log(System.Logger.Level.ERROR, "version.properties file not found");
       }
     } catch (IOException e) {
-      log.error("Error reading version properties file", e);
+      log.log(System.Logger.Level.ERROR, "Error reading version properties file", e);
     }
     return "unknown";
   }

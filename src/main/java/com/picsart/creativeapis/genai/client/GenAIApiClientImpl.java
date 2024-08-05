@@ -36,12 +36,11 @@ import com.picsart.creativeapis.busobj.genai.request.Text2ImageRequest;
 import com.picsart.creativeapis.busobj.genai.response.Text2ImageMiddleResponse;
 import com.picsart.creativeapis.busobj.genai.response.Text2ImageResponse;
 import com.picsart.creativeapis.http.ApiHttpClient;
+import com.picsart.creativeapis.utils.UrlUtils;
 import lombok.NonNull;
 import lombok.experimental.FieldDefaults;
-import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Mono;
 
-@Slf4j
 @FieldDefaults(makeFinal = true, level = lombok.AccessLevel.PRIVATE)
 public class GenAIApiClientImpl extends AbstractApiClient implements GenAIApiClient {
   GenAIApiClientConfig clientConfig;
@@ -55,14 +54,13 @@ public class GenAIApiClientImpl extends AbstractApiClient implements GenAIApiCli
   @Override
   public Mono<HttpResponseWithBody<Text2ImageResponse>> text2Image(
       ApiConfig config, Text2ImageRequest request) {
-    log.debug("Text2Image request: {}", request);
     var apiKey = config.apiKey();
     var baseUrl = config.baseUrl();
     var validateRequestMono = validateRequestMono(request, ApiActions.TEXT2IMAGE.actionName());
     var sendRequestMono =
         apiHttpClient
             .sendPostRequest(
-                appendBaseUrl(baseUrl, ApiActions.TEXT2IMAGE.url()),
+                UrlUtils.appendBaseUrl(baseUrl, ApiActions.TEXT2IMAGE.url()),
                 apiKey,
                 request,
                 config.timeout())
@@ -79,7 +77,7 @@ public class GenAIApiClientImpl extends AbstractApiClient implements GenAIApiCli
       ApiConfig config, String id) {
     return apiHttpClient
         .sendGetRequest(
-            appendBaseUrl(
+            UrlUtils.appendBaseUrl(
                 config.baseUrl(),
                 ApiActions.TEXT2IMAGE.url() + SLASH + INFERENCES_URL.formatted(id)),
             config.apiKey(),

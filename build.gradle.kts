@@ -34,11 +34,12 @@ dependencies {
 
     implementation("com.fasterxml.jackson.core:jackson-databind:2.17.1")
 
-    implementation("org.slf4j:slf4j-api:2.0.13")
-    runtimeOnly("org.slf4j:slf4j-simple:2.0.13")
     implementation("org.apache.tika:tika-core:2.9.2")
-    implementation("com.google.guava:guava:33.2.1-jre")
     implementation("org.mapstruct:mapstruct:1.5.5.Final")
+    implementation("com.google.code.findbugs:jsr305:3.0.2")
+    implementation("org.checkerframework:checker-qual:3.46.0")
+
+
 
     compileOnly("org.projectlombok:lombok:1.18.32")
     annotationProcessor("org.projectlombok:lombok:1.18.32")

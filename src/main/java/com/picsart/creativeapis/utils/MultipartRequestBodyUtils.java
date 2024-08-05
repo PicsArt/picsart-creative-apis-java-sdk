@@ -24,11 +24,10 @@
 
 package com.picsart.creativeapis.utils;
 
-import com.google.common.base.CaseFormat;
-import com.google.common.base.Function;
 import java.beans.Introspector;
 import java.io.File;
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import javax.annotation.Nullable;
 import lombok.SneakyThrows;
@@ -145,7 +144,7 @@ public class MultipartRequestBodyUtils {
   }
 
   private String camelToSnake(String camelCase) {
-    return CaseFormat.LOWER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE, camelCase);
+    return camelCase.replaceAll("([a-z])([A-Z]+)", "$1_$2").toLowerCase(Locale.ROOT);
   }
 
   private String getMimeType(File file) {

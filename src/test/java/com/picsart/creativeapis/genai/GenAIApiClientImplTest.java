@@ -29,7 +29,6 @@ import static com.picsart.creativeapis.utils.Constants.SLASH;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import com.picsart.creativeapis.AbstractApiClient;
 import com.picsart.creativeapis.busobj.ApiActions;
 import com.picsart.creativeapis.busobj.ApiConfig;
 import com.picsart.creativeapis.busobj.HttpResponseWithStringBody;
@@ -41,6 +40,7 @@ import com.picsart.creativeapis.busobj.image.Image;
 import com.picsart.creativeapis.busobj.result.Metadata;
 import com.picsart.creativeapis.genai.client.GenAIApiClientImpl;
 import com.picsart.creativeapis.http.ApiHttpClient;
+import com.picsart.creativeapis.utils.UrlUtils;
 import io.netty.handler.codec.http.HttpResponseStatus;
 import java.time.Duration;
 import java.util.List;
@@ -112,7 +112,7 @@ public class GenAIApiClientImplTest {
     when(httpClientResponse200.status()).thenReturn(new HttpResponseStatus(200, "OK"));
     var expectedResponse = new Text2ImageResponse("DONE", List.of(new Image("testId", "testUrl")));
     when(apiHttpClient.sendPostRequest(
-            AbstractApiClient.appendBaseUrl(BASE_URL, ApiActions.TEXT2IMAGE.url()),
+            UrlUtils.appendBaseUrl(BASE_URL, ApiActions.TEXT2IMAGE.url()),
             API_KEY,
             VALID_REQUEST,
             TIMEOUT))
@@ -121,7 +121,7 @@ public class GenAIApiClientImplTest {
                 HttpResponseWithStringBody.of(httpClientResponse202, validMiddleResponseBody)));
 
     when(apiHttpClient.sendGetRequest(
-            AbstractApiClient.appendBaseUrl(
+            UrlUtils.appendBaseUrl(
                 BASE_URL,
                 ApiActions.TEXT2IMAGE.url() + SLASH + INFERENCES_URL.formatted("testInferenceId")),
             API_KEY,
@@ -163,7 +163,7 @@ public class GenAIApiClientImplTest {
     var httpClientResponse200 = mock(HttpClientResponse.class);
     var httpClientResponse202 = mock(HttpClientResponse.class);
     when(apiHttpClient.sendPostRequest(
-            AbstractApiClient.appendBaseUrl(BASE_URL, ApiActions.TEXT2IMAGE.url()),
+            UrlUtils.appendBaseUrl(BASE_URL, ApiActions.TEXT2IMAGE.url()),
             API_KEY,
             VALID_REQUEST,
             TIMEOUT))
@@ -172,7 +172,7 @@ public class GenAIApiClientImplTest {
                 HttpResponseWithStringBody.of(httpClientResponse202, validMiddleResponseBody)));
 
     when(apiHttpClient.sendGetRequest(
-            AbstractApiClient.appendBaseUrl(
+            UrlUtils.appendBaseUrl(
                 BASE_URL,
                 ApiActions.TEXT2IMAGE.url() + SLASH + INFERENCES_URL.formatted("testInferenceId")),
             API_KEY,
@@ -197,7 +197,7 @@ public class GenAIApiClientImplTest {
   public void shouldReturnErrorMonoWhenText2ImageIsCalledWithInvalidRequest() {
     // Given
     when(apiHttpClient.sendPostRequest(
-            AbstractApiClient.appendBaseUrl(BASE_URL, ApiActions.TEXT2IMAGE.url()),
+            UrlUtils.appendBaseUrl(BASE_URL, ApiActions.TEXT2IMAGE.url()),
             API_KEY,
             INVALID_COUNT_REQUEST,
             TIMEOUT))
@@ -227,7 +227,7 @@ public class GenAIApiClientImplTest {
     // Given
     var metadata = new Metadata(null, null, null, null, null);
     when(apiHttpClient.sendPostRequest(
-            AbstractApiClient.appendBaseUrl(BASE_URL, ApiActions.TEXT2IMAGE.url()),
+            UrlUtils.appendBaseUrl(BASE_URL, ApiActions.TEXT2IMAGE.url()),
             API_KEY,
             VALID_REQUEST,
             TIMEOUT))

@@ -22,33 +22,19 @@
  * SOFTWARE.
  */
 
-package com.picsart.creativeapis;
+package com.picsart.creativeapis.utils;
 
-import com.picsart.creativeapis.busobj.ApiConfig;
-import com.picsart.creativeapis.busobj.HttpResponseWithStringBody;
-import com.picsart.creativeapis.http.ApiHttpClient;
-import com.picsart.creativeapis.utils.UrlUtils;
-import java.time.Duration;
-import lombok.AccessLevel;
-import lombok.RequiredArgsConstructor;
-import lombok.experimental.FieldDefaults;
-import reactor.core.publisher.Mono;
+import jakarta.validation.constraints.NotNull;
+import lombok.experimental.UtilityClass;
 
-@RequiredArgsConstructor
-@FieldDefaults(makeFinal = true, level = AccessLevel.PROTECTED)
-public abstract class AbstractApiClient {
-  ApiHttpClient apiHttpClient;
+@UtilityClass
+public class UrlUtils {
+  @NotNull
+  private static String removeTailingSlashIfAny(String baseUrl) {
+    return baseUrl.endsWith("/") ? baseUrl.substring(0, baseUrl.length() - 1) : baseUrl;
+  }
 
-  protected Mono<HttpResponseWithStringBody> getAsyncResponse(
-      ApiConfig config, String url, int repeatCount, Duration delay) {
-    return apiHttpClient
-        .sendGetRequest(
-            UrlUtils.appendBaseUrl(config.baseUrl(), url), config.apiKey(), config.timeout())
-        .filter(
-            httpResponseWithParsedBody -> {
-              var code = httpResponseWithParsedBody.getHttpClientResponse().status().code();
-              return code == 200;
-            })
-        .repeatWhenEmpty(repeatCount, repeat -> repeat.delayElements(delay));
+  public static String appendBaseUrl(String baseUrl, String url) {
+    return "%s/%s".formatted(removeTailingSlashIfAny(baseUrl), url);
   }
 }

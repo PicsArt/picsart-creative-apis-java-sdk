@@ -365,15 +365,14 @@ the terms and conditions of this license.
 This project has some third-party dependencies, each of which may have independent licensing:
 
 - [Jackson Databind:2.17.1](https://github.com/FasterXML/jackson) ([The Apache Software License, Version 2.0](https://www.apache.org/licenses/LICENSE-2.0.txt))
-- [Guava:33.2.1-jre](https://github.com/google/guava/) ([The Apache Software License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0.txt))
 - [Reactor Netty HTTP:1.1.19](https://github.com/reactor/reactor-netty) ([The Apache Software License, Version 2.0](https://www.apache.org/licenses/LICENSE-2.0.txt))
 - [Reactor Core:3.6.6](https://github.com/reactor/reactor-core) ([The Apache Software License, Version 2.0](https://www.apache.org/licenses/LICENSE-2.0.txt))
 - [Jakarta Validation API:3.1.0](https://www.eclipse.org) ([The Apache Software License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0.txt))
 - [Apache BVal JSR:3.0.0](https://bval.apache.org/) ([The Apache Software License, Version 2.0](https://www.apache.org/licenses/LICENSE-2.0.txt))
 - [Apache Tika Core:2.9.2](https://tika.apache.org/) ([The Apache Software License, Version 2.0](https://www.apache.org/licenses/LICENSE-2.0.txt))
 - [MapStruct:1.5.5.Final](https://mapstruct.org/mapstruct/) ([The Apache Software License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0.txt))
-- [SLF4J API:2.0.13](http://www.slf4j.org) ([MIT License](http://www.opensource.org/licenses/mit-license.php))
-- [SLF4J Simple:2.0.13](http://www.slf4j.org) ([MIT License](http://www.opensource.org/licenses/mit-license.php))
+- [jsr305:3.0.2](https://mvnrepository.com/artifact/com.google.code.findbugs/jsr305/3.0.2) ([GNU Lesser General Public License, Version 2.1](https://www.gnu.org/licenses/old-licenses/lgpl-2.1.en.html))
+- [checker-qual:3.46.0](https://checkerframework.org/) ([MIT License](https://opensource.org/licenses/MIT))
 
 # How to contribute?
 
