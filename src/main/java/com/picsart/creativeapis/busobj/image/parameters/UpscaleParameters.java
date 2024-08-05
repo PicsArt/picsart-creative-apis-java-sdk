@@ -45,7 +45,7 @@ public class UpscaleParameters {
   /** The source of the image to be upscaled. */
   ImageSource image;
 
-  /** The upscale factor for the upscaling. This is optional. Allowed values: 2, 4, 8, 16. */
+  /** The upscale factor for the upscaling. This is optional. Allowed values: 2, 4, 6, 8. */
   @Nullable Integer upscaleFactor;
 
   /** The desired format of the image after upscaling. This is optional. */
